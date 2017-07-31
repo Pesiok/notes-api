@@ -1,6 +1,6 @@
-import { ObjectID } from 'mongodb';
-import User from './models/User';
-import authenticate from './../middleware/authenticate';
+const { ObjectID } = require('mongodb');
+const User = require('./../models/User');
+const authenticate = require('./../middleware/authenticate');
 
 const userController = app => {
 
@@ -8,7 +8,7 @@ const userController = app => {
     app.post('/api/users', async (req, res) => {
         try {
             const {name, password} = req.body;
-            const user = new User({email, password});
+            const user = new User({name, password});
             await user.save();
             const token = await user.generateAuthToken();
             res.header('x-auth', token).send(user);
@@ -47,4 +47,4 @@ const userController = app => {
 
 }
 
-export default userController;
+module.exports = userController;

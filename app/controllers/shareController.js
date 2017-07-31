@@ -1,6 +1,5 @@
-// TODO
-import { ObjectID } from 'mongodb';
-import Note from './models/Note';
+const { ObjectID } = require('mongodb');
+const Note = require('./../models/Note');
 
 const checkAvailability = note => {
     if (!note.share.isShared) return false;
@@ -14,7 +13,7 @@ const shareController = app => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
-            const note = await Note.findOne({ _id: id, _author: req.user._id});
+            const note = await Note.findOne({ _id: id });
             if (!note) return res.status(404).send();
             
             if (checkAvailability(note)) res.send({ note });
@@ -26,4 +25,4 @@ const shareController = app => {
     });
 }
 
-export default shareController;
+module.exports = shareController;

@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
 const NoteSchema = new mongoose.Schema({
     _author: {
@@ -24,7 +24,8 @@ const NoteSchema = new mongoose.Schema({
     share: {
         isShared: {
             type: Boolean,
-            default: false
+            default: false,
+            required: true
         },
         expiration: {
             type: Date
@@ -34,4 +35,4 @@ const NoteSchema = new mongoose.Schema({
 
 const User = mongoose.model('Note', NoteSchema);
 
-export default User;
+module.exports = User;

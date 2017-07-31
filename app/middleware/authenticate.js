@@ -1,8 +1,8 @@
-import User from './../models/User';
+const User = require('./../models/User');
 
 const authenticate = async (req, res, next) => {
-    const token = req.header('x-auth');
     try {
+        const token = req.header('x-auth');
         const user = await User.findByToken(token);
         if (user) {
             req.user = user;
@@ -10,7 +10,7 @@ const authenticate = async (req, res, next) => {
             next();
         } else {
             // no user
-            return Promise.reject();
+            res.status(404).send();
         }
     } catch (error) {
         // no athorization
@@ -18,4 +18,4 @@ const authenticate = async (req, res, next) => {
     }
 };
 
-export default authenticate;
+module.exports = authenticate;

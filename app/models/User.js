@@ -1,8 +1,8 @@
-import mongoose from 'mongoose';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+const mongoose = require('mongoose');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
-const UserChema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -50,7 +50,7 @@ UserSchema.methods.toJSON = function() {
 UserSchema.methods.generateAuthToken = async function() {
     const user = this;
     const access = 'auth';
-    const token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+    const token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SALT).toString();
 
     user.tokens.push({access, token});
 
@@ -58,46 +58,41 @@ UserSchema.methods.generateAuthToken = async function() {
     return token;
 };
 
-UserSchema.methods.removeToken = function(token) {
+UserSchema.methods.removeToken = async function(token) {
     const user = this;
 
-    return user.update({
+    return await user.update({
         $pull: { tokens: {token} }
     });
 };
 
 ////////////* static methods */////////////
 
-UserSchema.statics.findByToken = function(token) {
+UserSchema.statics.findByToken = async function(token) {
     const User = this;
     let decoded;
-
     try {
         decoded = jwt.verify(token, process.env.JWT_SALT)
     } catch (error) {
-        return Promise.reject(error);
+        throw new Error(error);
     }
-
-    return User.findOne({
+    return await User.findOne({
         '_id': decoded._id,
         'tokens.token': token,
         'tokens.access': 'auth'
     });
 };
 
-UserSchema.statics.findByCredentials = async function (email, password) {
+UserSchema.statics.findByCredentials = async function (name, password) {
     const User = this;
     try {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ name });
         await bcrypt.compare(password, user.password, (error, response) => {
-            if (response) {
-                return user;
-            } else {
-                throw new Error(error);
-            }
+            if (!response) throw new Error(error); 
         });
+        return user;
     } catch (error) {
-        return Promise.reject(error);
+        throw new Error(error);
     }   
 };
 
@@ -123,4 +118,4 @@ UserSchema.pre('save', function(next) {
 
 const User = mongoose.model('User', UserSchema);
 
-export default User;
+module.exports = User;

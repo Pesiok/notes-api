@@ -1,19 +1,22 @@
-import config from './config/config';
-import express from 'express';
+const config =  require('./config/config');
+const express =  require('express');
+const bodyParser = require('body-parser');
 
-import mongoose from './database/mongoose';
-import notesController from './controllers/notesController';
-import userController from './controllers/userController';
+const mongoose =  require('./database/mongoose');
+const notesController =  require('./controllers/notesController');
+const userController =  require('./controllers/userController');
+const shareController = require('./controllers/shareController');
 
 const app = express();
 const port = process.env.PORT;
 
-app.user(bodyParser.json());
+app.use(bodyParser.json());
 
 // routes
 notesController(app);
 userController(app);
+shareController(app);
 
 app.listen(port, () => console.log(`App is online at port ${port}`));
 
-export default app;
+module.exports = app;

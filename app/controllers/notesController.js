@@ -1,6 +1,6 @@
-import { ObjectID } from 'mongodb';
-import Note from './models/Note';
-import authenticate from './../middleware/authenticate';
+const { ObjectID } = require('mongodb');
+const Note = require('./../models/Note');
+const authenticate = require('./../middleware/authenticate');
 
 const notesController = app => {
 
@@ -16,8 +16,8 @@ const notesController = app => {
                     tags: body.meta.tags
                 },
                 share: {
-                    isShared: body.meta.isShared,
-                    expiration: body.meta.expiration
+                    isShared: body.share.isShared,
+                    expiration: body.share.expiration
                 }
             });
             const doc = await note.save();
@@ -31,6 +31,7 @@ const notesController = app => {
     app.get('/api/notes', authenticate, async (req, res) => {
         try {
             const notes = await Note.find({ _author: req.user._id});
+            if (notes.length === 0) return res.status(404).send();
             res.send({ notes });
         } catch(error) {
             res.status(400).send(error);
@@ -69,7 +70,9 @@ const notesController = app => {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
             const {content, meta, share} = req.body;
+            meta.edited = Date.now();
             const body = {content, meta, share};
+
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },
                 { $set: body },
@@ -83,4 +86,4 @@ const notesController = app => {
     });
 }
 
-export default notesController;
+module.exports = notesController;
