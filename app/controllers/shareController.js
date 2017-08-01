@@ -15,10 +15,8 @@ const shareController = app => {
             if (!ObjectID.isValid(id)) return res.status(404).send();
             const note = await Note.findOne({ _id: id });
             if (!note) return res.status(404).send();
-            
             if (checkAvailability(note)) res.send({ note });
             res.status(401).send();
-            
         } catch(error) {
             res.status(400).send(error);
         }

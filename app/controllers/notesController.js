@@ -58,7 +58,7 @@ const notesController = app => {
             if (!ObjectID.isValid(id)) return res.status(404).send();  
             const note = await Note.findOneAndRemove({_id: id, _author: req.user._id});
             if (!note) return res.status(404).send();
-            res.send({note})
+            res.send({ note })
         } catch(error) {
             res.status(400).send(error);
         } 
@@ -69,15 +69,16 @@ const notesController = app => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
-            const {content, meta, share} = req.body;
-            meta.edited = Date.now();
+            const {content, share} = req.body;
+            let { meta } = req.body;
+            if (!meta) meta = { edited: Date.now() };
             const body = {content, meta, share};
-
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },
                 { $set: body },
                 { new: true }
             )
+
             if (!note) return res.status(404).send();
             res.send({ note });
         } catch (error) {

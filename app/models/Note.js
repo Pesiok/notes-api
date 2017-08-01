@@ -12,8 +12,7 @@ const NoteSchema = new mongoose.Schema({
     meta: {
         created: {
             type: Date,
-            default: Date.now,
-            required: true
+            default: Date.now
         },
         edited: {
             type: Date,
@@ -33,6 +32,15 @@ const NoteSchema = new mongoose.Schema({
     }
 });
 
-const User = mongoose.model('Note', NoteSchema);
+// adds creation time if not provided
+NoteSchema.pre('save', function(next) {
+    const note = this;
+    if (!note.meta.created) {
+        note.meta.created = Date.now();
+    } 
+    next();
+});
 
-module.exports = User;
+const Note = mongoose.model('Note', NoteSchema);
+
+module.exports = Note;
