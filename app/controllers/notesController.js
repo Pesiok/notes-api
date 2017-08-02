@@ -8,7 +8,7 @@ const notesController = app => {
     app.post('/api/notes', authenticate, async (req, res) => {
         try {
             const body = req.body;
-            const note = new Note({ 
+            const newNote = new Note({ 
                 _author: req.user._id, 
                 content: body.content, 
                 meta: {
@@ -20,8 +20,8 @@ const notesController = app => {
                     expiration: body.share.expiration
                 }
             });
-            const doc = await note.save();
-            res.send(doc);
+            const note = await newNote.save();
+            res.send({ note });
         } catch(error) {
             res.status(400).send(error)
         }
@@ -78,7 +78,6 @@ const notesController = app => {
                 { $set: body },
                 { new: true }
             )
-
             if (!note) return res.status(404).send();
             res.send({ note });
         } catch (error) {

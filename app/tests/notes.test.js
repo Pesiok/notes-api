@@ -17,7 +17,7 @@ const noteEquals = (oldNote, newNote) => {
     expect(newNote.share.isShared).to.equal(oldNote.share.isShared);
 }
 
-describe('Notes', () => {
+describe('Notes: ', () => {
     beforeEach(populateUsers);
     beforeEach(populateNotes);
 
@@ -42,7 +42,7 @@ describe('Notes', () => {
                 .send(note);
             expect(response).to.have.status(200);
 
-            const resNote = response.body;
+            const resNote = response.body.note;
             noteEquals(note, resNote);
             
             const dbNotes = await Note.find({content: note.content});

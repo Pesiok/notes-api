@@ -82,15 +82,14 @@ UserSchema.statics.findByToken = async function(token) {
 
 UserSchema.statics.findByCredentials = async function (name, password) {
     const User = this;
+    const user = await User.findOne({ name });
+
     try {
-        const user = await User.findOne({ name });
-        await bcrypt.compare(password, user.password, (error, response) => {
-            if (!response) throw new Error(error); 
-        });
-        return user;
+        bcrypt.compare(password, user.password);
     } catch (error) {
-        throw new Error(error);
-    }   
+        throw error;
+    }
+    return user;
 };
 
 ////////////* middleware */////////////

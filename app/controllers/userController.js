@@ -30,7 +30,7 @@ const userController = app => {
     });
 
     // log out
-    app.delete('/api/users/me/token', authenticate, async (req, res) => {
+    app.delete('/api/users/logout', authenticate, async (req, res) => {
         try {
             await req.user.removeToken(req.token);
             res.status(200).send()
