@@ -12,7 +12,7 @@ describe('Share: ', () => {
     beforeEach(populateNotes);
 
     describe('GET /share/notes/:id', () => {
-        it('should be abble to access shared note', async () => {
+        it('should be able to access shared note', async () => {
             const response = await chai.request(app)
                 .get(`/share/notes/${notes[1]._id}`);
             expect(response).to.have.status(200);
@@ -20,6 +20,15 @@ describe('Share: ', () => {
             const note = response.body.note;
             expect(note.content).to.equal(notes[1].content);
             expect(note.share.isShared).to.be.true;
+        });
+
+        it('shouldn\'t be able to access not shared note', async () => {
+           try {
+                const response = await chai.request(app)
+                    .get(`/share/notes/${notes[0]._id}`);
+           } catch ({ response }) {
+                expect(response).to.have.status(401);
+           }
         });
     });
 });

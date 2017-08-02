@@ -44,7 +44,6 @@ const userController = app => {
         res.send(req.user);
     });
 
-
 }
 
 module.exports = userController;

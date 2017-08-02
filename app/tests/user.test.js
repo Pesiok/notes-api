@@ -8,7 +8,6 @@ const { ObjectID } = require('mongodb');
 const expect = chai.expect;
 
 describe('User: ', () => {
-    // before it
     beforeEach(populateUsers);
     beforeEach(populateNotes);
 
