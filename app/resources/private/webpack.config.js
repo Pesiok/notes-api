@@ -11,10 +11,10 @@ const cssProd = ExtractTextPlugin.extract({
 const cssConfig = isProd ? cssProd : cssDev;
 
 module.exports = {
-    entry: './assets/scripts/app.js',
+    entry: './assets/scripts/index.js',
     output: {
         path: __dirname + '/../public',
-        filename: 'app.bundle.js'
+        filename: 'index.bundle.js'
     },
     module: {
         rules: [
@@ -58,7 +58,7 @@ module.exports = {
             template: './assets/index.ejs'
         }),
         new ExtractTextPlugin({
-            filename: 'app.css',
+            filename: 'index.css',
             allChunks: true,
             disable: !isProd
         }),

@@ -5,10 +5,9 @@ const compression = require('compression');
 const resourcesController = app => {
 
     app.use(compression());
-    app.use(express.static(path.join(__dirname, '../resources/public')));
-
+    app.use(express.static(path.resolve(__dirname, '..', 'resources/public')));
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../resources/public/index.html'));
+        res.sendFile(path.resolve(__dirname, '..', 'resources/public', 'index.html'));
     });
 }
 
