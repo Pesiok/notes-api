@@ -8,20 +8,20 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
 
-// local dependencies 
-import reducers from './reducers'
+// local dependencies
+import reducers from './reducers';
 // import sagas from './sagas'
 import Main from './components/Main';
-import css from '../styles/index.scss'
+import css from '../styles/index.scss'; // eslint-disable-line
 
-const sagaMiddleware = createSagaMiddleware();
+// const sagaMiddleware = createSagaMiddleware();
 const createStoreWithMiddleware = applyMiddleware(createSagaMiddleware)(createStore);
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
-     <BrowserRouter>
+    <BrowserRouter>
       <div>
         <Switch>
           {/* <Route path="/posts/new" component={PostsNew} /> */}
@@ -29,7 +29,7 @@ ReactDOM.render(
           <Route path="/" component={Main} />
         </Switch>
       </div>
-    </BrowserRouter>  
+    </BrowserRouter>
   </Provider>
-  , document.getElementById('root')
+  , document.getElementById('root'),
 );
