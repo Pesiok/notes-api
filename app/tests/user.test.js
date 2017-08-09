@@ -12,7 +12,7 @@ describe('User: ', () => {
     beforeEach(populateNotes);
 
     describe('GET /api/users/me', () => {
-        it('should return authendicated user with only id and name', async () => {
+        it('should return authenticated user with only id and name', async () => {
             const response = await chai.request(app)
                 .get('/api/users/me')
                 .set('x-auth', users[0].tokens[0].token);
@@ -36,7 +36,28 @@ describe('User: ', () => {
         });
     });
 
-    describe('POST /api/users/signin', () => {
+    describe('GET /api/users/find/:name', () => {
+        it('should return a user if found', async () => {
+            const response = await chai.request(app)
+                .get(`/api/users/find/${users[0].name}`);
+            expect(response).to.have.status(200);
+
+            const user = response.body;
+            expect(user._id).to.equal(users[0]._id.toHexString());
+            expect(user.name).to.equal(users[0].name);
+        });
+
+        it('shouldn\'t return a user if not found', async () => {
+            try {
+                const response = await chai.request(app)
+                    .get('/api/users/find/randomlogin123');
+            } catch({ response }) {
+                expect(response).to.have.status(404);
+            }
+        });
+    });
+
+    describe('POST /api/users', () => {
         it('should create a new user and put it to the DB', async () => {
             const name = 'superNewUser';
             const password = 'typicalpassword123';

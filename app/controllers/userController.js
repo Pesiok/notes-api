@@ -44,6 +44,18 @@ const userController = app => {
         res.send(req.user);
     });
 
+    // find user
+    app.get('/api/users/find/:name', async (req, res) => {
+        try {
+            const name = req.params.name;
+            const user = await User.findByCredentials(name);
+            if (!user) res.status(404).send();
+            res.status(200).send(user);
+        } catch (error) {
+            res.status(400).send(error)
+        }
+    });
+
 }
 
 module.exports = userController;

@@ -84,10 +84,12 @@ UserSchema.statics.findByCredentials = async function (name, password) {
     const User = this;
     const user = await User.findOne({ name });
 
-    try {
-        bcrypt.compare(password, user.password);
-    } catch (error) {
-        throw error;
+    if (password) {
+        try {
+            bcrypt.compare(password, user.password);
+        } catch (error) {
+            throw error;
+        }
     }
     return user;
 };
