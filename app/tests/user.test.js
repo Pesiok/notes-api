@@ -57,7 +57,7 @@ describe('User: ', () => {
         });
     });
 
-    describe('POST /api/users', () => {
+    describe('POST /api/users/signin', () => {
         it('should create a new user and put it to the DB', async () => {
             const name = 'superNewUser';
             const password = 'typicalpassword123';

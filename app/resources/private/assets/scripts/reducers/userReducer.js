@@ -13,17 +13,14 @@ import {
 export default function (state = {}, action) {
   switch (action.type) {
     case SIGN_IN_REQUEST: {
-      console.log('request');
       return state;
     }
     case SIGN_IN_FAILURE: {
-      console.log('failure');
       return state;
     }
     case SIGN_IN_SUCCESS: {
       const { user, token } = action.payload;
       const newState = Object.assign({}, state, { user, token });
-      console.log(newState);
       return newState;
     }
     case LOG_IN_REQUEST: {

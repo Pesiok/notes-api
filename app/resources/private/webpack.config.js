@@ -54,8 +54,8 @@ module.exports = {
     open: true,
     openPage: '',
     proxy: {
-      '/api': 'http://localhost:3000/api',
-      '/share': 'http://localhost:3000/share',
+      '/api': 'http://localhost:3000',
+      '/share': 'http://localhost:3000',
     },
   },
   plugins: [

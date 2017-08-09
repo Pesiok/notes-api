@@ -11,6 +11,7 @@ class SignInForm extends Component {
       name: { value: '', isValid: true },
       password: { value: '', isValid: true },
       passwordConf: { value: '', isValid: true },
+      isAvailable: true,
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -37,6 +38,20 @@ class SignInForm extends Component {
     return validity;
   }
 
+  checkAvailability(event) {
+    const name = event.target.value;
+    
+    fetch(`/api/users/find/${name}`)
+      .then((response) => {
+        console.log(response);
+        if (response.status === 404) {
+          this.setState(state => Object.assign({}, state, { isAvailable: true }));
+        } else if (response.status === 200) {
+          this.setState(state => Object.assign({}, state, { isAvailable: false }));
+        }
+      });
+  }
+
   checkValidity(value, name, checktLastState = false) {
     const isValid = checktLastState ? true : this.validate(value, name);
     this.setState(state => Object.assign({}, state, {
@@ -48,7 +63,6 @@ class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('called submit');
 
     // validate onSubmit
     const areValid = Object.keys(this.state)
@@ -58,7 +72,6 @@ class SignInForm extends Component {
       const name = this.state.name.value;
       const password = this.state.password.value;
       // send sign in request and change route on success
-      console.log('called request action creator');
       this.props.signInRequest({ name, password }, () => {
         this.props.history.push('/notes');
       });
@@ -90,10 +103,16 @@ class SignInForm extends Component {
             type="text"
             value={this.state.name.value}
             onChange={event => this.handleChange(event, 'name')}
-            onBlur={event => this.handleBlur(event, 'name')}
+            onBlur={(event) => {
+              this.handleBlur(event, 'name');
+              this.checkAvailability(event);
+            }}
           />
           <span style={{ display: this.state.name.isValid ? 'none' : 'inherit' }}>
             Your username must be at least 3 characters long.
+          </span>
+          <span style={{ display: this.state.isAvailable ? 'none' : 'inherit' }}>
+            This name is not available.
           </span>
         </label>
         <label htmlFor="password"> Password
