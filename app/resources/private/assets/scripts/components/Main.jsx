@@ -2,14 +2,14 @@ import React from 'react';
 import SignInForm from './../containers/SignInForm';
 // import LogInForm from './../containers/LoginForm';
 
-export default () => (
+export default props => (
   <main>
     <header>
       <h1>Hi there, this app allows you to create and share notes</h1>
       <p>Use forms below</p>
     </header>
     <div>
-      <SignInForm />
+      <SignInForm {...props} />
       {/* <LogInForm /> */}
     </div>
     <footer>

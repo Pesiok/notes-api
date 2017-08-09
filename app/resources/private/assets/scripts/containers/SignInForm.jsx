@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { signInRequest } from '../actions/userActions';
 
-export default class SignInForm extends Component {
-  constructor() {
-    super();
+class SignInForm extends Component {
+  constructor(props) {
+    super(props);
+
     this.state = {
       name: { value: '', isValid: true },
       password: { value: '', isValid: true },
@@ -45,16 +48,21 @@ export default class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    console.log('called submit');
 
     // validate onSubmit
     const areValid = Object.keys(this.state)
       .map(key => this.checkValidity(this.state[key].value, key));
     // stop if some of the inputs has invalid value
-    if (areValid.some(input => input === true)) return false;
-
-    // otherwise send request
-    // some redux saga mombo-jumbo
-    return true;
+    if (areValid.every(input => input === true)) {
+      const name = this.state.name.value;
+      const password = this.state.password.value;
+      // send sign in request and change route on success
+      console.log('called request action creator');
+      this.props.signInRequest({ name, password }, () => {
+        this.props.history.push('/notes');
+      });
+    }
   }
 
   handleBlur(event, name) {
@@ -76,6 +84,8 @@ export default class SignInForm extends Component {
       <form onSubmit={event => this.handleSubmit(event)}>
         <label htmlFor="name"> Username
           <input
+            aria-required="true"
+            aria-invalid={!this.state.name.isValid}
             id="name"
             type="text"
             value={this.state.name.value}
@@ -88,6 +98,8 @@ export default class SignInForm extends Component {
         </label>
         <label htmlFor="password"> Password
           <input
+            aria-required="true"
+            aria-invalid={!this.state.name.isValid}
             id="password"
             type="password"
             value={this.state.password.value}
@@ -100,6 +112,8 @@ export default class SignInForm extends Component {
         </label>
         <label htmlFor="passwordConf"> Confirm Password
           <input
+            aria-required="true"
+            aria-invalid={!this.state.name.isValid}
             id="passwordConf"
             type="password"
             value={this.state.passwordConf.value}
@@ -115,3 +129,10 @@ export default class SignInForm extends Component {
     );
   }
 }
+
+SignInForm.propTypes = {
+  signInRequest: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+};
+
+export default connect(null, { signInRequest })(SignInForm);

@@ -5,7 +5,7 @@ const authenticate = require('./../middleware/authenticate');
 const userController = app => {
 
     // sign in
-    app.post('/api/users', async (req, res) => {
+    app.post('/api/users/signin', async (req, res) => {
         try {
             const {name, password} = req.body;
             const user = new User({name, password});
