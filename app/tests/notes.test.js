@@ -13,6 +13,7 @@ const noteEquals = (oldNote, newNote) => {
     expect(newNote).to.be.a('object');
     expect(newNote.meta).to.have.property('created');
     expect(newNote.content).to.equal(oldNote.content);
+    expect(newNote.title).to.equal(oldNote.title);
     expect(newNote.meta.tags[0]).to.equal(oldNote.meta.tags[0]);
     expect(newNote.share.isShared).to.equal(oldNote.share.isShared);
 }
@@ -24,7 +25,8 @@ describe('Notes: ', () => {
     describe('POST /api/notes', () => {
         it('should create a new note and put it to the DB', async () => {
             const note = {
-                content: 'a new note', 
+                content: 'a new note',
+                title: 'New Title', 
                 meta: {
                     // created: Date.now(),
                     // edited: Date.now(),
@@ -66,7 +68,8 @@ describe('Notes: ', () => {
 
         it('shouldn\'t create a note with invalid data', async () => {
             const note = {
-                content: 'a new note', 
+                content: 'a new note',
+                title: 'k4k', 
                 meta: {
                     tags: ['kek']
                 }
@@ -185,7 +188,8 @@ describe('Notes: ', () => {
 
     describe('PATCH ./api/notes/:id', () => {
         const updatedNote = { 
-            content: 'new content', 
+            content: 'new content',
+            title: 'Super new title', 
             share: { 
                 isShared: true 
             } 
@@ -203,6 +207,7 @@ describe('Notes: ', () => {
             expect(note.meta).to.have.property('edited');
             expect(note.share.isShared).to.be.true;
             expect(note.content).to.equal(updatedNote.content);
+            expect(note.title).to.equal(updatedNote.title);
         });
 
         it('should not update note created by someone else', async () => {
