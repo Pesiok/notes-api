@@ -13,6 +13,8 @@ import reduxThunk from 'redux-thunk';
 // local dependencies
 import rootReducer from './reducers/index';
 import Main from './components/Main';
+import NotesIndex from './containers/NotesIndex';
+import Note from './containers/Note';
 import css from '../styles/index.scss'; // eslint-disable-line
 
 const store = createStore(
@@ -26,7 +28,7 @@ ReactDOM.render(
       <div>
         <Switch>
           {/* <Route path="/posts/new" component={PostsNew} /> */}
-          {/* <Route path="/posts/:id" component={PostsShow} /> */}
+          <Route path="/notes/:id" component={Note}>
           <Route path="/" component={Main} />
         </Switch>
       </div>
@@ -34,3 +36,6 @@ ReactDOM.render(
   </Provider>
   , document.getElementById('root'),
 );
+
+export default store;
+

@@ -10,9 +10,7 @@ function signInFailure(error) {
 }
 
 export const SIGN_IN_SUCCESS = 'sign_in_success';
-function signInSuccess(data, changeRoute) {
-  if (changeRoute) changeRoute();
-
+function signInSuccess(data) {
   return {
     type: SIGN_IN_SUCCESS,
     payload: data,
@@ -28,11 +26,9 @@ export function signInRequest(credentials, changeRoute) {
       'Content-Type': 'application/json',
     },
   };
-  console.log('called request');
 
   return (dispatch) => {
     dispatch({ type: SIGN_IN_REQUEST });
-    console.log('called request from thunk');
 
     fetch('/api/users/signin', options)
       .then((response) => {
@@ -43,7 +39,10 @@ export function signInRequest(credentials, changeRoute) {
         ));
       })
       .then(
-        data => dispatch(signInSuccess(data, changeRoute)),
+        (data) => {
+          dispatch(signInSuccess(data));
+          changeRoute();
+        },
         error => dispatch(signInFailure(error)),
       );
   };
@@ -60,9 +59,7 @@ export function logInFailure(error) {
 }
 
 export const LOG_IN_SUCCESS = 'log_in_success';
-function logInSuccess(data, changeRoute) {
-  if (changeRoute) changeRoute();
-
+function logInSuccess(data) {
   return {
     type: LOG_IN_SUCCESS,
     payload: data,
@@ -91,7 +88,10 @@ export function logInRequest(credentials, changeRoute) {
         ));
       })
       .then(
-        data => dispatch(logInSuccess(data, changeRoute)),
+        (data) => {
+          dispatch(logInSuccess(data));
+          changeRoute();
+        },
         error => dispatch(logInFailure(error)),
       );
   };

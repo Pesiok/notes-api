@@ -13,9 +13,6 @@ class SignInForm extends Component {
       passwordConf: { value: '', isValid: true },
       isAvailable: true,
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleBlur = this.handleBlur.bind(this);
   }
 
   validate(value, name) {
@@ -38,12 +35,9 @@ class SignInForm extends Component {
     return validity;
   }
 
-  checkAvailability(event) {
-    const name = event.target.value;
-    
+  checkAvailability(name) {
     fetch(`/api/users/find/${name}`)
       .then((response) => {
-        console.log(response);
         if (response.status === 404) {
           this.setState(state => Object.assign({}, state, { isAvailable: true }));
         } else if (response.status === 200) {
@@ -63,14 +57,16 @@ class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     // validate onSubmit
-    const areValid = Object.keys(this.state)
+    const areInValid = Object.keys(this.state)
       .map(key => this.checkValidity(this.state[key].value, key));
-    // stop if some of the inputs has invalid value
-    if (areValid.every(input => input === true)) {
+    this.checkAvailability(this.state.name.value);
+
+    // stop if some of the inputs has invalid value or name is not available
+    if (!areInValid.some(input => input === false) && this.state.isAvailable) {
       const name = this.state.name.value;
       const password = this.state.password.value;
+
       // send sign in request and change route on success
       this.props.signInRequest({ name, password }, () => {
         this.props.history.push('/notes');
@@ -105,7 +101,7 @@ class SignInForm extends Component {
             onChange={event => this.handleChange(event, 'name')}
             onBlur={(event) => {
               this.handleBlur(event, 'name');
-              this.checkAvailability(event);
+              this.checkAvailability(event.target.value);
             }}
           />
           <span style={{ display: this.state.name.isValid ? 'none' : 'inherit' }}>

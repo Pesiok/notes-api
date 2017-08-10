@@ -4,7 +4,7 @@ import {
   SIGN_IN_SUCCESS,
   LOG_IN_REQUEST,
   LOG_IN_FAILURE,
-  LOG_IN_SUCCES,
+  LOG_IN_SUCCESS,
   LOG_OUT_REQUEST,
   LOG_OUT_FAILURE,
   LOG_OUT_SUCCESS,
@@ -20,8 +20,7 @@ export default function (state = {}, action) {
     }
     case SIGN_IN_SUCCESS: {
       const { user, token } = action.payload;
-      const newState = Object.assign({}, state, { user, token });
-      return newState;
+      return Object.assign({}, state, { user, token });
     }
     case LOG_IN_REQUEST: {
       return state;
@@ -29,8 +28,9 @@ export default function (state = {}, action) {
     case LOG_IN_FAILURE: {
       return state;
     }
-    case LOG_IN_SUCCES: {
-      return state;
+    case LOG_IN_SUCCESS: {
+      const { user, token } = action.payload;
+      return Object.assign({}, state, { user, token });
     }
     case LOG_OUT_REQUEST: {
       return state;

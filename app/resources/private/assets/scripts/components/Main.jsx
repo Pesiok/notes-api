@@ -1,5 +1,6 @@
 import React from 'react';
 import SignInForm from './../containers/SignInForm';
+import LogInForm from './../containers/LogInForm';
 // import LogInForm from './../containers/LoginForm';
 
 export default props => (
@@ -10,7 +11,7 @@ export default props => (
     </header>
     <div>
       <SignInForm {...props} />
-      {/* <LogInForm /> */}
+      <LogInForm {...props} />
     </div>
     <footer>
       <p>I hope it works. 2017</p>
