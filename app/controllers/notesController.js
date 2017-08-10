@@ -9,7 +9,8 @@ const notesController = app => {
         try {
             const body = req.body;
             const newNote = new Note({ 
-                _author: req.user._id, 
+                _author: req.user._id,
+                title: body.title, 
                 content: body.content, 
                 meta: {
                     created: body.meta.created,
@@ -69,10 +70,10 @@ const notesController = app => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
-            const {content, share} = req.body;
+            const {content, title, share} = req.body;
             let { meta } = req.body;
             if (!meta) meta = { edited: Date.now() };
-            const body = {content, meta, share};
+            const body = {content, title, meta, share};
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },
                 { $set: body },

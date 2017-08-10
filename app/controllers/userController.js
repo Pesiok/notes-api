@@ -49,7 +49,7 @@ const userController = app => {
         try {
             const name = req.params.name;
             const user = await User.findByCredentials(name);
-            if (!user) res.status(404).send();
+            if (!user) return res.status(404).send();
             res.status(200).send(user);
         } catch (error) {
             res.status(400).send(error)

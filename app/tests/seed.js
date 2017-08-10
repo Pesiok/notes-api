@@ -33,6 +33,7 @@ const notes = [
     {
         _id: new ObjectID(),
         _author: usersID[0],
+        title: 'Title 1',
         content: 'lorem ipsum', 
         meta: {
             created: Date.now(),
@@ -45,6 +46,7 @@ const notes = [
     {
         _id: new ObjectID(),
         _author: usersID[0],
+        title: 'Title 2',
         content: 'lorem ipsum two', 
         meta: {
             created: Date.now(),
@@ -57,6 +59,7 @@ const notes = [
     {
         _id: new ObjectID(),
         _author: usersID[1],
+        title: 'Title 3',
         content: 'ipsum lorem', 
         meta: {
             tags: ['xyz', 'random']
