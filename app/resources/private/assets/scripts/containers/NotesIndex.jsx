@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getNotesRequest } from '../actions/notesActions';
+import { getNotesRequest } from '../actions/notes/getNotesActions';
 
 class NotesIndex extends Component {
   componentWillMount() {
@@ -15,9 +15,9 @@ class NotesIndex extends Component {
 
     return notes.map(note => (
       // eslint-disable-next-line
-      <Link key={note._id} to={`/notes/${_id}`}>
+      <Link key={note._id} to={`/notes/${note._id}`}>
         <li>
-          {note.content}
+          {note.title}
         </li>
       </Link>
     ));
@@ -35,9 +35,13 @@ class NotesIndex extends Component {
   }
 }
 
+NotesIndex.defaultProps = {
+  notes: null,
+};
+
 NotesIndex.propTypes = {
   getNotesRequest: PropTypes.func.isRequired,
-  notes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  notes: PropTypes.arrayOf(PropTypes.object),
 };
 
 function mapStateToProps(state) {

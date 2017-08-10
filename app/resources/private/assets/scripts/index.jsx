@@ -28,7 +28,8 @@ ReactDOM.render(
       <div>
         <Switch>
           {/* <Route path="/posts/new" component={PostsNew} /> */}
-          <Route path="/notes/:id" component={Note}>
+          <Route path="/notes/:id" component={Note} />
+          <Route path="/notes" component={NotesIndex} />
           <Route path="/" component={Main} />
         </Switch>
       </div>

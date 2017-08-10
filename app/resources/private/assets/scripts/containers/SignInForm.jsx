@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { signInRequest } from '../actions/userActions';
+import { signInRequest } from '../actions/user/signInActions';
 
 class SignInForm extends Component {
   constructor(props) {

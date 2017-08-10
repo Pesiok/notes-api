@@ -1,7 +1,6 @@
 import React from 'react';
 import SignInForm from './../containers/SignInForm';
 import LogInForm from './../containers/LogInForm';
-// import LogInForm from './../containers/LoginForm';
 
 export default props => (
   <main>

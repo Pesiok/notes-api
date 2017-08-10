@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logInRequest } from '../actions/userActions';
+import { logInRequest } from '../actions/user/logInActions';
 
 class LogInForm extends Component {
   constructor(props) {
