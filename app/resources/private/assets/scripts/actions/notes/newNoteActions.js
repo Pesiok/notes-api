@@ -10,9 +10,10 @@ export function newNoteRequest(note) {
   const token = store.getState().userReducer.token;
   const options = {
     method: 'POST',
-    body: note,
+    body: JSON.stringify(note),
     headers: {
       'x-auth': token,
+      'Content-Type': 'application/json',
     },
   };
 

@@ -13,7 +13,7 @@ const notesController = app => {
                 title: body.title, 
                 content: body.content, 
                 meta: {
-                    created: body.meta.created,
+                    created: Date.now(),
                     tags: body.meta.tags
                 },
                 share: {
@@ -70,10 +70,22 @@ const notesController = app => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
-            const {content, title, share} = req.body;
-            let { meta } = req.body;
-            if (!meta) meta = { edited: Date.now() };
-            const body = {content, title, meta, share};
+            const { content, title, share, meta } = req.body;
+            console.log(req.body);
+            const body = {};
+
+            // update only params in the request
+            if (title) body['title'] = title;
+            if (content) body['content'] = content;
+            if (share) {
+                if (share.expiration) body['share.expiration'] = share.expiration;
+                if (share.isShared) body['share.isShared'] = share.isShared;
+            }
+            if (meta) {
+                if (meta.tags) body['meta.tags'] = meta.tags;
+            }
+            body['meta.edited'] = Date.now();
+
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },
                 { $set: body },

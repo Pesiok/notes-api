@@ -57,6 +57,7 @@ module.exports = {
       '/api': 'http://localhost:3000',
       '/share': 'http://localhost:3000',
     },
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({

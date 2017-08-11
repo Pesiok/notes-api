@@ -9,11 +9,13 @@ export const UPDATE_NOTE_REQUEST = 'update_note_request';
 
 export function updateNoteRequest(id, update) {
   const token = store.getState().userReducer.token;
+  console.log(update);
   const options = {
-    method: 'PATH',
-    body: update,
+    method: 'PATCH',
+    body: JSON.stringify(update),
     headers: {
       'x-auth': token,
+      'Content-Type': 'application/json',
     },
   };
 

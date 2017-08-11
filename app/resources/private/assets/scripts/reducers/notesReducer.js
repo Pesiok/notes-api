@@ -10,6 +10,12 @@ import {
   GET_NOTE_SUCCESS,
 } from '../actions/notes/getNoteActions';
 
+import {
+  UPDATE_NOTE_REQUEST,
+  UPDATE_NOTE_FAILURE,
+  UPDATE_NOTE_SUCCESS,
+} from '../actions/notes/updateNoteActions';
+
 // state.notesReducer.notes // eslint-disable-next-line
 //       .filter(note => note._id === ownProps.match.params.id)[0]
 
@@ -32,11 +38,27 @@ export default function (state = {}, action) {
       return state;
     }
     case GET_NOTE_SUCCESS: {
+      console.log('state: ', state);
       const notes = state.notes;
       const newNote = action.payload;
       // eslint-disable-next-line
       const index = notes.indexOf(notes.filter(note => note._id === newNote._id)[0]);
       notes[index] = newNote;
+      return Object.assign({}, state, notes);
+    }
+    case UPDATE_NOTE_REQUEST: {
+      return state;
+    }
+    case UPDATE_NOTE_FAILURE: {
+      return state;
+    }
+    case UPDATE_NOTE_SUCCESS: {
+      const notes = state.notes;
+      const newNote = action.payload;
+      // eslint-disable-next-line
+      const index = notes.indexOf(notes.filter(note => note._id === newNote._id)[0]);
+      notes[index] = newNote;
+      console.log(notes[index]);
       return Object.assign({}, state, notes);
     }
     default: {

@@ -62,6 +62,7 @@ const notes = [
         title: 'Title 3',
         content: 'ipsum lorem', 
         meta: {
+            created: Date.now(),
             tags: ['xyz', 'random']
         },
         share: {
