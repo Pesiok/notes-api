@@ -1,66 +1,53 @@
 import {
-  GET_NOTES_REQUEST,
-  GET_NOTES_FAILURE,
+  // GET_NOTES_REQUEST,
+  // GET_NOTES_FAILURE,
   GET_NOTES_SUCCESS,
 } from '../actions/notes/getNotesActions';
 
 import {
-  GET_NOTE_REQUEST,
-  GET_NOTE_FAILURE,
+  // GET_NOTE_REQUEST,
+  // GET_NOTE_FAILURE,
   GET_NOTE_SUCCESS,
 } from '../actions/notes/getNoteActions';
 
 import {
-  UPDATE_NOTE_REQUEST,
-  UPDATE_NOTE_FAILURE,
+  // UPDATE_NOTE_REQUEST,
+  // UPDATE_NOTE_FAILURE,
   UPDATE_NOTE_SUCCESS,
 } from '../actions/notes/updateNoteActions';
 
-// state.notesReducer.notes // eslint-disable-next-line
-//       .filter(note => note._id === ownProps.match.params.id)[0]
+const arrToObj = (arr, key) => Object.assign({}, ...arr.map(item => ({ [item[key]]: item })));
 
 export default function (state = {}, action) {
   switch (action.type) {
-    case GET_NOTES_REQUEST: {
-      return state;
-    }
-    case GET_NOTES_FAILURE: {
-      return state;
-    }
     case GET_NOTES_SUCCESS: {
-      const notes = action.payload;
+      const notes = arrToObj(action.payload.notes, '_id');
       return Object.assign({}, state, notes);
     }
-    case GET_NOTE_REQUEST: {
-      return state;
-    }
-    case GET_NOTE_FAILURE: {
-      return state;
-    }
+    case UPDATE_NOTE_SUCCESS:
     case GET_NOTE_SUCCESS: {
-      console.log('state: ', state);
-      const notes = state.notes;
-      const newNote = action.payload;
-      // eslint-disable-next-line
-      const index = notes.indexOf(notes.filter(note => note._id === newNote._id)[0]);
-      notes[index] = newNote;
-      return Object.assign({}, state, notes);
+      const id = action.payload.note._id;
+      const notes = Object.assign({}, state, { [id]: action.payload.note });
+      return notes;
     }
-    case UPDATE_NOTE_REQUEST: {
-      return state;
-    }
-    case UPDATE_NOTE_FAILURE: {
-      return state;
-    }
-    case UPDATE_NOTE_SUCCESS: {
-      const notes = state.notes;
-      const newNote = action.payload;
-      // eslint-disable-next-line
-      const index = notes.indexOf(notes.filter(note => note._id === newNote._id)[0]);
-      notes[index] = newNote;
-      console.log(notes[index]);
-      return Object.assign({}, state, notes);
-    }
+    // case GET_NOTES_REQUEST: {
+    //   return state;
+    // }
+    // case GET_NOTES_FAILURE: {
+    //   return state;
+    // }
+    // case UPDATE_NOTE_REQUEST: {
+    //   return state;
+    // }
+    // case UPDATE_NOTE_FAILURE: {
+    //   return state;
+    // }
+    // case GET_NOTE_REQUEST: {
+    //   return state;
+    // }
+    // case GET_NOTE_FAILURE: {
+    //   return state;
+    // }
     default: {
       return state;
     }

@@ -13,14 +13,15 @@ class NotesIndex extends Component {
     const notes = this.props.notes;
     if (!notes) return <span>Loading...</span>;
 
-    return notes.map(note => (
-      // eslint-disable-next-line
-      <Link key={note._id} to={`/notes/${note._id}`}>
+    const kek = Object.keys(notes).map(key => (
+      <Link key={key} to={`/notes/${key}`}>
         <li>
-          {note.title}
+          {notes[key].title}
         </li>
       </Link>
     ));
+    console.log(kek);
+    return kek;
   }
 
   render() {
@@ -41,12 +42,12 @@ NotesIndex.defaultProps = {
 
 NotesIndex.propTypes = {
   getNotesRequest: PropTypes.func.isRequired,
-  notes: PropTypes.arrayOf(PropTypes.object),
+  notes: PropTypes.objectOf(PropTypes.object),
 };
 
 function mapStateToProps(state) {
   return {
-    notes: state.notesReducer.notes,
+    notes: state.notesReducer,
   };
 }
 

@@ -49,9 +49,9 @@ Note.propTypes = {
 };
 
 function mapStateToProps(state, ownProps) {
+  const id = ownProps.match.params.id;
   return {
-    note: state.notesReducer.notes // eslint-disable-next-line
-      .filter(note => note._id === ownProps.match.params.id)[0]
+    note: state.notesReducer[id],
   };
 }
 
