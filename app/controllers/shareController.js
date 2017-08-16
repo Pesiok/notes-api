@@ -10,7 +10,7 @@ const checkAvailability = note => {
 
 const shareController = app => {
     // get shared note
-    app.get('/share/notes/:id', async (req, res) => {
+    app.get('/api/share/:id', async (req, res) => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();

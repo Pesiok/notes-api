@@ -70,21 +70,24 @@ const notesController = app => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();
-            const { content, title, share, meta } = req.body;
             console.log(req.body);
+            const { content, title, share, meta } = req.body;
+            console.log(share);
             const body = {};
 
             // update only params in the request
             if (title) body['title'] = title;
             if (content) body['content'] = content;
             if (share) {
-                if (share.expiration) body['share.expiration'] = share.expiration;
-                if (share.isShared) body['share.isShared'] = share.isShared;
+                console.log('called from share');
+                body['share.expiration'] = share.expiration;
+                body['share.isShared'] = share.isShared;
             }
             if (meta) {
-                if (meta.tags) body['meta.tags'] = meta.tags;
+                body['meta.tags'] = meta.tags;
             }
             body['meta.edited'] = Date.now();
+            console.log(body);
 
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },

@@ -11,10 +11,10 @@ describe('Share: ', () => {
     beforeEach(populateUsers);
     beforeEach(populateNotes);
 
-    describe('GET /share/notes/:id', () => {
+    describe('GET /api/share/:id', () => {
         it('should be able to access shared note', async () => {
             const response = await chai.request(app)
-                .get(`/share/notes/${notes[1]._id}`);
+                .get(`/api/share/${notes[1]._id}`);
             expect(response).to.have.status(200);
 
             const note = response.body.note;
@@ -25,7 +25,7 @@ describe('Share: ', () => {
         it('shouldn\'t be able to access not shared note', async () => {
            try {
                 const response = await chai.request(app)
-                    .get(`/share/notes/${notes[0]._id}`);
+                    .get(`/api/share/${notes[0]._id}`);
            } catch ({ response }) {
                 expect(response).to.have.status(401);
            }

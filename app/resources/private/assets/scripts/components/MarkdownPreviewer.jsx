@@ -21,7 +21,6 @@ class MarkdownPreviewer extends Component {
 
   saveHandler() {
     const content = this.state.value;
-    console.log(content);
     this.props.onSave({ content });
   }
 
@@ -31,23 +30,28 @@ class MarkdownPreviewer extends Component {
   }
 
   render() {
+    /*eslint-disable */
     return (
-      <div>
-        <span dangerouslySetInnerHTML={transpile(this.state.value)} />
-        <textarea
-          type="text"
-          value={this.state.value}
-          onChange={this.changeHandler}
-        />
-        <button onClick={this.saveHandler}>Save</button>
+      <div> 
+        <span dangerouslySetInnerHTML={transpile(this.state.value)} /> 
+        <div style={{ display: this.props.showEditor ? 'inherit' : 'none' }}>
+          <textarea
+            type="text"
+            value={this.state.value}
+            onChange={this.changeHandler}
+          />
+          <button onClick={this.saveHandler}>Save</button>
+        </div>
       </div>
     );
+  /*eslint-enable */
   }
 }
 
 MarkdownPreviewer.propTypes = {
   value: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
+  showEditor: PropTypes.bool.isRequired,
 };
 
 export default MarkdownPreviewer;

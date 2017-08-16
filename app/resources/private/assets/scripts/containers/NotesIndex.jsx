@@ -13,15 +13,13 @@ class NotesIndex extends Component {
     const notes = this.props.notes;
     if (!notes) return <span>Loading...</span>;
 
-    const kek = Object.keys(notes).map(key => (
+    return Object.keys(notes).map(key => (
       <Link key={key} to={`/notes/${key}`}>
         <li>
           {notes[key].title}
         </li>
       </Link>
     ));
-    console.log(kek);
-    return kek;
   }
 
   render() {

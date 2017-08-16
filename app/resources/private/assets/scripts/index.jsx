@@ -12,10 +12,9 @@ import configureStore from './config/configureStore';
 import css from '../styles/index.scss'; // eslint-disable-line
 
 const store = configureStore();
+export default store;
 
 render(
   <Root store={store} />
   , document.getElementById('root'),
 );
-
-export default store;

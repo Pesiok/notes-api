@@ -10,14 +10,12 @@ import Note from './../containers/Note';
 const Root = ({ store }) => (
   <Provider store={store}>
     <BrowserRouter>
-      <div>
-        <Switch>
-          {/* <Route path="/posts/new" component={PostsNew} /> */}
-          <Route path="/notes/:id" component={Note} />
-          <Route path="/notes" component={NotesIndex} />
-          <Route path="/" component={Main} />
-        </Switch>
-      </div>
+      <Switch>
+        {/* <Route path="/new/new" component={NewNote} /> */}
+        <Route path="/notes/:id" component={Note} />
+        <Route path="/notes" component={NotesIndex} />
+        <Route path="/" component={Main} />
+      </Switch>
     </BrowserRouter>
   </Provider>
 );
