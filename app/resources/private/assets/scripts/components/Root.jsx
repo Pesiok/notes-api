@@ -11,7 +11,7 @@ const Root = ({ store }) => (
   <Provider store={store}>
     <BrowserRouter>
       <Switch>
-        {/* <Route path="/new/new" component={NewNote} /> */}
+        <Route path="/notes/new" component={Note} />
         <Route path="/notes/:id" component={Note} />
         <Route path="/notes" component={NotesIndex} />
         <Route path="/" component={Main} />

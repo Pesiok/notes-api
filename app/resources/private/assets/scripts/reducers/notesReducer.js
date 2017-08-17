@@ -16,7 +16,21 @@ import {
   UPDATE_NOTE_SUCCESS,
 } from '../actions/notes/updateNoteActions';
 
+import {
+  // DELETE_NOTE_REQUEST,
+  // DELETE_NOTE_FAILURE,
+  DELETE_NOTE_SUCCESS,
+} from '../actions/notes/deleteNoteActions';
+
+import {
+  // NEW_NOTE_REQUEST,
+  // NEW_NOTE_FAILURE,
+  NEW_NOTE_SUCCESS,
+} from '../actions/notes/newNoteActions';
+
 const arrToObj = (arr, key) => Object.assign({}, ...arr.map(item => ({ [item[key]]: item })));
+
+// success reducer
 
 export default function (state = {}, action) {
   switch (action.type) {
@@ -24,32 +38,27 @@ export default function (state = {}, action) {
       const notes = arrToObj(action.payload.notes, '_id');
       return Object.assign({}, state, notes);
     }
+    case NEW_NOTE_SUCCESS:
     case UPDATE_NOTE_SUCCESS:
     case GET_NOTE_SUCCESS: {
       const id = action.payload.note._id;
       const notes = Object.assign({}, state, { [id]: action.payload.note });
       return notes;
     }
-    // case GET_NOTES_REQUEST: {
-    //   return state;
-    // }
-    // case GET_NOTES_FAILURE: {
-    //   return state;
-    // }
-    // case UPDATE_NOTE_REQUEST: {
-    //   return state;
-    // }
-    // case UPDATE_NOTE_FAILURE: {
-    //   return state;
-    // }
-    // case GET_NOTE_REQUEST: {
-    //   return state;
-    // }
-    // case GET_NOTE_FAILURE: {
-    //   return state;
-    // }
+    case DELETE_NOTE_SUCCESS: {
+      const id = action.payload;
+      const notes = Object.assign({}, state);
+      delete notes[id];
+      return notes;
+    }
     default: {
       return state;
     }
   }
 }
+
+// request reducer
+// todo
+
+// failure reducer
+// todo

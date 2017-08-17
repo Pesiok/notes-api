@@ -1,84 +1,63 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-// import Flatpickr from 'react-flatpickr'; // eslint-disable-line
 import DateTimePicker from './DateTimePicker';
 
-class ShareOptions extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isShared: this.props.value.isShared,
-      expiration: this.props.value.expiration,
-    };
-
-    this.calendarInstance = null;
-
-    // 'this' bindings
-    this.isSharedHandler = this.isSharedHandler.bind(this);
-    this.submitHandler = this.submitHandler.bind(this);
-    this.datetimeHandler = this.datetimeHandler.bind(this);
-  }
-
-  isSharedHandler(event) {
+const ShareOptions = (props) => {
+  // event handlers
+  const isSharedHandler = (event) => {
     const isShared = event.target.checked;
-    let expiration = this.state.expiration;
+    let expiration = props.value.expiration;
     if (!isShared) expiration = null;
 
-    this.setState(state => Object.assign({}, state, { isShared, expiration }));
-  }
-
-  datetimeHandler(dates) {
+    props.onChange({ isShared, expiration }, 'share');
+  };
+  const datetimeHandler = (dates) => {
     const expiration = Date.parse(dates[0]) || null;
-    const isShared = this.state.isShared;
+    const isShared = props.value.isShared;
 
-    this.setState(state => Object.assign({}, state, { isShared, expiration }));
-  }
-
-  submitHandler(event) {
+    props.onChange({ isShared, expiration }, 'share');
+  };
+  const submitHandler = (event) => {
     event.preventDefault();
-    this.props.onSave({
-      share: {
-        isShared: this.state.isShared,
-        expiration: this.state.expiration,
-      },
-    });
-  }
+    props.onSave();
+  };
 
-  render() {
-    return (
-      <form onSubmit={this.submitHandler}>
-        <label htmlFor="isShared"> Shared
-          <input
-            id="isShared"
-            type="checkbox"
-            checked={this.state.isShared}
-            onChange={this.isSharedHandler}
-          />
-        </label>
-        {
-          this.state.isShared &&
+  return (
+    <form onSubmit={submitHandler}>
+      <label htmlFor="isShared"> Shared
+        <input
+          id="isShared"
+          type="checkbox"
+          checked={props.value.isShared}
+          onChange={isSharedHandler}
+        />
+      </label>
+      {
+        props.value.isShared &&
           <div>
-            <em><a href={this.props.url}>{this.props.url}</a></em>
+            <em><a href={props.url}>{props.url}</a></em>
             <DateTimePicker
-              onChange={this.datetimeHandler}
-              value={this.state.expiration}
+              onChange={datetimeHandler}
+              value={props.value.expiration}
             />
           </div>
-        }
-        <button type="submit">Save</button>
-      </form>
-    );
-  }
-}
+      }
+      <button type="submit">Save</button>
+    </form>
+  );
+};
 
 ShareOptions.propTypes = {
   value: PropTypes.shape({
     isShared: PropTypes.bool.isRequired,
-    expiration: PropTypes.string,
+    expiration: PropTypes.oneOf([
+      PropTypes.string,
+      PropTypes.number,
+    ]),
   }).isRequired,
   url: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default ShareOptions;

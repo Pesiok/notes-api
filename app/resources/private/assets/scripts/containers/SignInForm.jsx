@@ -68,9 +68,8 @@ class SignInForm extends Component {
       const password = this.state.password.value;
 
       // send sign in request and change route on success
-      this.props.signInRequest({ name, password }, () => {
-        this.props.history.push('/notes');
-      });
+      this.props.signInRequest({ name, password })
+        .then(() => this.props.history.push('/notes'));
     }
   }
 

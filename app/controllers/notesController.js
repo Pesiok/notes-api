@@ -2,6 +2,25 @@ const { ObjectID } = require('mongodb');
 const Note = require('./../models/Note');
 const authenticate = require('./../middleware/authenticate');
 
+const parseNote = (reqBody) => {
+    const { content, title, share, meta } = reqBody;
+    const body = {};
+
+    // update only params in the request
+    if (title) body['title'] = title;
+    if (content) body['content'] = content;
+    if (share) {
+        body['share.expiration'] = share.expiration;
+        body['share.isShared'] = share.isShared;
+    }
+    if (meta) {
+        body['meta.tags'] = meta.tags;
+    }
+    body['meta.edited'] = Date.now();
+
+    return body;
+}
+
 const notesController = app => {
 
     // create one note
@@ -41,11 +60,13 @@ const notesController = app => {
 
     // get one note
     app.get('/api/notes/:id', authenticate, async (req, res) => {
+        const id = req.params.id;
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
         try {
-            const id = req.params.id;
-            if (!ObjectID.isValid(id)) return res.status(404).send();
             const note = await Note.findOne({ _id: id, _author: req.user._id});
             if (!note) return res.status(404).send();
+            
             res.send({ note });
         } catch(error) {
             res.status(400).send(error);
@@ -54,12 +75,14 @@ const notesController = app => {
 
     // delete one note
     app.delete('/api/notes/:id', authenticate, async (req, res) => {
+        const id = req.params.id;
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
         try {
-            const id = req.params.id;
-            if (!ObjectID.isValid(id)) return res.status(404).send();  
             const note = await Note.findOneAndRemove({_id: id, _author: req.user._id});
             if (!note) return res.status(404).send();
-            res.send({ note })
+
+            res.send();
         } catch(error) {
             res.status(400).send(error);
         } 
@@ -67,34 +90,17 @@ const notesController = app => {
 
     // update one note
     app.patch('/api/notes/:id', authenticate, async (req, res) => {
+        const id = req.params.id;
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
         try {
-            const id = req.params.id;
-            if (!ObjectID.isValid(id)) return res.status(404).send();
-            console.log(req.body);
-            const { content, title, share, meta } = req.body;
-            console.log(share);
-            const body = {};
-
-            // update only params in the request
-            if (title) body['title'] = title;
-            if (content) body['content'] = content;
-            if (share) {
-                console.log('called from share');
-                body['share.expiration'] = share.expiration;
-                body['share.isShared'] = share.isShared;
-            }
-            if (meta) {
-                body['meta.tags'] = meta.tags;
-            }
-            body['meta.edited'] = Date.now();
-            console.log(body);
-
             const note = await Note.findOneAndUpdate(
                 { _id: id, _author: req.user._id },
-                { $set: body },
+                { $set: parseNote(req.body) },
                 { new: true }
-            )
+            );
             if (!note) return res.status(404).send();
+
             res.send({ note });
         } catch (error) {
             res.status(400).send(error);

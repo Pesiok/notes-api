@@ -29,6 +29,7 @@ class NotesIndex extends Component {
         <ul>
           {this.renderNotes()}
         </ul>
+        <Link to={'/notes/new'}>Add a new note</Link>
       </section>
     );
   }

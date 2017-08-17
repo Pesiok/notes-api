@@ -66,9 +66,8 @@ class LogInForm extends Component {
 
     // send request if user exists and password is provided
     if (!areInValid.some(input => input === false)) {
-      this.props.logInRequest({ name, password }, () => {
-        this.props.history.push('/notes');
-      });
+      this.props.logInRequest({ name, password })
+        .then(() => this.props.history.push('/notes'));
     }
   }
 

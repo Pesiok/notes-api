@@ -6,7 +6,6 @@ class NoteTitle extends Component {
     super(props);
 
     this.state = {
-      value: this.props.value,
       showEditor: false,
     };
 
@@ -22,13 +21,12 @@ class NoteTitle extends Component {
 
   changeHandler(event) {
     const value = event.target.value;
-    this.setState(state => Object.assign({}, state, { value }));
+    this.props.onChange(value, 'title');
   }
 
   saveHandler() {
-    const title = this.state.value;
     this.toggleEditor();
-    this.props.onSave({ title });
+    this.props.onSave();
   }
 
   keyHandler(event) {
@@ -48,12 +46,12 @@ class NoteTitle extends Component {
             onClick={this.toggleEditor}
             onKeyPress={this.keyHandler}
           >
-            {this.state.value}
+            {this.props.value}
           </span>
         </h2>
         <textarea
           type="text"
-          value={this.state.value}
+          value={this.props.value}
           onChange={this.changeHandler}
           onBlur={this.saveHandler}
           style={{ display: this.state.showEditor ? 'inherit' : 'none' }}
@@ -66,6 +64,7 @@ class NoteTitle extends Component {
 NoteTitle.propTypes = {
   value: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default NoteTitle;
