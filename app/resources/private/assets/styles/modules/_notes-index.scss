@@ -1,0 +1,48 @@
+.notes-index {
+  padding: 1rem;
+  min-height: calc(100% - 5.2rem);
+
+  background-color: $background;
+
+  &__heading {
+    margin: 1rem;
+
+    font-size: 2rem;
+  }
+
+  &__content {
+    // width: calc(100% - $menuWidth);
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    // justify-content: center;
+
+    padding: 0;
+  }
+
+  &__new {
+    position: fixed;
+    bottom: 3.2rem;
+    right: 3.2rem;
+
+    height: 4.5rem;
+    width: 4.5rem;
+
+    @include mdShadow(3);
+    transition: box-shadow 0.15s ease-in;
+    &:focus,
+    &:hover {
+      @include mdShadow(4);
+    }
+
+    background-color: $primaryDark;
+    border-radius: 100%;
+
+    text-decoration: none;
+    text-align: center;
+    line-height: 4.5rem;
+    color: $textSecondary;
+  }
+}

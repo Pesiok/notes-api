@@ -45,6 +45,7 @@
     "flatpickr": "^3.0.7",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
+    "normalize-scss": "^7.0.0",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",

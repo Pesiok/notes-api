@@ -4,6 +4,15 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getNotesRequest } from '../actions/notes/getNotesActions';
 
+const formatDateTime = timestamp => new Date(timestamp).toLocaleString();
+const formatTitle = (title) => {
+  const maxLength = 20;
+  if (title.length > maxLength) {
+    return `${title.substring(0, maxLength)}...`;
+  }
+  return title;
+};
+
 class NotesIndex extends Component {
   componentWillMount() {
     this.props.getNotesRequest();
@@ -14,9 +23,20 @@ class NotesIndex extends Component {
     if (!notes) return <span>Loading...</span>;
 
     return Object.keys(notes).map(key => (
-      <Link key={key} to={`/notes/${key}`}>
-        <li>
-          {notes[key].title}
+      <Link
+        key={key}
+        to={`/notes/${key}`}
+        className="note-preview"
+      >
+        <li className="note-preview__content">
+          <h3 className="note-preview__heading">{formatTitle(notes[key].title)}</h3>
+          {notes[key].share.isShared &&
+            <strong className="note-preview__status">Shared</strong>
+          }
+          {notes[key].meta.edited ?
+            <time className="note-preview__time">Last edited: {formatDateTime(notes[key].meta.edited)}</time> :
+            <time className="note-preview__time">Created: {formatDateTime(notes[key].meta.created)}</time>
+          }
         </li>
       </Link>
     ));
@@ -24,12 +44,20 @@ class NotesIndex extends Component {
 
   render() {
     return (
-      <section>
-        <h2>Your notes: </h2>
-        <ul>
-          {this.renderNotes()}
-        </ul>
-        <Link to={'/notes/new'}>Add a new note</Link>
+      <section className="notes-index">
+        <div className="notes-index__content">
+          <h2 className="notes-index__heading">All notes: </h2>
+          <ul className="notes-index__list">
+            {this.renderNotes()}
+          </ul>
+        </div>
+        <Link
+          title="Add a new note"
+          to={'/notes/new'}
+          className="notes-index__new material-icons"
+        >
+          add
+        </Link>
       </section>
     );
   }

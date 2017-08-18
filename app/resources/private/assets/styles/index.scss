@@ -1,12 +1,18 @@
+
+// normalize
+@import "~normalize-scss/sass/normalize/import-now";
+
+// datetime picker styles
 @import '~flatpickr/dist/themes/material_green.css';
 
+// base styles
+@import 'base/_variables.scss';
+@import 'base/_mixins.scss';
+@import 'base/_global.scss';
 
-body {
-    background-color: pink;
-    // background: url('../images/jack.jpg') center center;
-
-    h1 {
-        color: red;
-        display: flex;
-    }
-}
+// modules
+@import 'modules/_menu.scss';
+@import 'modules/_menu-item';
+@import 'modules/_header.scss';
+@import 'modules/_note-preview';
+@import 'modules/_notes-index';

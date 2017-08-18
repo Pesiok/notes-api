@@ -1,0 +1,37 @@
+html {
+  box-sizing: border-box;
+
+  font-size: 62.5%;
+
+  font-family: 'Roboto', sans-serif;
+  line-height: normal;
+
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+
+}
+
+body {
+  overflow-x: hidden;
+	position: relative;
+  left: 0;
+  
+  transition: left 0.25s ease;
+}
+
+html,
+body {
+  background-color: $backgroundDark;
+  height: 100%;
+}
+
+#root,
+[data-reactroot] {
+    height: 100%;
+}
+
+.body--push {
+  left: $menuWidth;
+}

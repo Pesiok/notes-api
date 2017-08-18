@@ -1,0 +1,43 @@
+.header {
+  background-color: $backgroundLight;
+
+  // background: rgba(111,193,182,0);
+  // background: -moz-linear-gradient(top, rgba(111,193,182,0) 0%, rgba(111,193,182,0.22) 100%);
+  // background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(111,193,182,0)), color-stop(100%, rgba(111,193,182,0.22)));
+  // background: -webkit-linear-gradient(top, rgba(111,193,182,0) 0%, rgba(111,193,182,0.22) 100%);
+  // background: -o-linear-gradient(top, rgba(111,193,182,0) 0%, rgba(111,193,182,0.22) 100%);
+  // background: -ms-linear-gradient(top, rgba(111,193,182,0) 0%, rgba(111,193,182,0.22) 100%);
+  // background: linear-gradient(to bottom, rgba(111,193,182,0) 0%, rgba(111,193,182,0.22) 100%);
+  // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6fc1b6', endColorstr='#6fc1b6', GradientType=0 );
+
+  border-bottom: 0.15rem solid $primary;
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    height: 5rem;
+
+    @include mdShadow(1);
+  }
+
+  &__button {
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    color: $text;
+    transition: color 0.15s ease-in;
+
+    &:focus,
+    &:hover {
+      color: $primaryDark;
+    }
+  }
+
+  &__heading {
+    margin: 0;
+    margin-left: 1rem;
+    color: $text;
+  }
+}
