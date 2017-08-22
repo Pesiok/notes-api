@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import ClickedOutside from './ClickedOutside';
+
 class NoteTitle extends Component {
   constructor(props) {
     super(props);
@@ -9,6 +11,9 @@ class NoteTitle extends Component {
       showEditor: false,
     };
 
+    this.initialValue = this.props.value;
+
+    // bindings 
     this.changeHandler = this.changeHandler.bind(this);
     this.saveHandler = this.saveHandler.bind(this);
     this.toggleEditor = this.toggleEditor.bind(this);
@@ -21,41 +26,55 @@ class NoteTitle extends Component {
 
   changeHandler(event) {
     const value = event.target.value;
+
     this.props.onChange(value, 'title');
   }
 
   saveHandler() {
     this.toggleEditor();
-    this.props.onSave();
+    if (this.props.value.length === 0) {
+      this.props.onChange(this.initialValue, 'title');
+    } else {
+      this.props.onSave();
+    }
   }
 
   keyHandler(event) {
-    const code = event.keycode;
+    const code = event.which;
     if (code === 32 || code === 13) {
+      // open on enter or space
       this.toggleEditor();
     }
   }
 
   render() {
     return (
-      <div>
-        <h2>
-          <span
-            role="button"
-            tabIndex="0"
-            onClick={this.toggleEditor}
-            onKeyPress={this.keyHandler}
-          >
-            {this.props.value}
-          </span>
+      <div className="note-title">
+        <h2 className="note-title__heading">
+          {!this.state.showEditor &&
+            <span
+              className="note-title__button"
+              title="Click to change title"
+              role="button"
+              tabIndex="0"
+              onClick={this.toggleEditor}
+              onKeyPress={this.keyHandler}
+            >
+              {this.props.value}
+            </span>
+          }
         </h2>
-        <textarea
-          type="text"
-          value={this.props.value}
-          onChange={this.changeHandler}
-          onBlur={this.saveHandler}
-          style={{ display: this.state.showEditor ? 'inherit' : 'none' }}
-        />
+        {this.state.showEditor &&
+          <ClickedOutside on={this.saveHandler}>
+            <input
+              className="note-title__editor"
+              type="text"
+              value={this.props.value}
+              onChange={this.changeHandler}
+              onBlur={this.saveHandler}
+            />
+          </ClickedOutside>
+        }
       </div>
     );
   }

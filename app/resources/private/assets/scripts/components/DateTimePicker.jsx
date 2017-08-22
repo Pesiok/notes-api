@@ -36,20 +36,30 @@ class DateTimePicker extends Component {
   render() {
     /*eslint-disable */
     return (
-      <label htmlFor="expiration">Set optional expiration
-        <input 
-          id="expiration"
-          className="flatpickr" 
-          ref={input => this.inputField = input}
-          readOnly
-        />
-        <button 
-          type="button"
-          onClick={this.resetHandler}
-        >
-          Reset
-        </button> 
-      </label>
+        <div className="note-options-share__expiration">
+          <label 
+            htmlFor="expiration"
+            className="note-options-share__expiration-label"
+          >
+          Set optional expiration:
+          </label>
+          <div className="note-options-share__expiration-input">
+            <input 
+              id="expiration" 
+              ref={input => this.inputField = input}
+              readOnly
+            />
+            <button
+              title="clear input"
+              className="material-icons"
+              type="button"
+              onClick={this.resetHandler}
+            >
+              clear
+            </button>
+          </div> 
+        </div>
+      
     );
     /*eslint-enable */
   }

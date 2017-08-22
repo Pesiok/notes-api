@@ -11,15 +11,18 @@
   }
 
   &__content {
-    // width: calc(100% - $menuWidth);
+    margin: 0 auto;
+    max-width: 110rem;
   }
 
   &__list {
     display: flex;
     flex-wrap: wrap;
-    // justify-content: center;
+    justify-content: center;
 
     padding: 0;
+
+    transition: max-width 0.33s ease-in-out;
   }
 
   &__new {
@@ -45,4 +48,5 @@
     line-height: 4.5rem;
     color: $textSecondary;
   }
+
 }

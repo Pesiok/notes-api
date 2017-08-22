@@ -1,0 +1,20 @@
+.note {
+  min-height: calc(100% - 5.2rem);
+  padding: 1rem;
+
+  background-color: $background;
+
+  &__preview {
+    max-width: 110rem;
+    margin: 0 auto;
+    padding: 1rem;
+
+    background-color: $backgroundActive;
+    overflow-wrap: break-word;
+
+    @include mdShadow(2);
+
+    font-size: 1.4rem;
+  }
+}
+

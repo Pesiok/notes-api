@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import { Link } from 'react-router-dom';
 
 import Menu from '../containers/Menu';
 
@@ -8,7 +7,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
     };
   }
   render() {

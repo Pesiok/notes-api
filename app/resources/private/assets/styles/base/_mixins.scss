@@ -32,3 +32,23 @@
         @content;
     }
 }
+
+@mixin saveButton() {
+    cursor: pointer;
+
+    background: none;
+    border: none;
+
+    font-size: 1.5rem;
+
+    background-color: $primary;
+    @include mdShadow(2);
+
+    &:hover,
+    &:focus {
+      background-color: $primaryDark;
+      color: $textSecondary;
+
+      @include mdShadow(3);
+    }
+}

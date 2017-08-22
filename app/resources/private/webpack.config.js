@@ -14,6 +14,7 @@ module.exports = {
   entry: './assets/scripts/index.jsx',
   output: {
     path: `${__dirname}/../public`,
+    publicPath: '/',
     filename: 'index.bundle.js',
   },
   module: {

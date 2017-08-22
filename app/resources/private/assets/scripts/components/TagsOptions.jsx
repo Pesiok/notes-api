@@ -30,13 +30,15 @@ class TagsOptions extends Component {
   renderTags() {
     return (
       this.props.value.tags.map((tag, index) => (
-        <li key={`tag-${tag}`}>
-          <span>{tag}</span>
+        <li className="note-options-tags__tag" key={`tag-${tag}`}>
+          <span className="note-options-tags__tag-name">{tag}</span>
           <button
+            className="note-options-tags__tag-button"
             onClick={() => this.removeTag(index)}
             title="Remove tag"
           >
-            x
+            <span aria-hidden="true" className="material-icons">close</span>
+            <span className="visually-hidden">Remove</span>
           </button>
         </li>
       ))
@@ -45,9 +47,9 @@ class TagsOptions extends Component {
 
   render() {
     return (
-      <div>
+      <div className="note-options-tags">
         {this.props.value.tags.length > 0 &&
-        <ul>
+        <ul className="note-options-tags__list">
           {this.renderTags()}
         </ul>
         }

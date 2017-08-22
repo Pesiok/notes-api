@@ -18,7 +18,7 @@ body {
 	position: relative;
   left: 0;
   
-  transition: left 0.25s ease;
+  transition: left 0.3s ease-in-out;
 }
 
 html,
@@ -33,5 +33,18 @@ body {
 }
 
 .body--push {
+  // push whole body
+  // don't shrink content on smaller screens
+
   left: $menuWidth;
+
+  @include atMedium() {
+    // shrink to fit
+    .note__content,
+    .notes-index__list,
+    .note-nav__content {
+      max-width: calc(100% - #{$menuWidth});
+    }
+  }
+  
 }

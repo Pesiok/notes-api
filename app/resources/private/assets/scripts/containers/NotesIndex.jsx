@@ -2,53 +2,31 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { getNotesRequest } from '../actions/notes/getNotesActions';
 
-const formatDateTime = timestamp => new Date(timestamp).toLocaleString();
-const formatTitle = (title) => {
-  const maxLength = 20;
-  if (title.length > maxLength) {
-    return `${title.substring(0, maxLength)}...`;
-  }
-  return title;
-};
+import { getNotesRequest } from '../actions/notes/getNotesActions';
+import NotePreview from '../components/NotePreview';
 
 class NotesIndex extends Component {
   componentWillMount() {
     this.props.getNotesRequest();
-  }
-
-  renderNotes() {
-    const notes = this.props.notes;
-    if (!notes) return <span>Loading...</span>;
-
-    return Object.keys(notes).map(key => (
-      <Link
-        key={key}
-        to={`/notes/${key}`}
-        className="note-preview"
-      >
-        <li className="note-preview__content">
-          <h3 className="note-preview__heading">{formatTitle(notes[key].title)}</h3>
-          {notes[key].share.isShared &&
-            <strong className="note-preview__status">Shared</strong>
-          }
-          {notes[key].meta.edited ?
-            <time className="note-preview__time">Last edited: {formatDateTime(notes[key].meta.edited)}</time> :
-            <time className="note-preview__time">Created: {formatDateTime(notes[key].meta.created)}</time>
-          }
-        </li>
-      </Link>
-    ));
+    // then
   }
 
   render() {
     return (
       <section className="notes-index">
-        <div className="notes-index__content">
+        <div
+          className="notes-index__content"
+          ref={(content) => { this.content = content; }}
+        >
           <h2 className="notes-index__heading">All notes: </h2>
           <ul className="notes-index__list">
-            {this.renderNotes()}
+            {this.props.notes ?
+              Object.keys(this.props.notes).map(key => (
+                <NotePreview key={key} note={this.props.notes[key]} />
+              )) :
+              <span>Loading...</span>
+            }
           </ul>
         </div>
         <Link

@@ -9,10 +9,18 @@
 @import 'base/_variables.scss';
 @import 'base/_mixins.scss';
 @import 'base/_global.scss';
+@import 'base/_visually-hidden.scss';
 
 // modules
 @import 'modules/_menu.scss';
 @import 'modules/_menu-item';
 @import 'modules/_header.scss';
-@import 'modules/_note-preview';
 @import 'modules/_notes-index';
+@import 'modules/_note';
+@import 'modules/_note-preview';
+@import 'modules/_note-title';
+@import 'modules/_note-nav';
+@import 'modules/_note-options';
+@import 'modules/_note-options-editor';
+@import 'modules/_note-options-share';
+@import 'modules/_note-options-tags';

@@ -1,0 +1,70 @@
+.note-options-tags {
+  padding: 1rem;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0;
+    padding-bottom: 1rem;
+
+    list-style: none;
+    border-bottom: 0.1rem solid $primary;
+  }
+
+  // tag
+
+  &__tag {
+    display: flex;
+    align-items: center;
+
+    margin: 0.3rem;
+    padding: 0.1rem;
+
+    background-color: $backgroundDark;
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__tag-name {
+    // font-size: 1.4rem;
+    margin: 0 0.2rem;
+  }
+
+  &__tag-button {
+    cursor: pointer;
+
+    padding: 0.1rem;
+
+    border: none;
+    background: none;
+
+    color: $danger;
+
+    &:hover,
+    &:focus {
+      color: $primary;
+    }
+  }
+
+  // add
+
+  &__add {
+
+  }
+
+  &__add-input {
+
+  }
+
+  &__add-error {
+
+  }
+
+  &__add-button {
+
+  }
+
+}

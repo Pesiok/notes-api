@@ -23,26 +23,42 @@ const ShareOptions = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler}>
-      <label htmlFor="isShared"> Shared
-        <input
-          id="isShared"
-          type="checkbox"
-          checked={props.value.isShared}
-          onChange={isSharedHandler}
-        />
-      </label>
+    <form className="note-options-share" onSubmit={submitHandler}>
       {
         props.value.isShared &&
-          <div>
-            <em><a href={props.url}>{props.url}</a></em>
+          <div className="note-options-share__content">
+            <em className="note-options-share__link">Sharable link:
+              <a href={props.url}>{props.url}</a>
+            </em>
             <DateTimePicker
               onChange={datetimeHandler}
               value={props.value.expiration}
             />
           </div>
       }
-      <button type="submit">Save</button>
+      <div className="note-options-share__input-group">
+        <div>
+          <input
+            className="note-options-share__checkbox-input"
+            id="isShared"
+            type="checkbox"
+            checked={props.value.isShared}
+            onChange={isSharedHandler}
+          />
+          <label
+            className="note-options-share__checkbox-label"
+            htmlFor="isShared"
+          >
+            Shared
+          </label>
+        </div>
+        <button
+          className="note-options-share__button"
+          type="submit"
+        >
+          Save
+        </button>
+      </div>
     </form>
   );
 };

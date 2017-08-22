@@ -46,9 +46,13 @@ class AddTag extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submitHandler}>
+      <form
+        className="note-options-tags__add"
+        onSubmit={this.submitHandler}
+      >
         <label htmlFor="addTag">
           <input
+            className="note-options-tags__add-input"
             aria-required="true"
             aria-invalid={!this.state.isValid}
             id="addTag"
@@ -58,10 +62,18 @@ class AddTag extends Component {
             onBlur={this.validate}
           />
         </label>
-        <span style={{ display: this.state.isValid ? 'none' : 'inherit' }}>
+        <span
+          className="note-options-tags__add-error"
+          style={{ display: this.state.isValid ? 'none' : 'inherit' }}
+        >
           Incorrect tag
         </span>
-        <button type="submit">Add</button>
+        <button
+          className="note-options-tags__add-button"
+          type="submit"
+        >
+          Add
+        </button>
       </form>
     );
   }

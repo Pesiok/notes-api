@@ -1,0 +1,8 @@
+.note-options {
+  max-width: 110rem;
+  margin: 0 auto;
+
+  background-color: $backgroundActive;
+  @include mdShadow(2);
+
+}

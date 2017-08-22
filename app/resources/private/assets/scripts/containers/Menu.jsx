@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -39,6 +40,8 @@ class Menu extends Component {
     // show menu when initial state is true, ignore rule when props are changed
     if (this.initialState && this.props.isOpen) this.body.classList.add('body--push');
 
+    // if (this.props.isOpen)
+
     return (
       <nav
         className={`menu ${this.initialState ? 'menu--active menu--open' : ''}`}
@@ -68,4 +71,10 @@ Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
 
-export default Menu;
+// function mapStateToProps(state) {
+//   return {
+//     notes: state.notesReducer,
+//   };
+// }
+
+export default connect(null)(Menu);

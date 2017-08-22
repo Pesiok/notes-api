@@ -1,5 +1,6 @@
 .note-preview {
   display: block;
+  flex: 1 0 auto;
 
   width: 15rem;
   min-height: 13rem;
@@ -27,6 +28,7 @@
 
   &__heading {
     font-size: 1.8rem;
+    overflow-wrap: break-word;
     margin: 0;
   }
 

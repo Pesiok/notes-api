@@ -6,6 +6,11 @@
 
   &:hover {
     background-color: $primaryLight;
+    
+    .menu-item__button,
+    .menu-item__link {
+      color: $text;
+    }
   }
 
   &__button {

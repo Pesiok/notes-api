@@ -9,7 +9,10 @@ const transpile = (value) => {
 
 /*eslint-disable */
 const MarkdownPreviewer = props => (
-  <span dangerouslySetInnerHTML={transpile(props.value)} />
+  <div
+    className="note__preview"
+    dangerouslySetInnerHTML={transpile(props.value)} 
+  />
 );
 /*eslint-enable */
 
