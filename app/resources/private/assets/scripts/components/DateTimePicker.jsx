@@ -59,7 +59,6 @@ class DateTimePicker extends Component {
             </button>
           </div> 
         </div>
-      
     );
     /*eslint-enable */
   }

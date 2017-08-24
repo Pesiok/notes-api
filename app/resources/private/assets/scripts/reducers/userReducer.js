@@ -18,15 +18,22 @@ import {
 
 export default function (state = {}, action) {
   switch (action.type) {
+    case SIGN_IN_SUCCESS:
+    case LOG_IN_SUCCESS: {
+      const { user, token } = action.payload;
+      return Object.assign({}, state, { user, token });
+    }
+    case LOG_OUT_SUCCESS: {
+      const prevState = Object.assign({}, state);
+      delete prevState.token;
+      delete prevState.user;
+      return prevState;
+    }
     case SIGN_IN_REQUEST: {
       return state;
     }
     case SIGN_IN_FAILURE: {
       return state;
-    }
-    case SIGN_IN_SUCCESS: {
-      const { user, token } = action.payload;
-      return Object.assign({}, state, { user, token });
     }
     case LOG_IN_REQUEST: {
       return state;
@@ -34,17 +41,10 @@ export default function (state = {}, action) {
     case LOG_IN_FAILURE: {
       return state;
     }
-    case LOG_IN_SUCCESS: {
-      const { user, token } = action.payload;
-      return Object.assign({}, state, { user, token });
-    }
     case LOG_OUT_REQUEST: {
       return state;
     }
     case LOG_OUT_FAILURE: {
-      return state;
-    }
-    case LOG_OUT_SUCCESS: {
       return state;
     }
     default: {

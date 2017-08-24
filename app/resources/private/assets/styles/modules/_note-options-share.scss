@@ -55,6 +55,7 @@
   
       padding: 0.2rem;
       border: 0.1rem solid $primary;
+      @include mdShadow(1);
 
       &:hover,
       &:focus {
@@ -72,6 +73,7 @@
       color: $textSecondary;
 
       background-color: $primary;
+      @include mdShadow(1);
 
       &:hover,
       &:focus {

@@ -3,12 +3,34 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import AccordionMenu from '../components/AccordionMenu';
+
+
 class Menu extends Component {
   constructor(props) {
     super(props);
 
     this.initialState = this.props.isOpen;
     this.body = document.querySelector('body');
+
+    this.menuElements = [
+      { name: 'All notes', icon: 'list', link: '/notes' },
+      <AccordionMenu
+        key="accordion-menu-filter"
+        name="Filter notes"
+        icon="filter_list"
+        elements={[
+          { name: 'Newest', link: '/filter?by=created&newest=true' },
+          { name: 'Oldest', link: '/filter?by=created&newest=false' },
+          { name: 'Edited', link: '/filter?by=edited' },
+          { name: 'Shared', link: '/filter?by=shared' },
+        ]}
+      />,
+      { name: 'New note', icon: 'note_add', link: '/notes/new' },
+      { name: 'Home', icon: 'home', link: '/home' },
+      { name: 'About', icon: 'info', link: '/about' },
+      { name: 'Settings', icon: 'settings', link: '/settings', class: 'menu-item--last' },
+    ];
   }
 
   componentWillReceiveProps({ isOpen }) {
@@ -36,11 +58,28 @@ class Menu extends Component {
     }
   }
 
+  renderMenuItems() {
+    return this.menuElements.map((element) => {
+      if (React.isValidElement(element)) return element;
+      return (
+        <li key={`menu-list-${element.name}`} role="menuitem" className="menu-item">
+          <Link to={element.link} className={`menu-item__link ${element.class ? element.class : ''}`}>
+            <span
+              aria-hidden="true"
+              className="material-icons menu-item__icon"
+            >
+              {element.icon}
+            </span>
+            <span className="menu-item__name">{element.name}</span>
+          </Link>
+        </li>
+      );
+    });
+  }
+
   render() {
     // show menu when initial state is true, ignore rule when props are changed
     if (this.initialState && this.props.isOpen) this.body.classList.add('body--push');
-
-    // if (this.props.isOpen)
 
     return (
       <nav
@@ -49,18 +88,7 @@ class Menu extends Component {
       >
         <h2 className="menu__heading">Menu</h2>
         <ul role="menu" className="menu__content">
-          <li role="menuitem" className="menu-item">
-            <button className="menu-item__button">Recent</button>
-          </li>
-          <li role="menuitem" className="menu-item">
-            <Link to={'/notes'} className="menu-item__link">Notes index</Link>
-          </li>
-          <li role="menuitem" className="menu-item">
-            <Link to={'/notes/new'} className="menu-item__link" >Add a new note</Link>
-          </li>
-          <li role="menuitem" className="menu-item">
-            <button className="menu-item__button">Settings</button>
-          </li>
+          {this.renderMenuItems()}
         </ul>
       </nav>
     );
@@ -70,11 +98,5 @@ class Menu extends Component {
 Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
-
-// function mapStateToProps(state) {
-//   return {
-//     notes: state.notesReducer,
-//   };
-// }
 
 export default connect(null)(Menu);

@@ -46,11 +46,9 @@ class AddTag extends Component {
 
   render() {
     return (
-      <form
-        className="note-options-tags__add"
-        onSubmit={this.submitHandler}
-      >
-        <label htmlFor="addTag">
+      <form onSubmit={this.submitHandler}>
+        <div className="note-options-tags__add-input-group">
+          <label htmlFor="addTag" className="visually-hidden">Add tag</label>
           <input
             className="note-options-tags__add-input"
             aria-required="true"
@@ -59,21 +57,20 @@ class AddTag extends Component {
             type="text"
             value={this.state.value}
             onChange={this.changeHandler}
-            onBlur={this.validate}
           />
-        </label>
+          <button
+            type="submit"
+            className="note-options-tags__add-button"
+          >
+            Add
+          </button>
+        </div>
         <span
           className="note-options-tags__add-error"
           style={{ display: this.state.isValid ? 'none' : 'inherit' }}
         >
-          Incorrect tag
+        Incorrect tag
         </span>
-        <button
-          className="note-options-tags__add-button"
-          type="submit"
-        >
-          Add
-        </button>
       </form>
     );
   }

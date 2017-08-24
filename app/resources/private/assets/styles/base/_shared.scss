@@ -8,3 +8,10 @@
   position: absolute;
   width: 1px;
 }
+
+.content {
+  min-height: calc(100% - #{$headerCompiledHeight});
+  padding: 1rem;
+
+  background-color: $background;
+}

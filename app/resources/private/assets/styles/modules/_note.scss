@@ -1,11 +1,6 @@
 .note {
-  min-height: calc(100% - 5.2rem);
-  padding: 1rem;
-
-  background-color: $background;
-
   &__preview {
-    max-width: 110rem;
+    max-width: $maxContentWidth;
     margin: 0 auto;
     padding: 1rem;
 

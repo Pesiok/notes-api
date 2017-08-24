@@ -66,7 +66,6 @@ class SignInForm extends Component {
     if (!areInValid.some(input => input === false) && this.state.isAvailable) {
       const name = this.state.name.value;
       const password = this.state.password.value;
-
       // send sign in request and change route on success
       this.props.signInRequest({ name, password })
         .then(() => this.props.history.push('/notes'));
@@ -75,14 +74,12 @@ class SignInForm extends Component {
 
   handleBlur(event, name) {
     const value = event.target.value;
-
     // validate onBlur by default
     this.checkValidity(value, name);
   }
 
   handleChange(event, name) {
     const value = event.target.value;
-
     // trigger onChange validation after some handler validated to false
     this.checkValidity(value, name, this.state[name].isValid);
   }

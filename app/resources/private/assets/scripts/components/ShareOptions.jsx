@@ -66,7 +66,7 @@ const ShareOptions = (props) => {
 ShareOptions.propTypes = {
   value: PropTypes.shape({
     isShared: PropTypes.bool.isRequired,
-    expiration: PropTypes.oneOf([
+    expiration: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number,
     ]),

@@ -9,7 +9,7 @@
 @import 'base/_variables.scss';
 @import 'base/_mixins.scss';
 @import 'base/_global.scss';
-@import 'base/_visually-hidden.scss';
+@import 'base/_shared.scss';
 
 // modules
 @import 'modules/_menu.scss';
@@ -24,3 +24,5 @@
 @import 'modules/_note-options-editor';
 @import 'modules/_note-options-share';
 @import 'modules/_note-options-tags';
+@import 'modules/_note-options-delete';
+@import 'modules/_settings';

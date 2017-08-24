@@ -7,7 +7,7 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      isOpen: false,
+      isOpen: true,
     };
   }
   render() {

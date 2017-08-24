@@ -38,11 +38,12 @@ body {
 
   left: $menuWidth;
 
-  @include atMedium() {
+  @include atSmall() {
     // shrink to fit
     .note__content,
     .notes-index__list,
-    .note-nav__content {
+    .note-nav__content,
+    .settings__content {
       max-width: calc(100% - #{$menuWidth});
     }
   }

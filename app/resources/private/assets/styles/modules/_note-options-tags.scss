@@ -23,13 +23,18 @@
 
     background-color: $backgroundDark;
 
+    @include mdShadow(1);
+
+    &:hover {
+      @include mdShadow(2);
+    }
+
     span {
       font-size: 1.6rem;
     }
   }
 
   &__tag-name {
-    // font-size: 1.4rem;
     margin: 0 0.2rem;
   }
 
@@ -51,20 +56,34 @@
 
   // add
 
-  &__add {
+  &__add-input-group {
+    display: flex;
 
-  }
-
-  &__add-input {
-
+    height: 3rem;
+    font-size: 1.5rem;
   }
 
   &__add-error {
-
+    margin-top: 1rem;
+    font-size: 1.7rem;
+    color: $danger;
   }
 
   &__add-button {
+    @include saveButton();
+  }
 
+  &__add-input {
+    border: none;
+    border: 0.1rem solid $primary;
+
+    background-color: $backgroundLight;
+    @include mdShadow(2);
+
+    &:focus,
+    &:hover {
+      border-color: $primaryDark;
+    }
   }
 
 }

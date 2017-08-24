@@ -1,9 +1,5 @@
 .notes-index {
-  padding: 1rem;
-  min-height: calc(100% - 5.2rem);
-
-  background-color: $background;
-
+  
   &__heading {
     margin: 1rem;
 
@@ -12,7 +8,7 @@
 
   &__content {
     margin: 0 auto;
-    max-width: 110rem;
+    max-width: $maxContentWidth;
   }
 
   &__list {

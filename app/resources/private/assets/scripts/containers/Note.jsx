@@ -82,7 +82,7 @@ class Note extends Component {
 
   render() {
     return (
-      <section className="note">
+      <section className="content note">
         <div className="note__content">
           <NoteTitle
             value={this.state.note.title}
@@ -149,21 +149,10 @@ Note.propTypes = {
   newNoteRequest: PropTypes.func.isRequired,
 };
 
-const dummyNote = {
-  title: 'A Dummy note',
-  content: 'Click on the edit tab to write here soomething... Markdown included',
-  meta: {
-    tags: ['dummy'],
-  },
-  share: {
-    isShared: false,
-  },
-};
-
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
   // if there is no id in URL pass a dummy note
-  return { note: id ? state.notesReducer[id] : dummyNote };
+  return { note: id ? state.notesReducer[id] : ownProps.note };
 }
 
 export default connect(mapStateToProps, {

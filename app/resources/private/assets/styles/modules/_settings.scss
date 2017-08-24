@@ -1,0 +1,88 @@
+.settings {
+
+  &__content-items {
+    max-width: $maxContentWidth;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+
+  &__heading {
+    margin: 1rem 0;
+    
+    font-size: 2rem;
+  }
+
+  &__list {
+    max-width: 35rem;
+    padding: 0;
+    margin: 0;
+
+    font-size: 1.6rem;
+    list-style: none;
+  }
+
+  &__list-item {
+    margin: 1rem 0;
+  }
+
+  &__list-item-button {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+
+    height: 4.5rem;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+
+    background: none;
+    border: none;
+
+    background-color: $backgroundActive;
+    transition: box-shadow 0.2s ease-in;
+    @include mdShadow(2);
+
+    &:focus,
+    &:hover {
+      @include mdShadow(3);
+    }
+  }
+
+  &__list-item-icon {
+    padding: 0.5rem;
+    margin-right: 1rem;
+    
+    background-color: $primary;
+  }
+
+  &__details {
+    // max-width: 35rem;
+    padding: 1rem;
+    margin-top: 1rem;
+
+    background-color: $backgroundActive;
+    @include mdShadow(2);
+
+    font-size: 1.3rem;
+    overflow-wrap: break-word;
+  }
+
+  &__details-heading {
+    margin: 0;
+    font-size: 2rem;
+  }
+
+  &__details-list {
+    font-size: 1.5rem;
+
+    dt {
+      font-weight: bold;
+      color: $primaryDark;
+    }
+  }
+
+}
