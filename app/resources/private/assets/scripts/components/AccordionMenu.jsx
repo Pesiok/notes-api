@@ -12,11 +12,14 @@ const handleKeyPress = (event) => {
 };
 
 const renderSubMenu = elements => (
-  elements.map(element => (
-    <li key={`el-${element.link}`} className="menu-item--accordion__menu-item">
-      <Link to={element.link}>{element.name}</Link>
-    </li>
-  ))
+  elements.map((element) => {
+    if (React.isValidElement(element)) return element;
+    return (
+      <li key={`el-${element.link}`} className="menu-item--accordion__menu-item">
+        <Link to={element.link}>{element.name}</Link>
+      </li>
+    );
+  })
 );
 
 const AccordionMenu = props => (

@@ -20,8 +20,7 @@ class Menu extends Component {
         name="Filter notes"
         icon="filter_list"
         elements={[
-          { name: 'Newest', link: '/filter?by=created&newest=true' },
-          { name: 'Oldest', link: '/filter?by=created&newest=false' },
+          { name: 'All', link: '/filter' },
           { name: 'Edited', link: '/filter?by=edited' },
           { name: 'Shared', link: '/filter?by=shared' },
         ]}
