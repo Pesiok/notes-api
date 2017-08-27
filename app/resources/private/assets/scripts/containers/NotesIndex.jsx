@@ -8,7 +8,7 @@ import NotesList from '../components/NotesList';
 
 
 class NotesIndex extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.getNotesRequest();
     // .then loading animation or sth...
   }
@@ -16,8 +16,8 @@ class NotesIndex extends Component {
   render() {
     return (
       <NotesList
-        notes={this.props.notes}
-        name="All notes:"
+        notesToRender={this.props.notes}
+        name="All notes"
         {...this.props}
       />
     );

@@ -1,11 +1,17 @@
 .note-options-delete {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
   padding: 1rem;
 
   font-size: 1.8rem;
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 40rem;
+    min-height: 5rem;
+    margin: 0 auto;
+  }
 
   &__button {
     cursor: pointer;

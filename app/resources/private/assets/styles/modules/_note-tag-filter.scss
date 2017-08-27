@@ -1,0 +1,60 @@
+.note-tag-filter {
+  padding: 1rem;
+
+  &__heading {
+    font-size: 2.2rem;
+    margin: 1rem;
+    margin-left: 0;
+  }
+
+  &__input-group {
+    display: flex;
+    align-items: center;
+
+    height: 3.3rem;
+
+    font-size: 1.6rem;
+
+    @include mdShadow(1);
+    transition: box-shadow 0.2s ease-in;
+
+    @include atMedium() {
+      width: 66.66%;
+    }
+
+    @include atLarge() {
+      width: 33.33%;
+    }
+
+    &:hover {
+      @include mdShadow(2);
+    }
+  }
+
+  &__input {
+    border: none;
+    padding: 0.5rem;
+    width: 100%;
+    height: 100%;
+
+    background-color: $backgroundLight;
+  
+    color: $primaryDark;
+  }
+
+  &__input::placeholder {
+    color: $primaryDark;
+  }
+
+  &__button {
+    cursor: pointer;
+    border: none;
+    background: none;
+
+    height: 100%;
+
+    background-color: $primaryDark;
+    color: $textSecondary;
+
+  }
+}

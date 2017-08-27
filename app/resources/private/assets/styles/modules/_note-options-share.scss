@@ -72,12 +72,12 @@
 
       color: $textSecondary;
 
-      background-color: $primary;
+      background-color: $danger;
       @include mdShadow(1);
 
       &:hover,
       &:focus {
-        background-color: $primaryDark;
+        background-color: $dangerDark;
         color: $textSecondary;
         
       }

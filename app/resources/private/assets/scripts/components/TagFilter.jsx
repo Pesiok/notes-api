@@ -13,38 +13,58 @@ class TagFilter extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  filterNotes(notes) {
-    return notes.filter((note) => {
-      const mached = note.meta.tags.map(tag => tag === this.state.value);
-      const atLeastOneMatches = mached.some(value => value === true);
-      console.log(atLeastOneMatches);
-      return atLeastOneMatches;
-    });
-  }
-
   handleChange(event) {
     const value = event.target.value;
     this.setState(state => Object.assign({}, state, { value }));
   }
 
   handleSubmit(event) {
+    const value = this.state.value;
     event.preventDefault();
-    const filtredNotes = this.filterNotes(this.props.notes);
-    this.props.onSave(filtredNotes);
+    this.props.onSave(value);
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>With tag:</h2>
-        <label htmlFor="tagFilterInput">Show notes only with given tag</label>
-        <input
-          id="tagFilterInput"
-          type="text"
-          value={this.state.value}
-          onChange={this.handleChange}
-        />
-        <button type="submit">Filter</button>
+      <form
+        onSubmit={this.handleSubmit}
+        className="note-tag-filter"
+      >
+        <div className="note-tag-filter__content">
+          <h2 className="note-tag-filter__heading">Active tag filter:</h2>
+          <label
+            htmlFor="tagFilterInput"
+            className="visually-hidden"
+          >
+            Your tag filter
+          </label>
+          <div className="note-tag-filter__input-group">
+            <input
+              id="tagFilterInput"
+              type="text"
+              className="note-tag-filter__input"
+              value={this.state.value}
+              onChange={this.handleChange}
+              placeholder="none"
+            />
+            <button
+              title="filter by tag"
+              type="submit"
+              className="note-tag-filter__button"
+            >
+              <span
+                className="note-tag-filter__button-icon material-icons"
+              >
+                filter_list
+              </span>
+              <span
+                className="visually-hidden"
+              >
+                filter
+              </span>
+            </button>
+          </div>
+        </div>
       </form>
     );
   }
@@ -52,7 +72,6 @@ class TagFilter extends Component {
 
 TagFilter.propTypes = {
   onSave: PropTypes.func.isRequired,
-  notes: PropTypes.arrayOf(PropTypes.obj).isRequired,
 };
 
 export default TagFilter;

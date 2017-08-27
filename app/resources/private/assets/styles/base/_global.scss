@@ -44,7 +44,8 @@ body {
     .notes-list__list,
     .notes-list__heading,
     .note-nav__content,
-    .settings__content {
+    .settings__content,
+    .note-tag-filter__content {
       max-width: calc(100% - #{$menuWidth});
     }
   }

@@ -18,12 +18,23 @@
   }
 
   &__heading-link {
-    color: $text;
     margin: 0 0.5rem;
+
+    text-decoration: none;
+    color: $text;
+    transition: color 0.2s ease-in;
+
+
+    &:hover,
+    &:focus {
+      color: $primaryDark;
+    }
   }
 
   &__heading-link--active {
-    color: green;
+    color: $primary;
+    text-decoration: underline;
+
   }
 
   &__content {

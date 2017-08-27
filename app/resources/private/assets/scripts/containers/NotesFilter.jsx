@@ -10,37 +10,51 @@ import TagFilter from '../components/TagFilter';
 
 const Default = () => <div>No notes to display</div>;
 
+const tagFilter = (notes, filterValue) => notes.filter((note) => {
+  const mached = note.meta.tags.map(tag => tag === filterValue);
+  const atLeastOneMatches = mached.some(value => value === true);
+  return atLeastOneMatches;
+});
+
 class NotesFilter extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: this.props.notes,
-      filtredNotes: this.props.notes,
+      filteredNotes: this.props.notes,
+      value: '',
     };
 
     this.handleTagFilter = this.handleTagFilter.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.getNotesRequest();
   }
 
-  handleTagFilter(filtredNotes) {
-    this.setState(state => Object.assign({}, state, { filtredNotes }));
-    console.log(filtredNotes);
+  componentWillReceiveProps({ notes }) {
+    const value = this.state.value;
+    const filteredNotes = value.length > 0 ? tagFilter(notes, value) : notes;
+
+    this.setState(state => Object.assign({}, state, { filteredNotes }));
+  }
+
+  handleTagFilter(value) {
+    const notes = this.props.notes;
+    const filteredNotes = value.length === 0 ? notes : tagFilter(notes, value);
+
+    this.setState(state => Object.assign({}, state, { filteredNotes, value }));
   }
 
   render() {
     return (
       <NotesList
-        notes={this.state.filtredNotes}
+        notesToRender={this.state.filteredNotes}
         name={this.props.name}
         default={Default}
         {...this.props}
       >
         <TagFilter
-          notes={this.state.notes}
           onSave={this.handleTagFilter}
         />
       </NotesList>

@@ -10,13 +10,14 @@ const LoadingComponent = () => <span>Loading...</span>;
 const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
   const path = props.location.pathname;
+  console.log('props: ', props.notesToRender);
 
   return (
     <section className="content notes-list">
       <div className="notes-list__content">
         { props.children }
         <header className="notes-list__heading">
-          <h2 className="notes-list__heading-title">{props.name}</h2>
+          <h2 className="notes-list__heading-title">{`${props.name}:`}</h2>
           <span className="notes-list__heading-order">
           Sort by:
             <NavLink
@@ -39,8 +40,8 @@ const NotesList = (props) => {
           </span>
         </header>
         <ul className="notes-list__list">
-          {props.notes ?
-            props.notes.map(note => (
+          {props.notesToRender ?
+            props.notesToRender.map(note => (
               <NotePreview key={note._id} note={note} />
             )) :
             props.default()
@@ -59,13 +60,13 @@ const NotesList = (props) => {
 };
 
 NotesList.defaultProps = {
-  notes: null,
+  nnotesToRender: null,
   default: LoadingComponent,
 };
 
 NotesList.propTypes = {
   name: PropTypes.string.isRequired,
-  notes: PropTypes.arrayOf(PropTypes.object),
+  notesToRender: PropTypes.arrayOf(PropTypes.object),
   location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.element,
   default: PropTypes.func,
