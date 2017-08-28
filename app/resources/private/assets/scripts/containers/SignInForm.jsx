@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { signInRequest } from '../actions/user/signInActions';
 
+import Input from '../components/Input';
+
 class SignInForm extends Component {
   constructor(props) {
     super(props);
@@ -13,6 +15,10 @@ class SignInForm extends Component {
       passwordConf: { value: '', isValid: true },
       isAvailable: true,
     };
+
+    // bindings
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   validate(value, name) {
@@ -36,6 +42,7 @@ class SignInForm extends Component {
   }
 
   checkAvailability(name) {
+    // check name availability
     fetch(`/api/users/find/${name}`)
       .then((response) => {
         if (response.status === 404) {
@@ -74,6 +81,7 @@ class SignInForm extends Component {
 
   handleBlur(event, name) {
     const value = event.target.value;
+    if (name === 'name') this.checkAvailability(event.target.value);
     // validate onBlur by default
     this.checkValidity(value, name);
   }
@@ -86,56 +94,69 @@ class SignInForm extends Component {
 
   render() {
     return (
-      <form onSubmit={event => this.handleSubmit(event)}>
-        <label htmlFor="name"> Username
-          <input
-            aria-required="true"
-            aria-invalid={!this.state.name.isValid}
-            id="name"
-            type="text"
-            value={this.state.name.value}
-            onChange={event => this.handleChange(event, 'name')}
-            onBlur={(event) => {
-              this.handleBlur(event, 'name');
-              this.checkAvailability(event.target.value);
-            }}
-          />
-          <span style={{ display: this.state.name.isValid ? 'none' : 'inherit' }}>
-            Your username must be at least 3 characters long.
-          </span>
-          <span style={{ display: this.state.isAvailable ? 'none' : 'inherit' }}>
-            This name is not available.
-          </span>
-        </label>
-        <label htmlFor="password"> Password
-          <input
-            aria-required="true"
-            aria-invalid={!this.state.name.isValid}
-            id="password"
-            type="password"
-            value={this.state.password.value}
-            onChange={event => this.handleChange(event, 'password')}
-            onBlur={event => this.handleBlur(event, 'password')}
-          />
-          <span style={{ display: this.state.password.isValid ? 'none' : 'inherit' }}>
-            Your password must be at least 6 characters long.
-          </span>
-        </label>
-        <label htmlFor="passwordConf"> Confirm Password
-          <input
-            aria-required="true"
-            aria-invalid={!this.state.name.isValid}
-            id="passwordConf"
-            type="password"
-            value={this.state.passwordConf.value}
-            onChange={event => this.handleChange(event, 'passwordConf')}
-            onBlur={event => this.handleBlur(event, 'passwordConf')}
-          />
-          <span style={{ display: this.state.passwordConf.isValid ? 'none' : 'inherit' }}>
-            Password does not match the confirm password
-          </span>
-        </label>
-        <button type="submit">Submit</button>
+      <form
+        className="form"
+        onSubmit={event => this.handleSubmit(event)}
+      >
+        <h3 className="form__heading">Sign in</h3>
+        <Input
+          name="name"
+          type="text"
+          value={this.state.name.value}
+          isValid={this.state.name.isValid}
+          changeHandler={this.handleChange}
+          blurHandler={this.handleBlur}
+          errorMessages={[
+            {
+              validity: this.state.name.isValid,
+              content: 'Your username must be at least 3 characters long.',
+            },
+            {
+              validity: this.state.isAvailable,
+              content: 'This name is not available.',
+            },
+          ]}
+        >
+          Username
+        </Input>
+        <Input
+          name="password"
+          type="password"
+          value={this.state.password.value}
+          isValid={this.state.password.isValid}
+          changeHandler={this.handleChange}
+          blurHandler={this.handleBlur}
+          errorMessages={[
+            {
+              validity: this.state.password.isValid,
+              content: 'Your password must be at least 6 characters long.',
+            },
+          ]}
+        >
+          Password
+        </Input>
+        <Input
+          name="passwordConf"
+          type="password"
+          value={this.state.passwordConf.value}
+          isValid={this.state.passwordConf.isValid}
+          changeHandler={this.handleChange}
+          blurHandler={this.handleBlur}
+          errorMessages={[
+            {
+              validity: this.state.passwordConf.isValid,
+              content: 'Passwords do not match',
+            },
+          ]}
+        >
+          Confirm password
+        </Input>
+        <button
+          className="form__submit"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     );
   }

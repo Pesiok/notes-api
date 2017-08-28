@@ -40,6 +40,8 @@
   &__content {
     margin: 0 auto;
     max-width: $maxContentWidth;
+
+    transition: max-width 0.5s ease-in;
   }
 
   &__list {
@@ -49,7 +51,8 @@
 
     padding: 0;
 
-    transition: max-width 0.33s ease-in-out;
+    transition: max-width 0.5s ease-in;
+    
   }
 
   &__new {

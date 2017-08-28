@@ -45,8 +45,10 @@ body {
     .notes-list__heading,
     .note-nav__content,
     .settings__content,
-    .note-tag-filter__content {
+    .note-tag-filter__content,
+    .home__content {
       max-width: calc(100% - #{$menuWidth});
+      // transform: translateX(-$menuWidth);
     }
   }
   

@@ -3,14 +3,20 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logInRequest } from '../actions/user/logInActions';
 
+import Input from '../components/Input';
+
 class LogInForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      name: { value: '', isValid: true },
-      password: { value: '', isValid: true },
+      login: { value: '', isValid: true },
+      pass: { value: '', isValid: true },
     };
+
+    // bindings
+    this.handleChange = this.handleChange.bind(this);
+    this.handleBlur = this.handleBlur.bind(this);
   }
 
   setValidity(type, validity) {
@@ -19,28 +25,28 @@ class LogInForm extends Component {
     }));
   }
 
-  handleChange(event, name) {
+  handleChange(event, login) {
     const value = event.target.value;
 
     this.setState(state => Object.assign({}, state, {
-      [name]: { value, isValid: this.state[name].isValid },
+      [login]: { value, isValid: this.state[login].isValid },
     }));
   }
 
-  checkIfExists(name) {
-    fetch(`/api/users/find/${name}`)
+  checkIfExists(login) {
+    fetch(`/api/users/find/${login}`)
       .then((response) => {
         if (response.status === 404) {
-          this.setValidity('name', false);
+          this.setValidity('login', false);
         } else if (response.status === 200) {
-          this.setValidity('name', true);
+          this.setValidity('login', true);
         }
       });
   }
 
   validate(type, value) {
     switch (type) {
-      case 'password': {
+      case 'pass': {
         if (value.length <= 0) {
           this.setValidity(type, false);
         } else {
@@ -48,7 +54,7 @@ class LogInForm extends Component {
         }
         break;
       }
-      case 'name': {
+      case 'login': {
         this.checkIfExists(value);
         break;
       }
@@ -57,8 +63,8 @@ class LogInForm extends Component {
   }
 
   handleSubmit(event) {
-    const name = this.state.name.value;
-    const password = this.state.password.value;
+    const login = this.state.login.value;
+    const pass = this.state.pass.value;
     const areInValid = Object.keys(this.state)
       .map(key => this.validate(this.state[key].value, key));
 
@@ -66,49 +72,55 @@ class LogInForm extends Component {
 
     // send request if user exists and password is provided
     if (!areInValid.some(input => input === false)) {
-      this.props.logInRequest({ name, password })
+      this.props.logInRequest({ name: login, password: pass })
         .then(() => this.props.history.push('/notes'));
     }
   }
 
   handleBlur(event, type) {
     const value = event.target.value;
-
     this.validate(type, value);
   }
 
   render() {
     return (
-      <form onSubmit={event => this.handleSubmit(event)}>
-        <label htmlFor="name"> Username
-          <input
-            aria-required="true"
-            aria-invalid={!this.state.name.isValid}
-            id="name"
-            type="text"
-            value={this.state.name.value}
-            onChange={event => this.handleChange(event, 'name')}
-            onBlur={event => this.handleBlur(event, 'name')}
-          />
-          <span style={{ display: this.state.name.isValid ? 'none' : 'inherit' }}>
-            This user does not exist
-          </span>
-        </label>
-        <label htmlFor="password"> Password
-          <input
-            aria-required="true"
-            id="password"
-            type="password"
-            aria-invalid={!this.state.password.isValid}
-            value={this.state.password.value}
-            onChange={event => this.handleChange(event, 'password')}
-            onBlur={event => this.handleBlur(event, 'password')}
-          />
-          <span style={{ display: this.state.password.isValid ? 'none' : 'inherit' }}>
-            Please type in password
-          </span>
-        </label>
-        <button type="submit">Submit</button>
+      <form
+        className="form"
+        onSubmit={event => this.handleSubmit(event)}
+      >
+        <h3 className="form__heading">Log in</h3>
+        <Input
+          name="login"
+          type="text"
+          value={this.state.login.value}
+          isValid={this.state.login.isValid}
+          changeHandler={this.handleChange}
+          blurHandler={this.handleBlur}
+          errorMessages={[
+            { validity: this.state.login.isValid, content: 'This user does not exist' },
+          ]}
+        >
+          Username
+        </Input>
+        <Input
+          name="pass"
+          type="password"
+          value={this.state.pass.value}
+          isValid={this.state.pass.isValid}
+          changeHandler={this.handleChange}
+          blurHandler={this.handleBlur}
+          errorMessages={[
+            { validity: this.state.pass.isValid, content: 'Please type in password' },
+          ]}
+        >
+          Password
+        </Input>
+        <button
+          className="form__submit"
+          type="submit"
+        >
+          Submit
+        </button>
       </form>
     );
   }

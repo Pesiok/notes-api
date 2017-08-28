@@ -1,0 +1,33 @@
+.form {
+  background-color: $primary;
+
+  padding: 1rem;
+
+  font-size: 1.4rem;
+
+  @include mdShadow(2);
+
+  &__heading {
+    font-size: 2rem;
+
+    margin: 0;
+    margin-bottom: 1rem;
+  }
+
+  &__group {
+    display: block;
+
+    margin-top: 1rem;
+  }
+
+  &__group-input {
+    display: block;
+
+    height: 2.5rem;
+    padding: 0.5rem;
+  }
+
+  &__group-error {
+    color: $dangerDark;
+  }
+}

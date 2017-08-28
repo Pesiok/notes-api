@@ -1,5 +1,78 @@
 .home {
+  padding: 0;
+
+  &__content {
+    height: 100%;
+  }
+
   &__header {
-    background: url('../images/jack.jpg') center center;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 33.33vh;
+    min-height: 40rem;
+
+    text-align: center;
+    overflow: hidden;
+
+    background-color: rgba(27, 105, 90, 0.31);
+
+    &::before {
+      content: 'kek';
+      position: absolute;
+      display: block;
+      left: 0;
+      top: 0;
+
+      width: 100%;
+      height: 100%;
+
+      background-image: url('../images/header-bg-stock.jpg');
+      background-size: cover;
+      background-position: center;
+
+      transform: scale(1.5);
+      transition:
+        transform 0.5s,
+        filter 0.5s;
+      transition-timing-function: cubic-bezier(0.47, -0.09, 0.48, 1.03);
+    }
+
+    &--blur::before {
+      filter: blur(1rem);
+      transform: scale(1.05);
+      z-index: 0;
+    }
+  }
+
+  &__header-heading {
+    z-index: 1;
+
+    margin: 0;
+
+    font-size: 5rem;
+    color: $textSecondary;
+    text-shadow: 0.3rem 0.3rem $primaryDark;
+  }
+
+  &__header-para {
+    z-index: 1;
+
+    margin: 0.5rem;
+
+    font-size: 2rem;
+    color: $textSecondary;
+    // text-shadow: 0.2rem 0.2rem  $backgroundDark;
+  }
+
+  &__forms {
+    display: flex;
+    justify-content: space-around;
+
+    height: 100%;
+
+    background-color: $background;
   }
 }
