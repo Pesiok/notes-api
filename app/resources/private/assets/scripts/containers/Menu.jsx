@@ -26,7 +26,7 @@ class Menu extends Component {
         ]}
       />,
       { name: 'New note', icon: 'note_add', link: '/notes/new' },
-      { name: 'Home', icon: 'home', link: '/home' },
+      { name: 'Home', icon: 'home', link: '/' },
       { name: 'About', icon: 'info', link: '/about' },
       { name: 'Settings', icon: 'settings', link: '/settings', class: 'menu-item--last' },
     ];

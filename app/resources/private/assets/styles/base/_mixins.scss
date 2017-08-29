@@ -8,6 +8,20 @@
   @else if $level == 5 {box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
 }
 
+// animations
+
+@mixin bgAnim($colorOne, $colorTwo, $colorThree, $time: 43s, $degree: 109deg) {
+    background: linear-gradient($degree, $colorOne, $colorTwo, $colorThree);
+    background-size: 600% 600%;
+    animation: bgGradient $time ease infinite;
+}
+
+@keyframes bgGradient { 
+    0% { background-position: 0% 19% }
+    50% { background-position: 100% 82% }
+    100% { background-position: 0% 19% }
+}
+
 //media queries
 @mixin atSmall() {
     @media (min-width: 576px) {
@@ -33,9 +47,9 @@
     }
 }
 
-@mixin saveButton() {
+@mixin ButtonBase() {
     cursor: pointer;
-
+    
     background: none;
     border: none;
 
@@ -46,9 +60,31 @@
 
     &:hover,
     &:focus {
-      background-color: $primaryDark;
-      color: $textSecondary;
+        background-color: $primaryDark;
+        color: $textSecondary;
 
-      @include mdShadow(3);
+        @include mdShadow(3);
+    }
+}
+
+@mixin saveButtonPrimary() {
+    @include ButtonBase();
+
+    background-color: $primary;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryDark;
+    }
+}
+
+@mixin saveButtonSecondary() {
+    @include ButtonBase();
+    
+    background-color: $secondary;
+
+    &:hover,
+    &:focus {
+        background-color: $secondaryDark;
     }
 }

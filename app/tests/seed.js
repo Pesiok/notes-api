@@ -21,7 +21,7 @@ const users = [
     {
         _id: usersID[1],
         name: 'kekTwo',
-        password: 'kekTwo123',
+        password: '111111',
         tokens: [{
             access: 'auth',
             token: jwt.sign({_id: usersID[1], access: 'auth'}, process.env.JWT_SECRET).toString()

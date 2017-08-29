@@ -1,5 +1,4 @@
 
-
 // Log out
 
 import store from '../../index';
@@ -23,7 +22,7 @@ export const logOutRequest = () => (dispatch) => {
       if (!response.ok) throw Error(response.statusText);
     })
     .then(
-      () => dispatch({ type: LOG_OUT_SUCCESS }),
+      () => dispatch({ type: LOG_OUT_SUCCESS, isAuthenticated: false }),
       error => dispatch({ type: LOG_OUT_FAILURE, error }),
     );
 };

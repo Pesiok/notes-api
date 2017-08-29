@@ -42,7 +42,6 @@ UserSchema.methods.toJSON = function() {
 };
 
 // generate tokens
-// multiple tokens allows to be logged in from multiple devices at once
 UserSchema.methods.generateAuthToken = async function() {
     const user = this;
     const access = 'auth';
@@ -83,14 +82,9 @@ UserSchema.statics.findByToken = async function(token) {
 UserSchema.statics.findByCredentials = async function (name, password) {
     const User = this;
     const user = await User.findOne({ name });
+    const passwordIsCorrect = await bcrypt.compare(password, user.password);
+    if (!passwordIsCorrect) throw new Error('incorrect password');
 
-    if (password) {
-        try {
-            bcrypt.compare(password, user.password);
-        } catch (error) {
-            throw error;
-        }
-    }
     return user;
 };
 

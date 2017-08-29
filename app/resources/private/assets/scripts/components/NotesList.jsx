@@ -10,7 +10,6 @@ const LoadingComponent = () => <span>Loading...</span>;
 const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
   const path = props.location.pathname;
-  console.log('props: ', props.notesToRender);
 
   return (
     <section className="content notes-list">
@@ -19,23 +18,23 @@ const NotesList = (props) => {
         <header className="notes-list__heading">
           <h2 className="notes-list__heading-title">{`${props.name}:`}</h2>
           <span className="notes-list__heading-order">
-          Sort by:
+            Sort by:
             <NavLink
               isActive={() => !!query.newest}
               to={`${path}${query.by ? `?by=${query.by}&newest=true` : '?newest=true'}`}
               className="notes-list__heading-link"
               activeClassName="notes-list__heading-link--active"
             >
-            newest
+              newest
             </NavLink>
-          |
+            |
             <NavLink
               isActive={() => !query.newest}
               to={`${path}${query.by ? `?by=${query.by}` : ''}`}
               className="notes-list__heading-link"
               activeClassName="notes-list__heading-link--active"
             >
-            oldest
+              oldest
             </NavLink>
           </span>
         </header>
@@ -53,7 +52,7 @@ const NotesList = (props) => {
         to={'/notes/new'}
         className="notes-list__new material-icons"
       >
-      add
+        add
       </Link>
     </section>
   );

@@ -1,0 +1,21 @@
+.access-page {
+  // prevents collapsing on chrome
+  height: 1px;
+
+  &--primary {
+    @include bgAnim($primary, $primaryDark, $primaryLight);
+  }
+
+  &--secondary {
+    @include bgAnim($secondary, $secondaryDark, $secondaryLight);
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: calc(100% - #{$headerCompiledHeight});
+  }
+}
+

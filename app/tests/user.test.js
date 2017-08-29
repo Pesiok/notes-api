@@ -141,7 +141,7 @@ describe('User: ', () => {
                     .post('/api/users/login')
                     .send({
                         name: users[1].name,
-                        password: users[1].password + 'kek'
+                        password: undefined
                     });
             } catch ({ response }) {
                 expect(response).to.have.status(400);

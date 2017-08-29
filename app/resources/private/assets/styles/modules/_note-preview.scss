@@ -11,12 +11,12 @@
   list-style: none;
 
   background-color: $backgroundActive;
-  @include mdShadow(1);
+  @include mdShadow(2);
   transition: box-shadow 0.15s ease-in;
 
   &:focus,
   &:hover {
-    @include mdShadow(2);
+    @include mdShadow(3);
   }
 
   color: $text;

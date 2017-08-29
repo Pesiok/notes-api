@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import SignInForm from './../containers/SignInForm';
-import LogInForm from './../containers/LogInForm';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
   componentDidMount() {
     window.setTimeout(() => this.header.classList.add('home__header--blur'), 250);
   }
-
-  // componentWillUnmount() {
-  //   this.header.classList.remove('home__header--blur');
-  // }
 
   getElement(element) {
     if (element) this.header = element;
@@ -28,12 +23,26 @@ class Home extends Component {
             This app allows you to create and share Markdown flavored notes.
             </p>
             <p className="home__header-para">
-            And yes, this background image is random.
+            And yes, this background image is pretty much random.
             </p>
           </header>
-          <div className="home__forms">
-            <SignInForm {...this.props} />
-            <LogInForm {...this.props} />
+          <div className="home__links">
+            <div className="home__links-container home__links-container--secondary">
+              <h3 className="home__links-heading home__links-heading--secondary">
+                Don&#39;t have an account yet?
+              </h3>
+              <Link to="/signin" className="home__links-button home__links-button--secondary">
+                Sign in
+              </Link>
+            </div>
+            <div className="home__links-container home__links-container--primary">
+              <h3 className="home__links-heading home__links-heading--primary">
+                Already have an account?
+              </h3>
+              <Link to="/login" className="home__links-button home__links-button--primary">
+                Log in
+              </Link>
+            </div>
           </div>
         </div>
       </section>

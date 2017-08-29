@@ -28,6 +28,10 @@ import {
   NEW_NOTE_SUCCESS,
 } from '../actions/notes/newNoteActions';
 
+import {
+  LOG_OUT_SUCCESS,
+} from '../actions/user/logOutActions';
+
 const arrToObj = (arr, key) => Object.assign({}, ...arr.map(item => ({ [item[key]]: item })));
 
 // success reducer
@@ -50,6 +54,9 @@ export default function (state = {}, action) {
       const notes = Object.assign({}, state);
       delete notes[id];
       return notes;
+    }
+    case LOG_OUT_SUCCESS: {
+      return {};
     }
     default: {
       return state;

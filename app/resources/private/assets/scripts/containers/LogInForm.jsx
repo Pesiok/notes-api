@@ -66,8 +66,9 @@ class LogInForm extends Component {
     const login = this.state.login.value;
     const pass = this.state.pass.value;
     const areInValid = Object.keys(this.state)
-      .map(key => this.validate(this.state[key].value, key));
+      .map(key => this.validate(key, this.state[key].value));
 
+    console.log(areInValid);
     event.preventDefault();
 
     // send request if user exists and password is provided
@@ -83,12 +84,15 @@ class LogInForm extends Component {
   }
 
   render() {
+    const inputClass = 'form__group-input form__group-input--primary';
+    const nameClass = 'form__group-name form__group-name--primary';
+
     return (
       <form
         className="form"
         onSubmit={event => this.handleSubmit(event)}
       >
-        <h3 className="form__heading">Log in</h3>
+        <h3 className="form__heading form__heading--primary">Log in</h3>
         <Input
           name="login"
           type="text"
@@ -99,6 +103,7 @@ class LogInForm extends Component {
           errorMessages={[
             { validity: this.state.login.isValid, content: 'This user does not exist' },
           ]}
+          class={{ name: nameClass, input: inputClass }}
         >
           Username
         </Input>
@@ -112,11 +117,12 @@ class LogInForm extends Component {
           errorMessages={[
             { validity: this.state.pass.isValid, content: 'Please type in password' },
           ]}
+          class={{ name: nameClass, input: inputClass }}
         >
           Password
         </Input>
         <button
-          className="form__submit"
+          className="form__submit form__submit--primary"
           type="submit"
         >
           Submit

@@ -21,13 +21,12 @@ export default function (state = {}, action) {
     case SIGN_IN_SUCCESS:
     case LOG_IN_SUCCESS: {
       const { user, token } = action.payload;
-      return Object.assign({}, state, { user, token });
+      const { isAuthenticated } = action;
+      return Object.assign({}, state, { user, token, isAuthenticated });
     }
     case LOG_OUT_SUCCESS: {
-      const prevState = Object.assign({}, state);
-      delete prevState.token;
-      delete prevState.user;
-      return prevState;
+      const { isAuthenticated } = action;
+      return Object.assign({}, state, { token: null, isAuthenticated });
     }
     case SIGN_IN_REQUEST: {
       return state;
@@ -39,7 +38,8 @@ export default function (state = {}, action) {
       return state;
     }
     case LOG_IN_FAILURE: {
-      return state;
+      const { isAuthenticated, error } = action;
+      return Object.assign({}, state, { token: null, isAuthenticated, error });
     }
     case LOG_OUT_REQUEST: {
       return state;

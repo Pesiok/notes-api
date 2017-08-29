@@ -1,8 +1,10 @@
 .home {
   padding: 0;
+  height: 1px;
+  min-height: calc(100% - #{$headerCompiledHeight});
 
   &__content {
-    height: 100%;
+    height: calc(100vh - #{$headerCompiledHeight});
   }
 
   &__header {
@@ -11,8 +13,8 @@
     justify-content: center;
     flex-direction: column;
 
-    height: 33.33vh;
-    min-height: 40rem;
+    height: 40vh;
+    min-height: 20rem;
 
     text-align: center;
     overflow: hidden;
@@ -52,9 +54,13 @@
 
     margin: 0;
 
-    font-size: 5rem;
+    font-size: 4rem;
     color: $textSecondary;
     text-shadow: 0.3rem 0.3rem $primaryDark;
+
+    @include atSmall() {
+      font-size: 5rem;
+    }
   }
 
   &__header-para {
@@ -62,17 +68,112 @@
 
     margin: 0.5rem;
 
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: $textSecondary;
-    // text-shadow: 0.2rem 0.2rem  $backgroundDark;
+
+    @include atSmall() {
+      font-size: 2rem;
+    }
   }
 
-  &__forms {
+  &__links {
+    @include atMedium() {
+      display: flex;
+      // justify-content: space-around;
+    }
+
+    height: calc(60vh - #{$headerCompiledHeight});
+  }
+
+  &__links-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
 
     height: 100%;
-
-    background-color: $background;
+    min-height: 18rem;
+    width: 100%;
   }
+
+  &__links-container--primary {
+    background-color: $primary;
+  }
+
+  &__links-container--secondary {
+    background-color: $secondary;
+  }
+
+  &__links-heading {
+    text-align: center;
+    font-size: 2.2rem;
+    letter-spacing: 0.1rem;
+    color: $textSecondary;
+
+    @include atSmall() {
+      font-size: 2.6rem;
+    }
+  }
+
+  &__links-heading--primary {
+    text-shadow: 0.2rem 0.2rem $primaryDark;
+  }
+
+  &__links-heading--secondary {
+    text-shadow: 0.2rem 0.2rem $secondaryDark;
+  }
+
+  &__links-button {
+    display: block;
+
+    width: 13rem;
+    height: 4rem;
+
+    padding: 1rem;
+    margin: 0 auto;
+    // margin-bottom: 15rem;
+
+    @include atMedium() {
+      margin-bottom: 15rem;
+    }
+
+    text-decoration: none;
+    font-size: 1.8rem;
+    text-align: center;
+    color: $text;
+
+    background-color: $backgroundActive;
+    transition: 
+      background-color 0.3s,
+      box-shadow 0.3;
+    transition-timing-function: ease-in;
+
+    @include mdShadow(3);
+
+    &:focus,
+    &:hover {
+      color: $textSecondary;
+      @include mdShadow(4);
+    }
+  }
+
+  &__links-button--primary {
+    color: $primaryDark;
+
+    &:focus,
+    &:hover {
+      background-color: $primaryDark;
+    
+    }
+  }
+
+  &__links-button--secondary {
+    color: $secondaryDark;
+
+    &:focus,
+    &:hover {
+      background-color: $secondaryDark;
+
+    }
+  }
+
 }

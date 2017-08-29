@@ -43,14 +43,16 @@ class SignInForm extends Component {
 
   checkAvailability(name) {
     // check name availability
-    fetch(`/api/users/find/${name}`)
-      .then((response) => {
-        if (response.status === 404) {
-          this.setState(state => Object.assign({}, state, { isAvailable: true }));
-        } else if (response.status === 200) {
-          this.setState(state => Object.assign({}, state, { isAvailable: false }));
-        }
-      });
+    if (name.length > 0) {
+      fetch(`/api/users/find/${name}`)
+        .then((response) => {
+          if (response.status === 404) {
+            this.setState(state => Object.assign({}, state, { isAvailable: true }));
+          } else if (response.status === 200) {
+            this.setState(state => Object.assign({}, state, { isAvailable: false }));
+          }
+        });
+    }
   }
 
   checkValidity(value, name, checktLastState = false) {
@@ -64,6 +66,7 @@ class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+
     // validate onSubmit
     const areInValid = Object.keys(this.state)
       .map(key => this.checkValidity(this.state[key].value, key));
@@ -73,6 +76,7 @@ class SignInForm extends Component {
     if (!areInValid.some(input => input === false) && this.state.isAvailable) {
       const name = this.state.name.value;
       const password = this.state.password.value;
+
       // send sign in request and change route on success
       this.props.signInRequest({ name, password })
         .then(() => this.props.history.push('/notes'));
@@ -81,24 +85,33 @@ class SignInForm extends Component {
 
   handleBlur(event, name) {
     const value = event.target.value;
-    if (name === 'name') this.checkAvailability(event.target.value);
-    // validate onBlur by default
-    this.checkValidity(value, name);
+
+    if (value.length > 0) {
+      if (name === 'name') this.checkAvailability(event.target.value);
+
+      // validate onBlur by default
+      this.checkValidity(value, name);
+    }
   }
 
   handleChange(event, name) {
     const value = event.target.value;
-    // trigger onChange validation after some handler validated to false
+
+    // trigger onChange validation after
+    // some handler already validated to false
     this.checkValidity(value, name, this.state[name].isValid);
   }
 
   render() {
+    const inputClass = 'form__group-input form__group-input--secondary';
+    const nameClass = 'form__group-name form__group-name--secondary';
+
     return (
       <form
         className="form"
         onSubmit={event => this.handleSubmit(event)}
       >
-        <h3 className="form__heading">Sign in</h3>
+        <h3 className="form__heading form__heading--secondary">Sign in</h3>
         <Input
           name="name"
           type="text"
@@ -116,6 +129,7 @@ class SignInForm extends Component {
               content: 'This name is not available.',
             },
           ]}
+          class={{ name: nameClass, input: inputClass }}
         >
           Username
         </Input>
@@ -132,6 +146,7 @@ class SignInForm extends Component {
               content: 'Your password must be at least 6 characters long.',
             },
           ]}
+          class={{ name: nameClass, input: inputClass }}
         >
           Password
         </Input>
@@ -148,11 +163,12 @@ class SignInForm extends Component {
               content: 'Passwords do not match',
             },
           ]}
+          class={{ name: nameClass, input: inputClass }}
         >
           Confirm password
         </Input>
         <button
-          className="form__submit"
+          className="form__submit form__submit--secondary"
           type="submit"
         >
           Submit

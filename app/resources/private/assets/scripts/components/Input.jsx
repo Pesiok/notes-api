@@ -1,23 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const nameHolder = (event) => {
+  const value = event.target.value;
+  const input = event.target;
+
+  if (value) {
+    input.classList.add('form__group-input--has-value');
+  } else {
+    input.classList.remove('form__group-input--has-value');
+  }
+};
 
 const Input = props => (
   <label
     className="form__group"
     htmlFor={props.name}
   >
-    {props.children}
     <input
-      className="form__group-input"
+      className={props.class.input}
       aria-required="true"
       aria-invalid={!props.isValid}
       id={props.name}
       type={props.type}
       value={props.value}
       onChange={event => props.changeHandler(event, props.name)}
-      onBlur={event => props.blurHandler(event, props.name)}
+      onBlur={(event) => {
+        nameHolder(event);
+        props.blurHandler(event, props.name);
+      }}
     />
+    <span className={props.class.name}>
+      {props.children}
+    </span>
     {
       props.errorMessages.map(message => (
         <span
@@ -41,7 +56,7 @@ Input.propTypes = {
   changeHandler: PropTypes.func.isRequired,
   blurHandler: PropTypes.func.isRequired,
   errorMessages: PropTypes.arrayOf(PropTypes.object).isRequired,
-
+  class: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Input;

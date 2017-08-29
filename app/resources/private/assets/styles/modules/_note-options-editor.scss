@@ -19,7 +19,7 @@
   }
 
   &__button {
-    @include saveButton();
+    @include saveButtonPrimary();
     display: block;
 
     height: 3rem;

@@ -1,33 +1,131 @@
 .form {
-  background-color: $primary;
+  background-color: $backgroundActive;
 
   padding: 1rem;
 
-  font-size: 1.4rem;
+  width: 35rem;
 
-  @include mdShadow(2);
+  font-size: 1.6rem;
+
+  @include mdShadow(3);
 
   &__heading {
-    font-size: 2rem;
-
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 3rem;
+
+    font-size: 2.5rem;
+
+    &--primary {
+      color: $primaryDark;
+    }
+
+    &--secondary {
+      color: $secondaryDark;
+    }
   }
 
   &__group {
+    position: relative;
     display: block;
 
-    margin-top: 1rem;
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 4rem;
   }
 
   &__group-input {
     display: block;
 
     height: 2.5rem;
-    padding: 0.5rem;
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    font-size: 1.7rem;
+
+    &--primary {
+      border-bottom: 0.2rem solid $primary;
+    }
+
+    &--secondary {
+      border-bottom: 0.2rem solid $secondary;
+    }
+  }
+
+  &__group-name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    transition: all 0.15s ease-out;
+
+    &--primary {
+      color: $primaryDark;
+    }
+
+    &--secondary {
+      color: $secondaryDark;
+    }
+  }
+
+  &__group-input:focus + &__group-name,
+  &__group-input--has-value + &__group-name {
+    top: -1.5rem;
+    font-size: 1.2rem;
   }
 
   &__group-error {
-    color: $dangerDark;
+    padding: 0.5rem;
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 0.5rem;
+
+    background-color: $backgroundDark;
+    color: $danger;
+
+    @include mdShadow(1);
+
+    &::before {
+      content:'error';
+      margin: 0.5rem;
+
+      // MD icons styles
+      font-family: 'Material Icons';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 24px;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+
+      color: $backgroundActive;
+      border-radius: 100%;
+      vertical-align: middle;
+
+      background-color: $danger;
+
+      @include mdShadow(1);
+    }
+  }
+
+  &__submit {
+    display: block;
+
+    margin: 1rem;
+    margin-left: auto;
+    height: 3rem;
+
+    &--primary {
+      @include saveButtonPrimary();
+    }
+
+    &--secondary {
+      @include saveButtonSecondary();
+    }
   }
 }

@@ -70,7 +70,7 @@
   }
 
   &__add-button {
-    @include saveButton();
+    @include saveButtonPrimary();
   }
 
   &__add-input {

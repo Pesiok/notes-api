@@ -85,7 +85,7 @@
   }
 
   &__button {
-    @include saveButton();
+    @include saveButtonPrimary();
 
     height: 3rem;
     width: 6rem;

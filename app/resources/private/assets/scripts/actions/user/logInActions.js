@@ -25,7 +25,7 @@ export const logInRequest = credentials => (dispatch) => {
       ));
     })
     .then(
-      data => dispatch({ type: LOG_IN_SUCCESS, payload: data }),
-      error => dispatch({ type: LOG_IN_FAILURE, error }),
+      data => dispatch({ type: LOG_IN_SUCCESS, payload: data, isAuthenticated: true }),
+      error => dispatch({ type: LOG_IN_FAILURE, error, isAuthenticated: false }),
     );
 };
