@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 // actions creators
-import { getNoteRequest } from '../actions/notes/getNoteActions';
-import { updateNoteRequest } from '../actions/notes/updateNoteActions';
-import { deleteNoteRequest } from '../actions/notes/deleteNoteActions';
-import { newNoteRequest } from '../actions/notes/newNoteActions';
+import { getNoteRequest } from '../../actions/notes/getNoteActions';
+import { updateNoteRequest } from '../../actions/notes/updateNoteActions';
+import { deleteNoteRequest } from '../../actions/notes/deleteNoteActions';
+import { newNoteRequest } from '../../actions/notes/newNoteActions';
 
 // components
-import MarkdownPreviewer from '../components/MarkdownPreviewer';
-import MarkdownEditor from '../components/MarkdownEditor';
-import NoteTitle from '../components/NoteTitle';
-import ShareOptions from '../components/ShareOptions';
-import TagsOptions from '../components/TagsOptions';
-import DeleteOptions from '../components/DeleteOptions';
-import OptionsNav from '../components/OptionsNav';
+import MarkdownPreviewer from '../../components/Notes/Note/MarkdownPreviewer';
+import MarkdownEditor from '../../components/Notes/Note//MarkdownEditor';
+import NoteTitle from '../../components/Notes/Note/NoteTitle';
+import ShareOptions from '../../components/Notes/Note/ShareOptions';
+import TagsOptions from '../../components/Notes/Note/TagsOptions';
+import DeleteOptions from '../../components/Notes/Note/DeleteOptions';
+import OptionsNav from '../../components/Notes/Note/OptionsNav';
 
 class Note extends Component {
   constructor(props) {
@@ -152,7 +152,7 @@ Note.propTypes = {
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
   // if there is no id in URL pass a dummy note
-  return { note: id ? state.notesReducer[id] : ownProps.note };
+  return { note: id ? state.notes[id] : ownProps.note };
 }
 
 export default connect(mapStateToProps, {

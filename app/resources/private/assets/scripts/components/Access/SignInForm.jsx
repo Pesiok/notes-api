@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { signInRequest } from '../actions/user/signInActions';
 
-import Input from '../components/Input';
+import Input from './Input';
 
 class SignInForm extends Component {
   constructor(props) {
@@ -183,4 +181,4 @@ SignInForm.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default connect(null, { signInRequest })(SignInForm);
+export default SignInForm;

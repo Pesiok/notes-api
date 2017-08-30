@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { logOutRequest } from '../actions/user/logOutActions';
+import { logOutRequest } from '../../actions/user/logOutActions';
 
 class Settings extends Component {
   constructor(props) {
@@ -97,9 +97,9 @@ Settings.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    user: state.userReducer.user,
-    token: state.userReducer.token,
-    notesNumber: Object.keys(state.notesReducer).length,
+    user: state.user.user,
+    token: state.user.token,
+    notesNumber: Object.keys(state.notes).length,
   };
 }
 

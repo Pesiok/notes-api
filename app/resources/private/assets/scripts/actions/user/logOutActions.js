@@ -8,7 +8,7 @@ export const LOG_OUT_SUCCESS = 'log_out_success';
 export const LOG_OUT_REQUEST = 'log_out_request';
 
 export const logOutRequest = () => (dispatch) => {
-  const token = store.getState().userReducer.token;
+  const token = store.getState().user.token;
   const options = {
     method: 'DELETE',
     headers: {

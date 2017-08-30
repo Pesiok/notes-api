@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import AccordionMenu from '../components/AccordionMenu';
+import AccordionMenu from './AccordionMenu';
 
 
 class Menu extends Component {
@@ -98,4 +97,4 @@ Menu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
 };
 
-export default connect(null)(Menu);
+export default Menu;

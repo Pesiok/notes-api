@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import { getNotesRequest } from '../actions/notes/getNotesActions';
+import { getNotesRequest } from '../../actions/notes/getNotesActions';
 
-import NotesList from '../components/NotesList';
-import TagFilter from '../components/TagFilter';
+import NotesList from '../../components/Notes/NotesList';
+import TagFilter from '../../components/Notes/TagFilter';
 
 const Default = () => <div>No notes to display</div>;
 
@@ -102,7 +102,7 @@ function mapStateToProps(state, ownProps) {
   const params = queryString.parse(ownProps.location.search);
 
   return {
-    notes: filterNotes(params, state.notesReducer),
+    notes: filterNotes(params, state.notes),
     name: params.by,
   };
 }

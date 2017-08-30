@@ -59,7 +59,7 @@ const NotesList = (props) => {
 };
 
 NotesList.defaultProps = {
-  nnotesToRender: null,
+  notesToRender: null,
   default: LoadingComponent,
 };
 

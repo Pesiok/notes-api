@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { logInRequest } from '../actions/user/logInActions';
 
-import Input from '../components/Input';
+import Input from './Input';
 
 class LogInForm extends Component {
   constructor(props) {
@@ -12,6 +10,7 @@ class LogInForm extends Component {
     this.state = {
       login: { value: '', isValid: true },
       pass: { value: '', isValid: true },
+      exists: true,
     };
 
     // bindings
@@ -21,58 +20,67 @@ class LogInForm extends Component {
 
   setValidity(type, validity) {
     this.setState(state => Object.assign({}, state, {
-      [type]: { value: this.state[type].value, isValid: validity },
+      [type]: { value: state[type].value, isValid: validity },
     }));
+    return validity;
   }
 
-  handleChange(event, login) {
+  handleChange(event, type) {
     const value = event.target.value;
 
     this.setState(state => Object.assign({}, state, {
-      [login]: { value, isValid: this.state[login].isValid },
+      [type]: { value, isValid: state[type].isValid },
     }));
   }
 
   checkIfExists(login) {
-    fetch(`/api/users/find/${login}`)
-      .then((response) => {
-        if (response.status === 404) {
-          this.setValidity('login', false);
-        } else if (response.status === 200) {
-          this.setValidity('login', true);
-        }
-      });
+    if (login.length <= 0) {
+      this.setState(state => Object.assign({}, state, { exists: true }));
+    } else {
+      fetch(`/api/users/find/${login}`)
+        .then((response) => {
+          if (response.status === 404) {
+            this.setState(state => Object.assign({}, state, { exists: false }));
+          } else if (response.status === 200) {
+            this.setState(state => Object.assign({}, state, { exists: true }));
+          }
+        });
+    }
   }
 
   validate(type, value) {
     switch (type) {
       case 'pass': {
         if (value.length <= 0) {
-          this.setValidity(type, false);
-        } else {
-          this.setValidity(type, true);
+          return this.setValidity(type, false);
         }
-        break;
+        return this.setValidity(type, true);
       }
       case 'login': {
+        if (value.length <= 0) {
+          this.checkIfExists(value);
+          return this.setValidity(type, false);
+        }
         this.checkIfExists(value);
-        break;
+        return this.setValidity(type, true);
       }
-      default: break;
+      default: {
+        return false;
+      }
     }
   }
 
   handleSubmit(event) {
+    event.preventDefault();
     const login = this.state.login.value;
     const pass = this.state.pass.value;
-    const areInValid = Object.keys(this.state)
-      .map(key => this.validate(key, this.state[key].value));
-
-    console.log(areInValid);
-    event.preventDefault();
+    const areInValid = [
+      this.validate('login', this.state.login.value),
+      this.validate('pass', this.state.pass.value),
+    ];
 
     // send request if user exists and password is provided
-    if (!areInValid.some(input => input === false)) {
+    if (!areInValid.some(input => input === false) && this.state.exists) {
       this.props.logInRequest({ name: login, password: pass })
         .then(() => this.props.history.push('/notes'));
     }
@@ -80,7 +88,9 @@ class LogInForm extends Component {
 
   handleBlur(event, type) {
     const value = event.target.value;
-    this.validate(type, value);
+    if (value.length > 0) {
+      this.validate(type, value);
+    }
   }
 
   render() {
@@ -101,7 +111,8 @@ class LogInForm extends Component {
           changeHandler={this.handleChange}
           blurHandler={this.handleBlur}
           errorMessages={[
-            { validity: this.state.login.isValid, content: 'This user does not exist' },
+            { validity: this.state.login.isValid, content: 'Please type in username' },
+            { validity: this.state.exists, content: 'This user does not exist' },
           ]}
           class={{ name: nameClass, input: inputClass }}
         >
@@ -137,4 +148,4 @@ LogInForm.propTypes = {
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default connect(null, { logInRequest })(LogInForm);
+export default LogInForm;

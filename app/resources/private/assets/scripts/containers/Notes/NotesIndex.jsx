@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
-import { getNotesRequest } from '../actions/notes/getNotesActions';
-import NotesList from '../components/NotesList';
+import { getNotesRequest } from '../../actions/notes/getNotesActions';
+import NotesList from '../../components/Notes/NotesList';
 
 
 class NotesIndex extends Component {
@@ -45,7 +45,7 @@ function mapStateToProps(state, ownProps) {
   const params = queryString.parse(ownProps.location.search);
 
   return {
-    notes: parseNotes(state.notesReducer, params),
+    notes: parseNotes(state.notes, params),
   };
 }
 

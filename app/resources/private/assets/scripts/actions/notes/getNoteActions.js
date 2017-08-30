@@ -1,14 +1,12 @@
 
 // get note
 
-import store from '../../index';
-
 export const GET_NOTE_FAILURE = 'get_note_failure';
 export const GET_NOTE_SUCCESS = 'get_note_success';
 export const GET_NOTE_REQUEST = 'get_note_request';
 
-export const getNoteRequest = id => (dispatch) => {
-  const token = store.getState().userReducer.token;
+export const getNoteRequest = id => (dispatch, getState) => {
+  const token = getState().user.token;
   const options = {
     method: 'GET',
     headers: {

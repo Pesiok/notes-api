@@ -1,14 +1,12 @@
 
 // update note
 
-import store from '../../index';
-
 export const UPDATE_NOTE_FAILURE = 'update_note_failure';
 export const UPDATE_NOTE_SUCCESS = 'update_note_success';
 export const UPDATE_NOTE_REQUEST = 'update_note_request';
 
-export const updateNoteRequest = (id, update) => (dispatch) => {
-  const token = store.getState().userReducer.token;
+export const updateNoteRequest = (id, update) => (dispatch, getState) => {
+  const token = getState().user.token;
   const options = {
     method: 'PATCH',
     body: JSON.stringify(update),

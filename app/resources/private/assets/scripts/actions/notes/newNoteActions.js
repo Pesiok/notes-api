@@ -1,14 +1,12 @@
 
 // new note
 
-import store from '../../index';
-
 export const NEW_NOTE_FAILURE = 'new_note_failure';
 export const NEW_NOTE_SUCCESS = 'new_note_success';
 export const NEW_NOTE_REQUEST = 'new_note_request';
 
-export const newNoteRequest = note => (dispatch) => {
-  const token = store.getState().userReducer.token;
+export const newNoteRequest = note => (dispatch, getState) => {
+  const token = getState().user.token;
   const options = {
     method: 'POST',
     body: JSON.stringify(note),

@@ -1,14 +1,12 @@
 
 // update note
 
-import store from '../../index';
-
 export const DELETE_NOTE_FAILURE = 'delete_note_failure';
 export const DELETE_NOTE_SUCCESS = 'delete_note_success';
 export const DELETE_NOTE_REQUEST = 'delete_note_request';
 
-export const deleteNoteRequest = id => (dispatch) => {
-  const token = store.getState().userReducer.token;
+export const deleteNoteRequest = id => (dispatch, getState) => {
+  const token = getState().user.token;
   const options = {
     method: 'DELETE',
     headers: {

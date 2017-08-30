@@ -1,10 +1,10 @@
 .home {
   padding: 0;
   height: 1px;
-  min-height: calc(100% - #{$headerCompiledHeight});
+  min-height: calc(100% - #{$headerHeight});
 
   &__content {
-    height: calc(100vh - #{$headerCompiledHeight});
+    height: calc(100vh - #{$headerHeight});
   }
 
   &__header {
@@ -82,7 +82,7 @@
       // justify-content: space-around;
     }
 
-    height: calc(60vh - #{$headerCompiledHeight});
+    height: calc(60vh - #{$headerHeight});
   }
 
   &__links-container {
@@ -172,7 +172,6 @@
     &:focus,
     &:hover {
       background-color: $secondaryDark;
-
     }
   }
 

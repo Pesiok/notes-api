@@ -1,5 +1,5 @@
 import React from 'react';
-import Note from '../containers/Note';
+import Note from '../../containers/Notes/Note';
 
 const dummyNote = {
   title: 'A Dummy note',

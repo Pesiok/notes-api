@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Menu from '../containers/Menu';
-import ClickedOutside from './ClickedOutside';
+import Menu from './Menu';
+import ClickedOutside from '../Utilis/ClickedOutside';
 
 class Header extends Component {
   constructor(props) {

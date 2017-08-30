@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import ClickedOutside from './ClickedOutside';
+import ClickedOutside from '../../Utilis/ClickedOutside';
 
 class NoteTitle extends Component {
   constructor(props) {

@@ -4,16 +4,16 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // components
-import PrivateRoute from './../containers/PrivateRoute';
-import Home from './Home';
-import Header from './Header';
-import NotesFilter from './../containers/NotesFilter';
-import NotesIndex from './../containers/NotesIndex';
-import Note from './../containers/Note';
-import NewNote from './../components/NewNote';
-import Settings from './../containers/Settings';
-import SignInPage from './SignInPage';
-import LogInPage from './LogInPage';
+import PrivateRoute from './../containers/Access/PrivateRoute';
+import Home from './Public/Home';
+import Header from './Header/Header';
+import NotesFilter from './../containers/Notes/NotesFilter';
+import NotesIndex from './../containers/Notes/NotesIndex';
+import Note from './../containers/Notes/Note';
+import NewNote from './../components/Notes/NewNote';
+import Settings from './../containers/Settings/Settings';
+import SignInPage from './../containers/Access/SignInPage';
+import LogInPage from './../containers/Access/LogInPage';
 
 const Main = () => (
   <Switch>

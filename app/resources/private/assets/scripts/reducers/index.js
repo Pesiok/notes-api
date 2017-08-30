@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import userReducer from './userReducer';
-import notesReducer from './notesReducer';
+import userReducer from './user';
+import notesReducer from './notes';
+import uiReducer from './ui';
 
 const rootReducer = combineReducers({
-  userReducer,
-  notesReducer,
+  user: userReducer,
+  notes: notesReducer,
+  ui: uiReducer,
 });
 
 export default rootReducer;

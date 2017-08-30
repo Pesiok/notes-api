@@ -25,7 +25,7 @@ PrivateRoute.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    isAuthenticated: state.userReducer.isAuthenticated,
+    isAuthenticated: state.user.isAuthenticated,
   };
 }
 
