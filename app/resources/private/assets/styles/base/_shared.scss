@@ -10,8 +10,7 @@
 }
 
 .content {
-  // height: 1px;
-  min-height: calc(100% - #{$headerCompiledHeight});
+  min-height: calc(100% - #{$headerHeight});
   padding: 1rem;
 
   background-color: $background;

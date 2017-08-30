@@ -2,10 +2,8 @@ import React from 'react';
 import SignInForm from './../containers/SignInForm';
 
 const SignInPage = props => (
-  <section className="content access-page access-page--secondary">
-    <div className="access-page__content">
-      <SignInForm {...props} />
-    </div>
+  <section className="access-page access-page--secondary">
+    <SignInForm {...props} />
   </section>
 );
 

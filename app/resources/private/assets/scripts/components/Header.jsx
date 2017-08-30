@@ -1,15 +1,26 @@
 import React, { Component } from 'react';
 
 import Menu from '../containers/Menu';
+import ClickedOutside from './ClickedOutside';
 
 class Header extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isOpen: true,
+      isOpen: false,
     };
+
+    // bindings
+    this.closeMenu = this.closeMenu.bind(this);
   }
+
+  closeMenu() {
+    if (this.state.isOpen) {
+      this.setState(state => Object.assign({}, state, { isOpen: !state.isOpen }));
+    }
+  }
+
   render() {
     return (
       <header className="header">
@@ -26,7 +37,9 @@ class Header extends Component {
           </button>
           <h1 className="header__heading">Notes App</h1>
         </div>
-        <Menu isOpen={this.state.isOpen} />
+        <ClickedOutside on={this.closeMenu} >
+          <Menu isOpen={this.state.isOpen} />
+        </ClickedOutside>
       </header>
     );
   }

@@ -18,7 +18,12 @@ body {
 	position: relative;
   left: 0;
   
-  transition: left 0.3s ease-in-out;
+  transition: 
+    left 0.3s,
+    background-color 0.4s;
+  transition-timing-function: ease-in-out;
+
+  // ??? transition
 }
 
 html,
@@ -34,12 +39,26 @@ body {
 
 .body--push {
   // push whole body
-  // don't shrink content on smaller screens
 
   left: $menuWidth;
 
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+.body--shrink {
+  // shrink to fit
   @include atSmall() {
-    // shrink to fit
     .note__content,
     .notes-list__list,
     .notes-list__heading,
@@ -47,10 +66,9 @@ body {
     .settings__content,
     .note-tag-filter__content,
     .home__content,
-    .access-page__content {
+    .access-page {
       max-width: calc(100% - #{$menuWidth});
       // transform: translateX(-$menuWidth);
     }
   }
-  
 }
