@@ -50,7 +50,8 @@ class NotesFilter extends Component {
       <NotesList
         notesToRender={this.state.filteredNotes}
         name={this.props.name}
-        placeHolder="No notes matched given filter."
+        placeHolder="There is no notes matching given filter."
+        className={this.props.isFetching ? 'loading-bar loading-bar--primary' : ''}
         {...this.props}
       >
         <TagFilter
@@ -68,6 +69,7 @@ NotesFilter.defaultProps = {
 
 NotesFilter.propTypes = {
   getNotesRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   name: PropTypes.string,
   notes: PropTypes.arrayOf(PropTypes.object),
 };
@@ -103,6 +105,8 @@ function mapStateToProps(state, ownProps) {
   return {
     notes: filterNotes(params, state.notes),
     name: params.by,
+    isFetching: state.ui.getNotes.isFetching,
+    error: state.ui.getNotes.error,
   };
 }
 

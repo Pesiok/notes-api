@@ -8,7 +8,7 @@
     margin: 1rem 0;
 
     background-color: $secondaryLight;
-    @include mdShadow(2);
+    @include mdShadow(1);
   }
 
   &__link {
@@ -54,12 +54,12 @@
       background-color: $background;
   
       padding: 0.2rem;
-      border: 0.1rem solid $primary;
+      border: 0.1rem solid $secondaryDark;
       @include mdShadow(1);
 
       &:hover,
       &:focus {
-        border-color: $primaryDark;
+        border-color: $secondary;
       }
     }
 
@@ -72,12 +72,12 @@
 
       color: $textSecondary;
 
-      background-color: $danger;
+      background-color: $secondaryDark;
       @include mdShadow(1);
 
       &:hover,
       &:focus {
-        background-color: $dangerDark;
+        background-color: $secondary;
         color: $textSecondary;
         
       }

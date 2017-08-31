@@ -110,3 +110,40 @@
         }
     }
 }
+
+@mixin bar($height, $width, $color, $bgColor: transparent) {
+    
+    &::before {
+        height: $height;
+        background-color: $bgColor;
+    }
+
+    &::after {
+        left: -$width;
+        width: $width;
+        height: $height;
+        background-color: $color;
+        animation: loading-bar-animation 2s linear infinite;
+    }
+
+    @keyframes loading-bar-animation {
+        0% {
+            left: -$height; width: 30%;
+        }
+        50% {
+            width: 70%;
+        }
+        60% {
+            left: 50%;
+        }
+        80% {
+            left: 100%;
+        }
+        95% {
+            left: 120%;
+        }
+        100% {
+            left: 100%;
+        }
+      }
+}

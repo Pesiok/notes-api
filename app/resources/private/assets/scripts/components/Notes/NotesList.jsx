@@ -5,16 +5,40 @@ import queryString from 'query-string';
 
 import NotePreview from './NotePreview';
 
-const LoadingComponent = () => <span>Loading...</span>;
-
 const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
   const path = props.location.pathname;
 
-  console.log(props.notesToRender);
+  const renderListContents = () => {
+    if (props.notesToRender && props.notesToRender.length > 0) {
+      return (
+        <ul className="notes-list__list">
+          {
+            props.notesToRender.map(note => (
+              <NotePreview key={note._id} note={note} />
+            ))
+          }
+        </ul>
+      );
+    }
+    if (props.error && props.error !== 'Not Found' && !props.isFetching) {
+      return (
+        <p className="notes-list__placeholder">
+          <strong className="notes-list__placeholder-title">{props.error}</strong>
+          We were unable to obtain your notes. Please try again later.
+        </p>
+      );
+    }
+    return (
+      <p className="notes-list__placeholder">
+        {props.placeHolder}
+      </p>
+    );
+  };
+
   return (
-    <section className="content notes-list">
-      <div className="notes-list__content">
+    <section className={`content notes-list ${props.className}`}>
+      <div className={'notes-list__content'}>
         { props.children }
         <header className="notes-list__heading">
           <h2 className="notes-list__heading-title">{`${props.name}:`}</h2>
@@ -39,19 +63,7 @@ const NotesList = (props) => {
             </NavLink>
           </span>
         </header>
-        {props.notesToRender && props.notesToRender.length > 0 ? (
-          <ul className="notes-list__list">
-            {
-              props.notesToRender.map(note => (
-                <NotePreview key={note._id} note={note} />
-              ))
-            }
-          </ul>)
-          : (
-            <p className="notes-list__placeholder">
-              {props.placeHolder}
-            </p>)
-        }
+        {renderListContents()}
       </div>
       <Link
         title="Add a new note"
@@ -66,15 +78,20 @@ const NotesList = (props) => {
 
 NotesList.defaultProps = {
   notesToRender: null,
-  default: LoadingComponent,
+  error: null,
+  className: '',
 };
-
+/* eslint-disable */
 NotesList.propTypes = {
   name: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  error: PropTypes.string, 
+  isFetching: PropTypes.bool,
   placeHolder: PropTypes.string.isRequired,
   notesToRender: PropTypes.arrayOf(PropTypes.object),
-  location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  location: PropTypes.object.isRequired,
   children: PropTypes.element,
 };
+/* eslint-enable */
 
 export default NotesList;

@@ -46,6 +46,17 @@ import {
   SIGN_IN_SUCCESS,
 } from '../../actions/user/signInActions';
 
+import {
+  RESET_LOG_IN_ERROR,
+  RESET_LOG_OUT_ERROR,
+  RESET_SIGN_IN_ERROR,
+  RESET_GET_NOTES_ERROR,
+  RESET_GET_NOTE_ERROR,
+  RESET_NEW_NOTE_ERROR,
+  RESET_UPDATE_NOTE_ERROR,
+  RESET_DELETE_NOTE_ERROR,
+} from '../../actions/ui/resetErrorActions';
+
 const composeUIReducer = (actions) => {
   const defaultState = { isFetching: false, error: null };
   return (state = defaultState, action) => {
@@ -60,6 +71,9 @@ const composeUIReducer = (actions) => {
       case actions.success: {
         return Object.assign({}, state, { isFetching: false, error: null });
       }
+      case actions.resetError: {
+        return Object.assign({}, state, { error: null });
+      }
       default: {
         return state;
       }
@@ -71,46 +85,54 @@ export const getNotesReducer = composeUIReducer({
   request: GET_NOTES_REQUEST,
   failure: GET_NOTES_FAILURE,
   success: GET_NOTES_SUCCESS,
+  resetError: RESET_GET_NOTES_ERROR,
 });
 
 export const getNoteReducer = composeUIReducer({
   request: GET_NOTE_REQUEST,
   failure: GET_NOTE_FAILURE,
   success: GET_NOTE_SUCCESS,
+  resetError: RESET_GET_NOTE_ERROR,
 });
 
 export const deleteNoteReducer = composeUIReducer({
   request: DELETE_NOTE_REQUEST,
   failure: DELETE_NOTE_FAILURE,
   success: DELETE_NOTE_SUCCESS,
+  resetError: RESET_DELETE_NOTE_ERROR,
 });
 
 export const newNoteReducer = composeUIReducer({
   request: NEW_NOTE_REQUEST,
   failure: NEW_NOTE_FAILURE,
   success: NEW_NOTE_SUCCESS,
+  resetError: RESET_NEW_NOTE_ERROR,
 });
 
 export const updateNoteReducer = composeUIReducer({
   request: UPDATE_NOTE_REQUEST,
   failure: UPDATE_NOTE_FAILURE,
   success: UPDATE_NOTE_SUCCESS,
+  resetError: RESET_UPDATE_NOTE_ERROR,
 });
 
 export const logInReducer = composeUIReducer({
   request: LOG_IN_REQUEST,
   failure: LOG_IN_FAILURE,
   success: LOG_IN_SUCCESS,
+  resetError: RESET_LOG_IN_ERROR,
 });
 
 export const logOutReducer = composeUIReducer({
   request: LOG_OUT_REQUEST,
   failure: LOG_OUT_FAILURE,
   success: LOG_OUT_SUCCESS,
+  resetError: RESET_LOG_OUT_ERROR,
 });
 
 export const signInReducer = composeUIReducer({
   request: SIGN_IN_REQUEST,
   failure: SIGN_IN_FAILURE,
   success: SIGN_IN_SUCCESS,
+  resetError: RESET_SIGN_IN_ERROR,
 });

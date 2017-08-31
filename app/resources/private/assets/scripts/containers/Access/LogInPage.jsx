@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import LogInForm from '../../components/Access/LogInForm';
 import { logInRequest } from '../../actions/user/logInActions';
+import { RESET_LOG_IN_ERROR } from '../../actions/ui/resetErrorActions';
 
 const LogInPage = props => (
   <section className={`access-page access-page--primary${props.error ? '-error' : ''}`}>
@@ -23,6 +24,13 @@ LogInPage.propTypes = {
   isFetching: PropTypes.bool.isRequired,
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    logInRequest: data => dispatch(logInRequest(data)),
+    resetErrorMsg: () => dispatch({ type: RESET_LOG_IN_ERROR }),
+  };
+}
+
 function mapStateToProps(state) {
   return {
     error: state.ui.logIn.error,
@@ -30,4 +38,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { logInRequest })(LogInPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LogInPage);

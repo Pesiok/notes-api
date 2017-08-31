@@ -1,7 +1,12 @@
 .note-options-delete {
   padding: 1rem;
 
-  font-size: 1.8rem;
+  font-size: 1.4rem;
+  text-align: center;
+
+  @include atSmall() {
+    font-size: 1.8rem;
+  }
 
   &__content {
     display: flex;
@@ -20,7 +25,6 @@
 
     height: 3rem;
     width: 5rem;
-    // @include saveButton();
 
     font-size: 1.5rem;
 

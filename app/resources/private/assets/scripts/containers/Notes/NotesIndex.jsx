@@ -19,6 +19,7 @@ class NotesIndex extends Component {
         notesToRender={this.props.notes}
         name="All notes"
         placeHolder="There is no notes to display :("
+        className={this.props.isFetching ? 'loading-bar loading-bar--primary' : ''}
         {...this.props}
       />
     );
@@ -31,6 +32,7 @@ NotesIndex.defaultProps = {
 
 NotesIndex.propTypes = {
   getNotesRequest: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   notes: PropTypes.arrayOf(PropTypes.object),
 };
 

@@ -16,12 +16,11 @@
 
   &__tag {
     display: flex;
-    align-items: center;
 
     margin: 0.3rem;
     padding: 0.1rem;
 
-    background-color: $backgroundDark;
+    background-color: $secondaryLight;
 
     @include mdShadow(1);
 
@@ -39,6 +38,7 @@
   }
 
   &__tag-button {
+    display: block;
     cursor: pointer;
 
     padding: 0.1rem;
@@ -47,6 +47,10 @@
     background: none;
 
     color: $danger;
+
+    span {
+      vertical-align: middle;
+    }
 
     &:hover,
     &:focus {

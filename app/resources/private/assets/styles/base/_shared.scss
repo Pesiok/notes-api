@@ -58,3 +58,39 @@
     }
   }
 }
+
+.loading-bar {
+  position: relative;
+  
+  overflow-x: hidden;
+  z-index: 5;
+
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+
+
+    width: 100%;
+  }
+
+  &--primary {
+    @include bar(0.2rem, 200rem, $primaryLight, $primary);
+  }
+
+  &--secondary {
+    @include bar(0.2rem, 20rem, $secondary);
+  }
+}

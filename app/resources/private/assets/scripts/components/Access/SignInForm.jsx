@@ -19,6 +19,12 @@ class SignInForm extends Component {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  componentWillUnmount() {
+    if (this.props.error) {
+      this.props.resetErrorMsg();
+    }
+  }
+
   validate(value, name) {
     let validity = this.state[name].isValid;
     switch (name) {
@@ -198,6 +204,7 @@ SignInForm.defaultProps = {
 
 SignInForm.propTypes = {
   error: PropTypes.string,
+  resetErrorMsg: PropTypes.func.isRequired,
   className: PropTypes.string,
   signInRequest: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

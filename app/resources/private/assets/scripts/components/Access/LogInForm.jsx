@@ -13,9 +13,14 @@ class LogInForm extends Component {
       exists: true,
     };
 
-    // bindings
     this.handleChange = this.handleChange.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+  }
+
+  componentWillUnmount() {
+    if (this.props.error) {
+      this.props.resetErrorMsg();
+    }
   }
 
   setValidity(type, validity) {
@@ -165,6 +170,7 @@ LogInForm.defaultProps = {
 
 LogInForm.propTypes = {
   error: PropTypes.string,
+  resetErrorMsg: PropTypes.func.isRequired,
   className: PropTypes.string,
   logInRequest: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types

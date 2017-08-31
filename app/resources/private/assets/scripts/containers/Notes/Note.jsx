@@ -81,17 +81,28 @@ class Note extends Component {
   }
 
   render() {
+    const { isUpdating, isDeleting, isCreating, isGetting } = this.props;
+    const noteContainerClasses = `note__container ${
+      (isUpdating || isDeleting || isCreating) ? 'loading-spinner loading-spinner--primary' : ''
+    }`;
+    const noteClasses = `content note ${
+      isGetting ? 'loading-bar loading-bar--primary' : ''
+    }`;
+
     return (
-      <section className="content note">
+      <section className={noteClasses}>
         <div className="note__content">
-          <NoteTitle
-            value={this.state.note.title}
-            onSave={this.saveHandler}
-            onChange={this.changeHandler}
-          />
-          <MarkdownPreviewer
-            value={this.state.note.content}
-          />
+          <div className={noteContainerClasses}>
+            <NoteTitle
+              value={this.state.note.title}
+              onSave={this.saveHandler}
+              onChange={this.changeHandler}
+            />
+            <MarkdownPreviewer
+              value={this.state.note.content}
+              {...this.props}
+            />
+          </div>
           <OptionsNav
             onSet={this.tabsHandler}
             showSet={this.state.options}
@@ -147,12 +158,26 @@ Note.propTypes = {
   updateNoteRequest: PropTypes.func.isRequired,
   deleteNoteRequest: PropTypes.func.isRequired,
   newNoteRequest: PropTypes.func.isRequired,
+  isUpdating: PropTypes.bool.isRequired,
+  isDeleting: PropTypes.bool.isRequired,
+  isCreating: PropTypes.bool.isRequired,
+  isGetting: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
   // if there is no id in URL pass a dummy note
-  return { note: id ? state.notes[id] : ownProps.note };
+  return {
+    note: id ? state.notes[id] : ownProps.note,
+    isUpdating: state.ui.updateNote.isFetching,
+    updateError: state.ui.updateNote.error,
+    isDeleting: state.ui.deleteNote.isFetching,
+    deleteError: state.ui.deleteNote.error,
+    isCreating: state.ui.newNote.isFetching,
+    createError: state.ui.deleteNote.error,
+    isGetting: state.ui.getNote.isFetching,
+    getError: state.ui.getNote.error,
+  };
 }
 
 export default connect(mapStateToProps, {

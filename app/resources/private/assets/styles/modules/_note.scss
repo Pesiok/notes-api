@@ -1,4 +1,9 @@
 .note {
+  &__container {
+    max-width: $maxContentWidth;
+    margin: 0 auto;
+  }
+
   &__preview {
     max-width: $maxContentWidth;
     margin: 0 auto;
