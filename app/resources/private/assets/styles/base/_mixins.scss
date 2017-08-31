@@ -88,3 +88,25 @@
         background-color: $secondaryDark;
     }
 }
+
+@mixin spinner($height, $color) {
+    background-color: $color;
+    
+    left: calc(50% - #{$height / 2});
+    top: calc(50% - #{$height / 2});
+
+    width: $height;
+    height: $height;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+
+    
+    @keyframes sk-rotateplane {
+        0% { 
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        } 50% { 
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        } 100% { 
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+    }
+}

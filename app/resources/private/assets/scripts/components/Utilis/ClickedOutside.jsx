@@ -16,7 +16,7 @@ class ClickedOutside extends Component {
     document.addEventListener('mousedown', this.clickHandler);
   }
 
-  clickHandler() {
+  clickHandler(event) {
     if (this.node && !this.node.contains(event.target)) {
       this.props.on();
     }

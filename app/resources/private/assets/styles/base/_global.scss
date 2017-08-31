@@ -19,7 +19,7 @@ body {
   left: 0;
   
   transition: 
-    left 0.3s,
+    transform 0.3s,
     background-color 0.4s;
   transition-timing-function: ease-in-out;
 
@@ -40,7 +40,7 @@ body {
 .body--push {
   // push whole body
 
-  left: $menuWidth;
+  transform: translateX(#{$menuWidth});
 
   &::after {
     content: '';
@@ -52,7 +52,7 @@ body {
     width: 100%;
     height: 100%;
 
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 }
 

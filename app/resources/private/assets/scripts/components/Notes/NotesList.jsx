@@ -11,6 +11,7 @@ const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
   const path = props.location.pathname;
 
+  console.log(props.notesToRender);
   return (
     <section className="content notes-list">
       <div className="notes-list__content">
@@ -38,14 +39,19 @@ const NotesList = (props) => {
             </NavLink>
           </span>
         </header>
-        <ul className="notes-list__list">
-          {props.notesToRender ?
-            props.notesToRender.map(note => (
-              <NotePreview key={note._id} note={note} />
-            )) :
-            props.default()
-          }
-        </ul>
+        {props.notesToRender && props.notesToRender.length > 0 ? (
+          <ul className="notes-list__list">
+            {
+              props.notesToRender.map(note => (
+                <NotePreview key={note._id} note={note} />
+              ))
+            }
+          </ul>)
+          : (
+            <p className="notes-list__placeholder">
+              {props.placeHolder}
+            </p>)
+        }
       </div>
       <Link
         title="Add a new note"
@@ -65,10 +71,10 @@ NotesList.defaultProps = {
 
 NotesList.propTypes = {
   name: PropTypes.string.isRequired,
+  placeHolder: PropTypes.string.isRequired,
   notesToRender: PropTypes.arrayOf(PropTypes.object),
   location: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   children: PropTypes.element,
-  default: PropTypes.func,
 };
 
 export default NotesList;

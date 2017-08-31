@@ -18,6 +18,7 @@ class NotesIndex extends Component {
       <NotesList
         notesToRender={this.props.notes}
         name="All notes"
+        placeHolder="There is no notes to display :("
         {...this.props}
       />
     );
@@ -46,6 +47,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     notes: parseNotes(state.notes, params),
+    isFetching: state.ui.getNotes.isFetching,
+    error: state.ui.getNotes.error,
   };
 }
 

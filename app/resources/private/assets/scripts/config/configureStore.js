@@ -22,7 +22,10 @@ const configureStore = () => {
 
   // save current state to the local storage on change every 1s max
   store.subscribe(throttle(() => {
-    saveState(store.getState());
+    saveState({
+      user: store.getState().user,
+      notes: store.getState().notes,
+    });
   }, 1000));
 
   return store;

@@ -7,12 +7,13 @@
   height: 100%;
   
 	top: 0;
-  left: -$menuWidth;
+  left: 0;
+  transform: translateX(#{-2 * $menuWidth});
 
   background-color: $backgroundActive;
   @include mdShadow(1);
 
-  transition: left 0.25s ease;
+  transition: transform 0.25s ease;
 
   color: $textSecondary;
 
@@ -21,7 +22,7 @@
   }
 
   &--open {
-    left: 0;
+    transform: translateX(#{-$menuWidth});
   }
 
   &__heading {

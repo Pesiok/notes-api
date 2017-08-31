@@ -25,7 +25,7 @@ export const signInRequest = credentials => (dispatch) => {
       ));
     })
     .then(
-      data => dispatch({ type: SIGN_IN_SUCCESS, payload: data, isisAuthenticated: true }),
+      data => dispatch({ type: SIGN_IN_SUCCESS, payload: data, isAuthenticated: true }),
       error => dispatch({ type: SIGN_IN_FAILURE, error }),
     );
 };

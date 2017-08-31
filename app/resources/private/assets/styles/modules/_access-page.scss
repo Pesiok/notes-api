@@ -5,7 +5,7 @@
 
   padding: 0.5rem;
   min-height: calc(100% - #{$headerHeight});
-
+  
   &--primary {
     @include bgAnim($primary, $primaryDark, $primaryLight);
   }
@@ -14,5 +14,12 @@
     @include bgAnim($secondary, $secondaryDark, $secondaryLight);
   }
 
-}
+  &--primary-error {
+    @include bgAnim($primary, $danger, $dangerLight);
+  }
 
+  &--secondary-error {
+    @include bgAnim($secondary, $danger, $dangerLight);
+  }
+
+}

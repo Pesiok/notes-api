@@ -18,7 +18,7 @@ const Input = props => (
     htmlFor={props.name}
   >
     <input
-      className={props.class.input}
+      className={props.cssClass.input}
       aria-required="true"
       aria-invalid={!props.isValid}
       id={props.name}
@@ -30,7 +30,7 @@ const Input = props => (
         props.blurHandler(event, props.name);
       }}
     />
-    <span className={props.class.name}>
+    <span className={props.cssClass.name}>
       {props.children}
     </span>
     {
@@ -56,7 +56,7 @@ Input.propTypes = {
   changeHandler: PropTypes.func.isRequired,
   blurHandler: PropTypes.func.isRequired,
   errorMessages: PropTypes.arrayOf(PropTypes.object).isRequired,
-  class: PropTypes.objectOf(PropTypes.string).isRequired,
+  cssClass: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default Input;

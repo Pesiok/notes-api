@@ -8,7 +8,6 @@ import { getNotesRequest } from '../../actions/notes/getNotesActions';
 import NotesList from '../../components/Notes/NotesList';
 import TagFilter from '../../components/Notes/TagFilter';
 
-const Default = () => <div>No notes to display</div>;
 
 const tagFilter = (notes, filterValue) => notes.filter((note) => {
   const mached = note.meta.tags.map(tag => tag === filterValue);
@@ -51,7 +50,7 @@ class NotesFilter extends Component {
       <NotesList
         notesToRender={this.state.filteredNotes}
         name={this.props.name}
-        default={Default}
+        placeHolder="No notes matched given filter."
         {...this.props}
       >
         <TagFilter

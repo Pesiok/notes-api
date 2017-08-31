@@ -7,7 +7,7 @@
     padding: 1rem;
     margin: 1rem 0;
 
-    background-color: $primaryLight;
+    background-color: $secondaryLight;
     @include mdShadow(2);
   }
 
@@ -157,7 +157,7 @@
 
   &__checkbox-input:disabled + &__checkbox-label:before {
     &, &:hover {
-      border-color: $backgroundDark !important;
+      border-color: $backgroundDark;
       background-color: $background;
     }
   }
@@ -175,7 +175,7 @@
   }
 
   &__checkbox-label:hover:before {
-    border : 0.1rem solid $primary !important;
+    border : 0.1rem solid $primary;
   }
 
 }

@@ -77,7 +77,11 @@ class SignInForm extends Component {
 
       // send sign in request and change route on success
       this.props.signInRequest({ name, password })
-        .then(() => this.props.history.push('/notes'));
+        .then(() => {
+          if (!this.props.error) {
+            this.props.history.push('/notes');
+          }
+        });
     }
   }
 
@@ -106,77 +110,95 @@ class SignInForm extends Component {
 
     return (
       <form
-        className="form"
+        className={`form ${this.props.className}`}
         onSubmit={event => this.handleSubmit(event)}
       >
-        <h3 className="form__heading form__heading--secondary">Sign in</h3>
-        <Input
-          name="name"
-          type="text"
-          value={this.state.name.value}
-          isValid={this.state.name.isValid}
-          changeHandler={this.handleChange}
-          blurHandler={this.handleBlur}
-          errorMessages={[
-            {
-              validity: this.state.name.isValid,
-              content: 'Your username must be at least 3 characters long.',
-            },
-            {
-              validity: this.state.isAvailable,
-              content: 'This name is not available.',
-            },
-          ]}
-          class={{ name: nameClass, input: inputClass }}
-        >
-          Username
-        </Input>
-        <Input
-          name="password"
-          type="password"
-          value={this.state.password.value}
-          isValid={this.state.password.isValid}
-          changeHandler={this.handleChange}
-          blurHandler={this.handleBlur}
-          errorMessages={[
-            {
-              validity: this.state.password.isValid,
-              content: 'Your password must be at least 6 characters long.',
-            },
-          ]}
-          class={{ name: nameClass, input: inputClass }}
-        >
-          Password
-        </Input>
-        <Input
-          name="passwordConf"
-          type="password"
-          value={this.state.passwordConf.value}
-          isValid={this.state.passwordConf.isValid}
-          changeHandler={this.handleChange}
-          blurHandler={this.handleBlur}
-          errorMessages={[
-            {
-              validity: this.state.passwordConf.isValid,
-              content: 'Passwords do not match',
-            },
-          ]}
-          class={{ name: nameClass, input: inputClass }}
-        >
-          Confirm password
-        </Input>
-        <button
-          className="form__submit form__submit--secondary"
-          type="submit"
-        >
-          Submit
-        </button>
+        {this.props.error &&
+          <div className="form__error">
+            <h3 className="form__error-title">{`Error: ${this.props.error}`}</h3>
+            <p className="form__error-info">Couldn&#39;t sign in.</p>
+          </div>
+        }
+        <div className="form__content">
+          <h3 className="form__heading form__heading--secondary">Sign in</h3>
+          <Input
+            name="name"
+            type="text"
+            value={this.state.name.value}
+            isValid={this.state.name.isValid}
+            changeHandler={this.handleChange}
+            blurHandler={this.handleBlur}
+            errorMessages={[
+              {
+                validity: this.state.name.isValid,
+                content: 'Your username must be at least 3 characters long.',
+              },
+              {
+                validity: this.state.isAvailable,
+                content: 'This name is not available.',
+              },
+            ]}
+            cssClass={{ name: nameClass, input: inputClass }}
+          >
+            Username
+          </Input>
+          <Input
+            name="password"
+            type="password"
+            value={this.state.password.value}
+            isValid={this.state.password.isValid}
+            changeHandler={this.handleChange}
+            blurHandler={this.handleBlur}
+            errorMessages={[
+              {
+                validity: this.state.password.isValid,
+                content: 'Your password must be at least 6 characters long.',
+              },
+            ]}
+            cssClass={{ name: nameClass, input: inputClass }}
+          >
+            Password
+          </Input>
+          <Input
+            name="passwordConf"
+            type="password"
+            value={this.state.passwordConf.value}
+            isValid={this.state.passwordConf.isValid}
+            changeHandler={this.handleChange}
+            blurHandler={this.handleBlur}
+            errorMessages={[
+              {
+                validity: this.state.passwordConf.isValid,
+                content: 'Passwords do not match',
+              },
+            ]}
+            cssClass={{ name: nameClass, input: inputClass }}
+          >
+            Confirm password
+          </Input>
+          <button
+            className="form__submit form__submit--secondary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     );
   }
 }
 
+SignInForm.defaultProps = {
+  error: null,
+};
+
+SignInForm.defaultProps = {
+  className: '',
+};
+
 SignInForm.propTypes = {
+  error: PropTypes.string,
+  className: PropTypes.string,
   signInRequest: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };

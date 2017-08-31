@@ -82,7 +82,11 @@ class LogInForm extends Component {
     // send request if user exists and password is provided
     if (!areInValid.some(input => input === false) && this.state.exists) {
       this.props.logInRequest({ name: login, password: pass })
-        .then(() => this.props.history.push('/notes'));
+        .then(() => {
+          if (!this.props.error) {
+            this.props.history.push('/notes');
+          }
+        });
     }
   }
 
@@ -99,51 +103,69 @@ class LogInForm extends Component {
 
     return (
       <form
-        className="form"
+        className={`form ${this.props.className}`}
         onSubmit={event => this.handleSubmit(event)}
       >
-        <h3 className="form__heading form__heading--primary">Log in</h3>
-        <Input
-          name="login"
-          type="text"
-          value={this.state.login.value}
-          isValid={this.state.login.isValid}
-          changeHandler={this.handleChange}
-          blurHandler={this.handleBlur}
-          errorMessages={[
-            { validity: this.state.login.isValid, content: 'Please type in username' },
-            { validity: this.state.exists, content: 'This user does not exist' },
-          ]}
-          class={{ name: nameClass, input: inputClass }}
-        >
-          Username
-        </Input>
-        <Input
-          name="pass"
-          type="password"
-          value={this.state.pass.value}
-          isValid={this.state.pass.isValid}
-          changeHandler={this.handleChange}
-          blurHandler={this.handleBlur}
-          errorMessages={[
-            { validity: this.state.pass.isValid, content: 'Please type in password' },
-          ]}
-          class={{ name: nameClass, input: inputClass }}
-        >
-          Password
-        </Input>
-        <button
-          className="form__submit form__submit--primary"
-          type="submit"
-        >
-          Submit
-        </button>
+        {this.props.error &&
+          <div className="form__error">
+            <h3 className="form__error-title">{`Error: ${this.props.error}`}</h3>
+            <p className="form__error-info">Couldn&#39;t log in.</p>
+          </div>
+        }
+        <div className="form__content">
+          <h3 className="form__heading form__heading--primary">Log in</h3>
+          <Input
+            name="login"
+            type="text"
+            value={this.state.login.value}
+            isValid={this.state.login.isValid}
+            changeHandler={this.handleChange}
+            blurHandler={this.handleBlur}
+            errorMessages={[
+              { validity: this.state.login.isValid, content: 'Please type in username' },
+              { validity: this.state.exists, content: 'This user does not exist' },
+            ]}
+            cssClass={{ name: nameClass, input: inputClass }}
+          >
+            Username
+          </Input>
+          <Input
+            name="pass"
+            type="password"
+            value={this.state.pass.value}
+            isValid={this.state.pass.isValid}
+            changeHandler={this.handleChange}
+            blurHandler={this.handleBlur}
+            errorMessages={[
+              { validity: this.state.pass.isValid, content: 'Please type in password' },
+            ]}
+            cssClass={{ name: nameClass, input: inputClass }}
+          >
+            Password
+          </Input>
+          <button
+            className="form__submit form__submit--primary"
+            type="submit"
+          >
+            Submit
+          </button>
+        </div>
       </form>
     );
   }
 }
 
+LogInForm.defaultProps = {
+  error: null,
+};
+
+LogInForm.defaultProps = {
+  className: '',
+};
+
 LogInForm.propTypes = {
+  error: PropTypes.string,
+  className: PropTypes.string,
   logInRequest: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
