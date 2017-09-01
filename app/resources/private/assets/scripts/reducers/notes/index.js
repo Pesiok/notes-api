@@ -19,8 +19,7 @@ const notesReducer = (state = {}, action) => {
     case UPDATE_NOTE_SUCCESS:
     case GET_NOTE_SUCCESS: {
       const id = action.payload.note._id;
-      const notes = Object.assign({}, state, { [id]: action.payload.note });
-      return notes;
+      return Object.assign({}, state, { [id]: action.payload.note });
     }
     case DELETE_NOTE_SUCCESS: {
       const id = action.payload;

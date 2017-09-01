@@ -14,6 +14,7 @@ import NewNote from './../components/Notes/NewNote';
 import Settings from './../containers/Settings/Settings';
 import SignInPage from './../containers/Access/SignInPage';
 import LogInPage from './../containers/Access/LogInPage';
+import SharedNote from './../containers/Shared/SharedNote';
 
 const Main = () => (
   <Switch>
@@ -22,6 +23,7 @@ const Main = () => (
     <PrivateRoute path="/notes/new" shouldRender={NewNote} />
     <PrivateRoute path="/notes/:id" shouldRender={Note} />
     <PrivateRoute path="/notes" shouldRender={NotesIndex} />
+    <Route path="/share/:id" component={SharedNote} />
     <Route path="/signin" component={SignInPage} />
     <Route path="/login" component={LogInPage} />
     <Route path="/about" component={Home} />

@@ -39,7 +39,6 @@ body {
 
 .body--push {
   // push whole body
-
   transform: translateX(#{$menuWidth});
 
   &::after {

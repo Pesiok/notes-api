@@ -1,6 +1,6 @@
 
 // normalize
-@import "~normalize-scss/sass/normalize/import-now";
+@import '~normalize-scss/sass/normalize/import-now';
 
 // datetime picker styles
 @import '~flatpickr/dist/themes/material_green.css';
@@ -19,6 +19,7 @@
 @import 'modules/_form.scss';
 @import 'modules/_access-page.scss';
 @import 'modules/_notes-list';
+@import 'modules/_shared-note';
 @import 'modules/_note';
 @import 'modules/_note-preview';
 @import 'modules/_note-title';

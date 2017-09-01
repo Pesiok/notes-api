@@ -50,7 +50,7 @@ class Note extends Component {
     this.changeHandler = this.changeHandler.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const id = this.props.match.params.id;
     if (id) this.props.requests.getNoteRequest(id);
   }
@@ -194,7 +194,7 @@ function mapDispatchToProps(dispatch) {
   return {
     requests: {
       getNoteRequest: data => dispatch(getNoteRequest(data)),
-      updateNoteRequest: data => dispatch(updateNoteRequest(data)),
+      updateNoteRequest: (id, data) => dispatch(updateNoteRequest(id, data)),
       deleteNoteRequest: data => dispatch(deleteNoteRequest(data)),
       newNoteRequest: data => dispatch(newNoteRequest(data)),
     },
