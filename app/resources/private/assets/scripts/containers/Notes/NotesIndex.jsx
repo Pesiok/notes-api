@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
+// actions and & action creators
+import { RESET_GET_NOTES_ERROR } from '../../actions/ui/resetErrorActions';
 import { getNotesRequest } from '../../actions/notes/getNotesActions';
+
+// components
 import NotesList from '../../components/Notes/NotesList';
 
 
@@ -44,6 +48,13 @@ const parseNotes = (notes, params) => {
   return parsedNotes;
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    getNotesRequest: () => dispatch(getNotesRequest()),
+    resetGetNotesError: () => dispatch({ type: RESET_GET_NOTES_ERROR }),
+  };
+}
+
 function mapStateToProps(state, ownProps) {
   const params = queryString.parse(ownProps.location.search);
 
@@ -54,4 +65,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { getNotesRequest })(NotesIndex);
+export default connect(mapStateToProps, mapDispatchToProps)(NotesIndex);

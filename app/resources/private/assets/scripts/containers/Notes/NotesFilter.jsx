@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
 
+// actions and & action creators
+import { RESET_GET_NOTES_ERROR } from '../../actions/ui/resetErrorActions';
 import { getNotesRequest } from '../../actions/notes/getNotesActions';
 
+// components
 import NotesList from '../../components/Notes/NotesList';
 import TagFilter from '../../components/Notes/TagFilter';
 
@@ -24,6 +27,7 @@ class NotesFilter extends Component {
       value: '',
     };
 
+    // bindings
     this.handleTagFilter = this.handleTagFilter.bind(this);
   }
 
@@ -99,6 +103,13 @@ const filterNotes = (params, notes) => {
   return sortedNotes;
 };
 
+function mapDispatchToProps(dispatch) {
+  return {
+    getNotesRequest: () => dispatch(getNotesRequest()),
+    resetGetNotesError: () => dispatch({ type: RESET_GET_NOTES_ERROR }),
+  };
+}
+
 function mapStateToProps(state, ownProps) {
   const params = queryString.parse(ownProps.location.search);
 
@@ -110,4 +121,4 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, { getNotesRequest })(NotesFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(NotesFilter);

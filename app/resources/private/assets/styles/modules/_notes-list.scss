@@ -90,4 +90,38 @@
     color: $textSecondary;
   }
 
+  &__error {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 1rem;
+    margin: 0 0.75rem;
+
+    background-color: $dangerLight;
+    color: $textSecondary;
+
+    transition: box-shadow 0.2s ease-in;
+    @include mdShadow(2);
+
+    &:hover {
+      @include mdShadow(3);
+    }
+  }
+
+  &__error-title {
+    font-size: 1.6rem;
+  }
+
+  &__error-info {
+    font-size: 1.4rem;
+  }
+
+  &__error-button {
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    color: $textSecondary;
+  }
+
 }

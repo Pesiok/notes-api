@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
 import queryString from 'query-string';
 
+// components
 import NotePreview from './NotePreview';
+import NotesListError from './NotesListError';
 
 const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
@@ -39,6 +41,7 @@ const NotesList = (props) => {
   return (
     <section className={`content notes-list ${props.className}`}>
       <div className={'notes-list__content'}>
+        <NotesListError {...props} />
         { props.children }
         <header className="notes-list__heading">
           <h2 className="notes-list__heading-title">{`${props.name}:`}</h2>

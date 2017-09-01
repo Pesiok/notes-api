@@ -36,11 +36,18 @@ const Input = props => (
     {
       props.errorMessages.map(message => (
         <span
-          className="form__group-error"
+          className={`form__group-error ${message.validity ? 'form__group-error--show' : ''}`}
           key={`${props.name}-val-err-${message.content.length}`}
-          style={{ display: message.validity ? 'none' : 'inherit' }}
         >
-          {message.content}
+          <span
+            aria-hidden="true"
+            className="material-icons form__group-error-icon"
+          >
+          error
+          </span>
+          <span className="form__group-error-name">
+            {message.content}
+          </span>
         </span>
       ))
     }

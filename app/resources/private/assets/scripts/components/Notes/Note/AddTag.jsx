@@ -11,37 +11,42 @@ class AddTag extends Component {
       tags: this.props.tags,
     };
 
+    // bindings
     this.changeHandler = this.changeHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
-    this.validate = this.validate.bind(this);
   }
 
   componentWillReceiveProps({ tags }) {
     this.setState(state => Object.assign({}, state, { tags }));
   }
 
-  validate() {
-    const value = this.state.value;
+  validate(value, callback) {
     let isValid = true;
+
     // check if tag already exists in state or is empty
-    if (this.state.tags.find(tag => tag === value) || value.length === 0) isValid = false;
-    this.setState(state => Object.assign({}, state, { isValid }));
+    if (this.state.tags.find(tag => tag === value) || value.length === 0) {
+      isValid = false;
+    }
+    this.setState(state => Object.assign({}, state, { isValid }), callback);
   }
 
   changeHandler(event) {
     const value = event.target.value;
-    if (!this.state.isValid) this.validate();
+    this.validate(value);
     this.setState(state => Object.assign({}, state, { value }));
   }
 
   submitHandler(event) {
+    const sendRequest = () => {
+      if (this.state.isValid) {
+        const tags = [...this.state.tags, this.state.value];
+        this.props.onSave(tags);
+      }
+    };
     event.preventDefault();
-    this.validate();
 
-    if (this.state.isValid) {
-      const tags = [...this.state.tags, this.state.value];
-      this.props.onSave(tags);
-    }
+    // check if state is valid and send request after validation
+    this.validate(this.state.value, sendRequest);
   }
 
   render() {

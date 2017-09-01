@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-// actions creators
+// actions & actions creators
+import {
+  RESET_GET_NOTE_ERROR,
+  RESET_NEW_NOTE_ERROR,
+  RESET_UPDATE_NOTE_ERROR,
+  RESET_DELETE_NOTE_ERROR,
+} from '../../actions/ui/resetErrorActions';
 import { getNoteRequest } from '../../actions/notes/getNoteActions';
 import { updateNoteRequest } from '../../actions/notes/updateNoteActions';
 import { deleteNoteRequest } from '../../actions/notes/deleteNoteActions';
@@ -16,6 +22,7 @@ import ShareOptions from '../../components/Notes/Note/ShareOptions';
 import TagsOptions from '../../components/Notes/Note/TagsOptions';
 import DeleteOptions from '../../components/Notes/Note/DeleteOptions';
 import OptionsNav from '../../components/Notes/Note/OptionsNav';
+import NoteError from '../../components/Notes/Note/NoteError';
 
 class Note extends Component {
   constructor(props) {
@@ -45,24 +52,32 @@ class Note extends Component {
 
   componentWillMount() {
     const id = this.props.match.params.id;
-    if (id) this.props.getNoteRequest(id);
+    if (id) this.props.requests.getNoteRequest(id);
   }
 
-  // delete note
   deleteHandler() {
     const id = this.props.match.params.id;
-    this.props.deleteNoteRequest(id)
-      .then(() => this.props.history.push('/notes'));
+    this.props.requests.deleteNoteRequest(id)
+      .then(() => {
+        if (!this.props.errors.deleteError) {
+          this.props.history.push('/notes');
+        }
+      });
   }
 
   saveHandler() {
     const id = this.props.match.params.id;
 
+    // if there is no id in url treat it like new note request
     if (id) {
-      this.props.updateNoteRequest(id, this.state.note);
+      this.props.requests.updateNoteRequest(id, this.state.note);
     } else {
-      this.props.newNoteRequest(this.state.note)
-        .then(data => this.props.history.push(`/notes/${data.note._id}`));
+      this.props.requests.newNoteRequest(this.state.note)
+        .then((data) => {
+          if (!this.props.errors.createError) {
+            this.props.history.push(`/notes/${data.note._id}`);
+          }
+        });
     }
   }
 
@@ -81,7 +96,7 @@ class Note extends Component {
   }
 
   render() {
-    const { isUpdating, isDeleting, isCreating, isGetting } = this.props;
+    const { isUpdating, isDeleting, isCreating, isGetting } = this.props.fetchingState;
     const noteContainerClasses = `note__container ${
       (isUpdating || isDeleting || isCreating) ? 'loading-spinner loading-spinner--primary' : ''
     }`;
@@ -103,6 +118,7 @@ class Note extends Component {
               {...this.props}
             />
           </div>
+          <NoteError {...this.props} />
           <OptionsNav
             onSet={this.tabsHandler}
             showSet={this.state.options}
@@ -144,6 +160,8 @@ class Note extends Component {
   }
 }
 
+// config
+
 Note.defaultProps = {
   note: null,
   URLRoot: window.location.origin,
@@ -154,35 +172,60 @@ Note.propTypes = {
   note: PropTypes.object, // eslint-disable-line react/forbid-prop-types
   match: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
   URLRoot: PropTypes.string,
-  getNoteRequest: PropTypes.func.isRequired,
-  updateNoteRequest: PropTypes.func.isRequired,
-  deleteNoteRequest: PropTypes.func.isRequired,
-  newNoteRequest: PropTypes.func.isRequired,
-  isUpdating: PropTypes.bool.isRequired,
-  isDeleting: PropTypes.bool.isRequired,
-  isCreating: PropTypes.bool.isRequired,
-  isGetting: PropTypes.bool.isRequired,
+  requests: PropTypes.shape({
+    getNoteRequest: PropTypes.func.isRequired,
+    updateNoteRequest: PropTypes.func.isRequired,
+    deleteNoteRequest: PropTypes.func.isRequired,
+    newNoteRequest: PropTypes.func.isRequired,
+  }).isRequired,
+  fetchingState: PropTypes.shape({
+    isUpdating: PropTypes.bool.isRequired,
+    isDeleting: PropTypes.bool.isRequired,
+    isCreating: PropTypes.bool.isRequired,
+    isGetting: PropTypes.bool.isRequired,
+  }).isRequired,
+  errors: PropTypes.shape({
+    deleteError: PropTypes.string,
+    createError: PropTypes.string,
+  }).isRequired,
 };
 
-function mapStateToProps(state, ownProps) {
-  const id = ownProps.match.params.id;
-  // if there is no id in URL pass a dummy note
+function mapDispatchToProps(dispatch) {
   return {
-    note: id ? state.notes[id] : ownProps.note,
-    isUpdating: state.ui.updateNote.isFetching,
-    updateError: state.ui.updateNote.error,
-    isDeleting: state.ui.deleteNote.isFetching,
-    deleteError: state.ui.deleteNote.error,
-    isCreating: state.ui.newNote.isFetching,
-    createError: state.ui.deleteNote.error,
-    isGetting: state.ui.getNote.isFetching,
-    getError: state.ui.getNote.error,
+    requests: {
+      getNoteRequest: data => dispatch(getNoteRequest(data)),
+      updateNoteRequest: data => dispatch(updateNoteRequest(data)),
+      deleteNoteRequest: data => dispatch(deleteNoteRequest(data)),
+      newNoteRequest: data => dispatch(newNoteRequest(data)),
+    },
+    resetErrors: {
+      updateError: () => dispatch({ type: RESET_UPDATE_NOTE_ERROR }),
+      deleteError: () => dispatch({ type: RESET_DELETE_NOTE_ERROR }),
+      createError: () => dispatch({ type: RESET_NEW_NOTE_ERROR }),
+      getError: () => dispatch({ type: RESET_GET_NOTE_ERROR }),
+    },
   };
 }
 
-export default connect(mapStateToProps, {
-  getNoteRequest,
-  updateNoteRequest,
-  deleteNoteRequest,
-  newNoteRequest,
-})(Note);
+function mapStateToProps(state, ownProps) {
+  const id = ownProps.match.params.id;
+
+  return {
+    // if there is no id in the URL pass a dummy note
+    note: id ? state.notes[id] : ownProps.note,
+    fetchingState: {
+      isUpdating: state.ui.updateNote.isFetching,
+      isDeleting: state.ui.deleteNote.isFetching,
+      isCreating: state.ui.newNote.isFetching,
+      isGetting: state.ui.getNote.isFetching,
+    },
+    errors: {
+      updateError: state.ui.updateNote.error,
+      deleteError: state.ui.deleteNote.error,
+      createError: state.ui.newNote.error,
+      getError: state.ui.getNote.error,
+    },
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);

@@ -89,6 +89,17 @@
     }
 }
 
+@mixin saveButtonDanger() {
+    @include ButtonBase();
+    
+    background-color: $danger;
+
+    &:hover,
+    &:focus {
+        background-color: $dangerDark;
+    }
+}
+
 @mixin spinner($height, $color) {
     background-color: $color;
     

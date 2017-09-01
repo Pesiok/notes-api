@@ -16,5 +16,46 @@
 
     font-size: 1.4rem;
   }
+
+  &__error {
+    max-width: $maxContentWidth;
+    margin: 0 auto;
+    margin-top: 1rem;
+    // prevents margin collapsing
+    padding: 1px 0;
+
+    background-color: $backgroundActive;
+    color: $textSecondary;
+
+    @include mdShadow(2);
+    
+  }
+
+  &__error-content {
+    padding: 1rem;
+    background-color: $dangerLight;
+
+    border-bottom: 0.1rem solid $danger;
+  }
+
+  &__error-title {
+    margin: 0;
+
+    font-size: 1.8rem;
+  }
+
+  &__error-type {
+    font-size: 1.4rem;
+  }
+
+  &__error-button {
+    display: block;
+    height: 3rem;
+    margin: 1rem;
+    margin-left: auto;
+    
+    color: $textSecondary;
+    @include saveButtonDanger();
+  }
 }
 
