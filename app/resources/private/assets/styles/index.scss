@@ -1,0 +1,33 @@
+
+// normalize
+@import '~normalize-scss/sass/normalize/import-now';
+
+// datetime picker styles
+@import '~flatpickr/dist/themes/material_green.css';
+
+// base styles
+@import 'base/_variables.scss';
+@import 'base/_mixins.scss';
+@import 'base/_global.scss';
+@import 'base/_shared.scss';
+
+// modules
+@import 'modules/_menu.scss';
+@import 'modules/_menu-item';
+@import 'modules/_header.scss';
+@import 'modules/_home.scss';
+@import 'modules/_form.scss';
+@import 'modules/_access-page.scss';
+@import 'modules/_notes-list';
+@import 'modules/_shared-note';
+@import 'modules/_note';
+@import 'modules/_note-preview';
+@import 'modules/_note-title';
+@import 'modules/_note-nav';
+@import 'modules/_note-options';
+@import 'modules/_note-options-editor';
+@import 'modules/_note-options-share';
+@import 'modules/_note-options-tags';
+@import 'modules/_note-options-delete';
+@import 'modules/_note-tag-filter';
+@import 'modules/_settings';

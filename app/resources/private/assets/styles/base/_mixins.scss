@@ -1,0 +1,160 @@
+
+//obtained from http://codepen.io/allusis/pen/bdVjbj
+@mixin mdShadow($level: 1) {
+  @if $level == 1 {box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);} 
+  @else if $level == 2 {box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
+  @else if $level == 3 {box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+  @else if $level == 4 {box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+  @else if $level == 5 {box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
+}
+
+// animations
+
+@mixin bgAnim($colorOne, $colorTwo, $colorThree, $time: 43s, $degree: 109deg) {
+    background: linear-gradient($degree, $colorOne, $colorTwo, $colorThree);
+    background-size: 600% 600%;
+    animation: bgGradient $time ease infinite;
+}
+
+@keyframes bgGradient { 
+    0% { background-position: 0% 19% }
+    50% { background-position: 100% 82% }
+    100% { background-position: 0% 19% }
+}
+
+//media queries
+@mixin atSmall() {
+    @media (min-width: 576px) {
+        @content;
+    }
+}
+
+@mixin atMedium() {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin atLarge() {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin atExtraLarge() {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin ButtonBase() {
+    cursor: pointer;
+    
+    background: none;
+    border: none;
+
+    font-size: 1.5rem;
+
+    background-color: $primary;
+    @include mdShadow(2);
+
+    &:hover,
+    &:focus {
+        background-color: $primaryDark;
+        color: $textSecondary;
+
+        @include mdShadow(3);
+    }
+}
+
+@mixin saveButtonPrimary() {
+    @include ButtonBase();
+
+    background-color: $primary;
+
+    &:hover,
+    &:focus {
+      background-color: $primaryDark;
+    }
+}
+
+@mixin saveButtonSecondary() {
+    @include ButtonBase();
+    
+    background-color: $secondary;
+
+    &:hover,
+    &:focus {
+        background-color: $secondaryDark;
+    }
+}
+
+@mixin saveButtonDanger() {
+    @include ButtonBase();
+    
+    background-color: $danger;
+
+    &:hover,
+    &:focus {
+        background-color: $dangerDark;
+    }
+}
+
+@mixin spinner($height, $color) {
+    background-color: $color;
+    
+    left: calc(50% - #{$height / 2});
+    top: calc(50% - #{$height / 2});
+
+    width: $height;
+    height: $height;
+    animation: sk-rotateplane 1.2s infinite ease-in-out;
+
+    
+    @keyframes sk-rotateplane {
+        0% { 
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+        } 50% { 
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+        } 100% { 
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
+    }
+}
+
+@mixin bar($height, $width, $color, $bgColor: transparent) {
+    
+    &::before {
+        height: $height;
+        background-color: $bgColor;
+    }
+
+    &::after {
+        left: -$width;
+        width: $width;
+        height: $height;
+        background-color: $color;
+        animation: loading-bar-animation 2s linear infinite;
+    }
+
+    @keyframes loading-bar-animation {
+        0% {
+            left: -$height; width: 30%;
+        }
+        50% {
+            width: 70%;
+        }
+        60% {
+            left: 50%;
+        }
+        80% {
+            left: 100%;
+        }
+        95% {
+            left: 120%;
+        }
+        100% {
+            left: 100%;
+        }
+      }
+}

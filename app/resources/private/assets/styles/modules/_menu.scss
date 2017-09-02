@@ -1,0 +1,52 @@
+.menu {
+  position: fixed;
+  display: none;
+  z-index: 1;
+
+  width: $menuWidth;
+  height: 100%;
+  // overflow-y: scroll; todo
+  
+	top: 0;
+  left: 0;
+  transform: translateX(#{-2 * $menuWidth});
+
+  background-color: $backgroundActive;
+  @include mdShadow(1);
+
+  transition: transform 0.25s ease;
+
+  color: $textSecondary;
+
+  &--active {
+    display: block;
+  }
+
+  &--open {
+    transform: translateX(#{-$menuWidth});
+  }
+
+  &__heading {
+    margin: 0;
+    padding: 1rem;
+    height: 5rem;
+
+    border-bottom: 0.15rem solid $primary;
+    background-color: $primaryDark;
+
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  &__content {
+    position: relative;
+    padding: 0;
+    margin: 0;
+
+    height: 100%;
+
+    list-style: none;
+  }
+}
+
+

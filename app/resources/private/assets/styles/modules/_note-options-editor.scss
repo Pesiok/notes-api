@@ -1,0 +1,31 @@
+.note-options-editor {
+  width: 100%;
+  // prevents margin collapse
+  padding: 1px 0;
+
+  &__input {
+    display: block;
+    resize: vertical;
+
+    width: 100%;
+    min-height: 15rem;
+    padding: 1rem;
+
+    border: none;
+    border-bottom: 0.1rem solid $primary;
+    background-color: $backgroundLight;
+
+    font-size: 1.4rem;
+  }
+
+  &__button {
+    @include saveButtonPrimary();
+    display: block;
+
+    height: 3rem;
+    width: 6rem;
+
+    margin: 1rem;
+    margin-left: auto;
+  }
+}

@@ -45,6 +45,7 @@ describe('Notes: ', () => {
             expect(response).to.have.status(200);
 
             const resNote = response.body.note;
+            expect(resNote.meta).to.have.property('created');
             noteEquals(note, resNote);
             
             const dbNotes = await Note.find({content: note.content});
@@ -70,6 +71,7 @@ describe('Notes: ', () => {
             const note = {
                 content: 'a new note',
                 title: 'k4k', 
+                //share: { isShared: false },
                 meta: {
                     tags: ['kek']
                 }
@@ -192,6 +194,9 @@ describe('Notes: ', () => {
             title: 'Super new title', 
             share: { 
                 isShared: true 
+            },
+            meta: {
+                tags: []
             } 
         }
 
@@ -205,6 +210,8 @@ describe('Notes: ', () => {
 
             const note = response.body.note;
             expect(note.meta).to.have.property('edited');
+            expect(note.meta).to.have.property('created');
+            expect(note.meta).to.have.property('tags');
             expect(note.share.isShared).to.be.true;
             expect(note.content).to.equal(updatedNote.content);
             expect(note.title).to.equal(updatedNote.title);

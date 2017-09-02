@@ -16,13 +16,17 @@ const NoteSchema = new mongoose.Schema({
     meta: {
         created: {
             type: Date,
-            default: Date.now
+            required: true
         },
         edited: {
             type: Date,
             default: null
         },
-        tags: [String]
+        tags: {
+            type: [String],
+            required: true,
+            default: []
+        }
     },
     share: {
         isShared: {
@@ -31,7 +35,8 @@ const NoteSchema = new mongoose.Schema({
             required: true
         },
         expiration: {
-            type: Date
+            type: Date,
+            default: null
         }
     }
 });

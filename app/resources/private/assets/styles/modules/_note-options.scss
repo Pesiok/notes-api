@@ -1,0 +1,13 @@
+.note-options {
+  max-width: 110rem;
+  margin: 4rem auto;
+  margin-top: 1rem;
+
+  @include atSmall() {
+    margin: 0 auto;
+  }
+
+  background-color: $backgroundActive;
+  @include mdShadow(2);
+
+}

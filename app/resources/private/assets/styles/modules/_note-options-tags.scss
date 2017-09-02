@@ -1,0 +1,93 @@
+.note-options-tags {
+  padding: 1rem;
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+
+    padding: 0;
+    padding-bottom: 1rem;
+
+    list-style: none;
+    border-bottom: 0.1rem solid $primary;
+  }
+
+  // tag
+
+  &__tag {
+    display: flex;
+
+    margin: 0.3rem;
+    padding: 0.1rem;
+
+    background-color: $secondaryLight;
+
+    @include mdShadow(1);
+
+    &:hover {
+      @include mdShadow(2);
+    }
+
+    span {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__tag-name {
+    margin: 0 0.2rem;
+  }
+
+  &__tag-button {
+    display: block;
+    cursor: pointer;
+
+    padding: 0.1rem;
+
+    border: none;
+    background: none;
+
+    color: $danger;
+
+    span {
+      vertical-align: middle;
+    }
+
+    &:hover,
+    &:focus {
+      color: $primaryDark;
+    }
+  }
+
+  // add
+
+  &__add-input-group {
+    display: flex;
+
+    height: 3rem;
+    font-size: 1.5rem;
+  }
+
+  &__add-error {
+    margin-top: 1rem;
+    font-size: 1.7rem;
+    color: $danger;
+  }
+
+  &__add-button {
+    @include saveButtonPrimary();
+  }
+
+  &__add-input {
+    border: none;
+    border: 0.1rem solid $primary;
+
+    background-color: $backgroundLight;
+    @include mdShadow(2);
+
+    &:focus,
+    &:hover {
+      border-color: $primaryDark;
+    }
+  }
+
+}

@@ -3,13 +3,14 @@ const Note = require('./../models/Note');
 
 const checkAvailability = note => {
     if (!note.share.isShared) return false;
-    if (note.share.expiration < Date.now()) return false;
+    if (note.share.expiration && note.share.expiration < Date.now()) return false;
+
     return true;
 }
 
 const shareController = app => {
     // get shared note
-    app.get('/share/notes/:id', async (req, res) => {
+    app.get('/api/share/:id', async (req, res) => {
         try {
             const id = req.params.id;
             if (!ObjectID.isValid(id)) return res.status(404).send();

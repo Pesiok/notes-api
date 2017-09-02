@@ -5,7 +5,7 @@ const authenticate = require('./../middleware/authenticate');
 const userController = app => {
 
     // sign in
-    app.post('/api/users', async (req, res) => {
+    app.post('/api/users/signin', async (req, res) => {
         try {
             const {name, password} = req.body;
             const user = new User({name, password});
@@ -33,7 +33,7 @@ const userController = app => {
     app.delete('/api/users/logout', authenticate, async (req, res) => {
         try {
             await req.user.removeToken(req.token);
-            res.status(200).send()
+            res.status(200).send();
         } catch(error) {
             res.status(400).send(error)
         }
@@ -48,14 +48,13 @@ const userController = app => {
     app.get('/api/users/find/:name', async (req, res) => {
         try {
             const name = req.params.name;
-            const user = await User.findByCredentials(name);
+            const user = await User.findOne({ name });
             if (!user) return res.status(404).send();
             res.status(200).send(user);
         } catch (error) {
             res.status(400).send(error)
         }
     });
-
 }
 
 module.exports = userController;

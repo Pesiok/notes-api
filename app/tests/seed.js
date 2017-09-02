@@ -21,7 +21,7 @@ const users = [
     {
         _id: usersID[1],
         name: 'kekTwo',
-        password: 'kekTwo123',
+        password: '111111',
         tokens: [{
             access: 'auth',
             token: jwt.sign({_id: usersID[1], access: 'auth'}, process.env.JWT_SECRET).toString()
@@ -62,6 +62,7 @@ const notes = [
         title: 'Title 3',
         content: 'ipsum lorem', 
         meta: {
+            created: Date.now(),
             tags: ['xyz', 'random']
         },
         share: {

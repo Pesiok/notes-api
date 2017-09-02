@@ -1,0 +1,46 @@
+.note-preview {
+  display: block;
+  flex: 1 0 auto;
+
+  width: 15rem;
+  min-height: 13rem;
+  margin: 1rem;
+  padding: 1rem;
+
+  text-decoration: none;
+  list-style: none;
+
+  background-color: $backgroundActive;
+  @include mdShadow(2);
+  transition: box-shadow 0.15s ease-in;
+
+  &:focus,
+  &:hover {
+    @include mdShadow(3);
+  }
+
+  color: $text;
+
+  &__content {
+    position: relative;
+    height: 100%;
+  }
+
+  &__heading {
+    font-size: 1.8rem;
+    overflow-wrap: break-word;
+    margin: 0;
+  }
+
+  &__status {
+   color: $primaryDark;
+   font-size: 1.2rem;
+  }
+
+  &__time {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+  }
+}

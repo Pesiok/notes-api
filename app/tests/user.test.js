@@ -57,13 +57,13 @@ describe('User: ', () => {
         });
     });
 
-    describe('POST /api/users', () => {
+    describe('POST /api/users/signin', () => {
         it('should create a new user and put it to the DB', async () => {
             const name = 'superNewUser';
             const password = 'typicalpassword123';
 
             const response = await chai.request(app)
-                .post('/api/users')
+                .post('/api/users/signin')
                 .send({ name, password });
             expect(response).to.have.status(200);
             expect(response.headers).to.have.property('x-auth');
@@ -81,7 +81,7 @@ describe('User: ', () => {
             const name = 'superNewUserTwo';
             try {
                 const response = chai.request(app)
-                    .post('/api/users')
+                    .post('/api/users/signin')
                     .send({ name });
             } catch({ response }) {
                 expect(response).to.have.status(400);
@@ -93,7 +93,7 @@ describe('User: ', () => {
             const password = 'kekeekek';
             try {
                 const response = chai.request(app)
-                    .post('/api/users')
+                    .post('/api/users/signin')
                     .send({ name, password });
             } catch({ response }) {
                 expect(response).to.have.status(400);
@@ -141,7 +141,7 @@ describe('User: ', () => {
                     .post('/api/users/login')
                     .send({
                         name: users[1].name,
-                        password: users[1].password + 'kek'
+                        password: undefined
                     });
             } catch ({ response }) {
                 expect(response).to.have.status(400);

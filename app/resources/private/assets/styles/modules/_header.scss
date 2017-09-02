@@ -1,0 +1,33 @@
+.header {
+  background-color: $backgroundActive;
+
+  &__content {
+    display: flex;
+    align-items: center;
+
+    height: 5rem;
+    border-bottom: 0.2rem solid $primary;
+
+    @include mdShadow(1);
+  }
+
+  &__button {
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    color: $text;
+    transition: color 0.15s ease-in;
+
+    &:focus,
+    &:hover {
+      color: $primaryDark;
+    }
+  }
+
+  &__heading {
+    margin: 0;
+    margin-left: 1rem;
+    color: $text;
+  }
+}

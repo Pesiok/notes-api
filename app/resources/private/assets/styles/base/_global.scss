@@ -1,0 +1,73 @@
+html {
+  box-sizing: border-box;
+
+  font-size: 62.5%;
+
+  font-family: 'Roboto', sans-serif;
+  line-height: normal;
+
+}
+
+*, *::after, *::before {
+  box-sizing: inherit;
+
+}
+
+body {
+  overflow-x: hidden;
+	position: relative;
+  left: 0;
+  
+  transition: 
+    transform 0.3s,
+    background-color 0.4s;
+  transition-timing-function: ease-in-out;
+
+  // ??? transition
+}
+
+html,
+body {
+  background-color: $backgroundDark;
+  height: 100%;
+}
+
+#root,
+[data-reactroot] {
+    height: 100%;
+}
+
+.body--push {
+  // push whole body
+  transform: translateX(#{$menuWidth});
+
+  &::after {
+    content: '';
+    position: absolute;
+    z-index: 5;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.body--shrink {
+  // shrink to fit
+  @include atSmall() {
+    .note__content,
+    .notes-list__list,
+    .notes-list__heading,
+    .note-nav__content,
+    .settings__content,
+    .note-tag-filter__content,
+    .home__content,
+    .access-page {
+      max-width: calc(100% - #{$menuWidth});
+      // transform: translateX(-$menuWidth);
+    }
+  }
+}
