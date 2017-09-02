@@ -13,7 +13,7 @@ class DateTimePicker extends Component {
     this.flatpickr = new Flatpickr(this.inputField, {
       onChange: this.props.onChange,
       enableTime: true,
-      minDate: Date.now(),
+      // minDate: Date.now(),
       time_24hr: true,
     });
 
@@ -28,6 +28,10 @@ class DateTimePicker extends Component {
 
   shouldComponentUpdate() {
     return false;
+  }
+
+  componentWillUnmount() {
+    this.flatpickr.destroy();
   }
 
   resetHandler() {

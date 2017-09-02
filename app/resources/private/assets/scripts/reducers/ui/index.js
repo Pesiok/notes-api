@@ -8,11 +8,13 @@ import {
   logInReducer,
   logOutReducer,
   signInReducer,
+  getSharedNoteReducer,
 } from './composeReducers';
 
 const uiReducer = combineReducers({
   getNotes: getNotesReducer,
   getNote: getNoteReducer,
+  getSharedNote: getSharedNoteReducer,
   updateNote: updateNoteReducer,
   newNote: newNoteReducer,
   deleteNote: deleteNoteReducer,

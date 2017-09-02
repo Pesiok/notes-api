@@ -36,7 +36,7 @@ const Input = props => (
     {
       props.errorMessages.map(message => (
         <span
-          className={`form__group-error ${message.validity ? 'form__group-error--show' : ''}`}
+          className={`form__group-error ${message.validity ? '' : 'form__group-error--active'}`}
           key={`${props.name}-val-err-${message.content.length}`}
         >
           <span

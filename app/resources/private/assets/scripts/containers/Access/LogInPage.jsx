@@ -7,7 +7,7 @@ import { logInRequest } from '../../actions/user/logInActions';
 import { RESET_LOG_IN_ERROR } from '../../actions/ui/resetErrorActions';
 
 const LogInPage = props => (
-  <section className={`access-page access-page--primary${props.error ? '-error' : ''}`}>
+  <section className={`access-page anim-bg-primary${props.error ? '--error' : ''}`}>
     <LogInForm
       {...props}
       className={props.isFetching ? 'loading-spinner loading-spinner--primary' : ''}

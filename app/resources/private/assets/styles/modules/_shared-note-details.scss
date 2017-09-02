@@ -1,0 +1,26 @@
+.shared-note-details {
+  padding: 1rem;
+  margin-top: 1rem;
+
+  background-color: $secondaryDark;
+
+  font-size: 1.4rem;
+  color: $textSecondary;
+  @include mdShadow(2);
+
+  &__list {
+    margin: 0;
+  }
+
+  &__list-title {
+    display: inline;
+    &::before {
+      content: '';
+      display: block;
+    }
+  }
+
+  &__list-def {
+    display: inline;
+  }
+}

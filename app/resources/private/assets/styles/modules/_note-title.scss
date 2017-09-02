@@ -9,8 +9,10 @@
   @include mdShadow(2);
 
   &__heading {
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     margin: 0;
+
+    font-size: 2.4rem;
   }
   
   &__button {

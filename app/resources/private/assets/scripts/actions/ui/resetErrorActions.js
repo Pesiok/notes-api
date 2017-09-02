@@ -9,4 +9,5 @@ export const RESET_GET_NOTE_ERROR = 'reset_get_note_error';
 export const RESET_NEW_NOTE_ERROR = 'reset_new_note_error';
 export const RESET_UPDATE_NOTE_ERROR = 'reset_update_note_error';
 export const RESET_DELETE_NOTE_ERROR = 'reset_delete_note_error';
+export const RESET_GET_SHARED_NOTE_ERROR = 'reset_get_shared_note_error';
 

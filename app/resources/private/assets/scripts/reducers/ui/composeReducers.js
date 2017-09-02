@@ -47,6 +47,12 @@ import {
 } from '../../actions/user/signInActions';
 
 import {
+  GET_SHARED_NOTE_REQUEST,
+  GET_SHARED_NOTE_FAILURE,
+  GET_SHARED_NOTE_SUCCESS,
+} from '../../actions/shared/getSharedNoteActions';
+
+import {
   RESET_LOG_IN_ERROR,
   RESET_LOG_OUT_ERROR,
   RESET_SIGN_IN_ERROR,
@@ -55,6 +61,7 @@ import {
   RESET_NEW_NOTE_ERROR,
   RESET_UPDATE_NOTE_ERROR,
   RESET_DELETE_NOTE_ERROR,
+  RESET_GET_SHARED_NOTES_ERROR,
 } from '../../actions/ui/resetErrorActions';
 
 const composeUIReducer = (actions) => {
@@ -80,6 +87,13 @@ const composeUIReducer = (actions) => {
     }
   };
 };
+
+export const getSharedNoteReducer = composeUIReducer({
+  request: GET_SHARED_NOTE_REQUEST,
+  failure: GET_SHARED_NOTE_FAILURE,
+  success: GET_SHARED_NOTE_SUCCESS,
+  resetError: RESET_GET_SHARED_NOTES_ERROR,
+});
 
 export const getNotesReducer = composeUIReducer({
   request: GET_NOTES_REQUEST,

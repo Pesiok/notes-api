@@ -21,6 +21,22 @@
   background-color: $background;
 }
 
+.anim-bg-primary {
+  @include bgAnim($primary, $primaryDark, $primaryLight);
+}
+
+.anim-bg-secondary {
+  @include bgAnim($secondary, $secondaryDark, $secondaryLight);
+}
+
+.anim-bg-primary--error {
+  @include bgAnim($primary, $dangerLight, $primary);
+}
+
+.anim-bg-secondary--error {
+  @include bgAnim($secondary, $dangerLight, $secondary);
+}
+
 
 .loading-spinner {
   position: relative;

@@ -7,15 +7,40 @@ import SharedNotePreview from '../../components/Notes/Shared/SharedNotePreview';
 // actions & action creators
 import { getSharedNoteRequest } from '../../actions/shared/getSharedNoteActions';
 
+
+const findNoteAuthor = (note) => {
+  const id = note._author;
+  return fetch(`/api/users/find/id/${id}`)
+    .then((response) => {
+      if (!response.ok) throw Error(response.statusText);
+      return response.json();
+    });
+};
+
 class SharedNote extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      author: null,
+    };
+  }
+
   componentDidMount() {
     const id = this.props.match.params.id;
-    if (id) this.props.getSharedNoteRequest(id);
+    if (id) {
+      this.props.getSharedNoteRequest(id)
+        .then(() => findNoteAuthor(this.props.note))
+        .then(author => this.setState(state => Object.assign({}, state, { author })));
+    }
   }
 
   render() {
     return (
-      <SharedNotePreview note={this.props.note} />
+      <SharedNotePreview
+        {...this.props}
+        author={this.state.author}
+      />
     );
   }
 }
@@ -32,9 +57,10 @@ SharedNote.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   const id = ownProps.match.params.id;
-  // console.log(state.shared[id]);
   return {
     note: state.shared[id],
+    error: state.ui.getSharedNote.error,
+    isFetching: state.ui.getSharedNote.isFetching,
   };
 }
 

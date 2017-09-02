@@ -7,7 +7,7 @@ import { signInRequest } from '../../actions/user/signInActions';
 import { RESET_SIGN_IN_ERROR } from '../../actions/ui/resetErrorActions';
 
 const SignInPage = props => (
-  <section className={`access-page access-page--secondary${props.error ? '-error' : ''}`}>
+  <section className={`access-page anim-bg-secondary${props.error ? '--error' : ''}`}>
     <SignInForm
       {...props}
       className={props.isFetching ? 'loading-spinner loading-spinner--secondary' : ''}
