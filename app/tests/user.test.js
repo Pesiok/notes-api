@@ -57,6 +57,27 @@ describe('User: ', () => {
         });
     });
 
+    describe('GET /api/users/find/id/:id', () => {
+        it('should return a user if found', async () => {
+            const response = await chai.request(app)
+                .get(`/api/users/find/id/${users[0]._id.toHexString()}`);
+            expect(response).to.have.status(200);
+
+            const user = response.body;
+            expect(user._id).to.equal(users[0]._id.toHexString());
+            expect(user.name).to.equal(users[0].name);
+        });
+
+        it('shouldn\'t return a user if not found', async () => {
+            try {
+                const response = await chai.request(app)
+                    .get('/api/users/find/id/3331423432432324');
+            } catch({ response }) {
+                expect(response).to.have.status(404);
+            }
+        });
+    });
+
     describe('POST /api/users/signin', () => {
         it('should create a new user and put it to the DB', async () => {
             const name = 'superNewUser';

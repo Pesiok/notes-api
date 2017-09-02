@@ -44,7 +44,7 @@ const userController = app => {
         res.send(req.user);
     });
 
-    // find user
+    // find user by name
     app.get('/api/users/find/:name', async (req, res) => {
         try {
             const name = req.params.name;
@@ -55,6 +55,21 @@ const userController = app => {
             res.status(400).send(error)
         }
     });
+
+    // find user by id 
+    app.get('/api/users/find/id/:id', async (req, res) => {
+        const id = req.params.id;
+        if (!ObjectID.isValid(id)) return res.status(404).send();
+
+        try {
+            const user = await User.findOne({ _id: id });
+            if (!user) return res.status(404).send();
+            
+            res.send(user);
+        } catch(error) {
+            res.status(400).send(error);
+        }
+    })
 }
 
 module.exports = userController;
