@@ -40,6 +40,7 @@ body {
 .body--push {
   // push whole body
   transform: translateX(#{$menuWidth});
+  overflow-y: hidden;
 
   &::after {
     content: '';

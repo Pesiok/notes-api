@@ -60,8 +60,12 @@ class Menu extends Component {
     return this.menuElements.map((element) => {
       if (React.isValidElement(element)) return element;
       return (
-        <li key={`menu-list-${element.name}`} role="menuitem" className="menu-item">
-          <Link to={element.link} className={`menu-item__link ${element.class ? element.class : ''}`}>
+        <li
+          key={`menu-list-${element.name}`}
+          role="menuitem"
+          className={`menu-item ${element.class ? element.class : ''}`}
+        >
+          <Link to={element.link} className={'menu-item__link'}>
             <span
               aria-hidden="true"
               className="material-icons menu-item__icon"

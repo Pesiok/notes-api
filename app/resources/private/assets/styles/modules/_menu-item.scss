@@ -12,10 +12,7 @@
   }
 
   &--last {
-    position: absolute;
-    bottom: $headerHeight;
-    
-    width: 100%;
+    margin-top: auto;
   }
 
   &--accordion__input:checked + &--accordion__label,

@@ -4,8 +4,9 @@
   z-index: 1;
 
   width: $menuWidth;
+  min-height: calc(100% - #{$headerHeight});
   height: 100%;
-  // overflow-y: scroll; todo
+  overflow-y: auto;
   
 	top: 0;
   left: 0;
@@ -39,11 +40,13 @@
   }
 
   &__content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
     padding: 0;
     margin: 0;
 
-    height: 100%;
+    height: calc(100% - #{$headerHeight});
+    // height: calc(100% + #{$headerHeight});
 
     list-style: none;
   }
