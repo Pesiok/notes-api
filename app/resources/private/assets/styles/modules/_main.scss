@@ -1,0 +1,7 @@
+.main {
+  height: calc(100% - #{$headerHeight});
+
+  &__content {
+    height: 100%;
+  }
+}

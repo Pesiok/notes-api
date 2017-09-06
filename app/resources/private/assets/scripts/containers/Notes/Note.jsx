@@ -106,53 +106,51 @@ class Note extends Component {
 
     return (
       <section className={noteClasses}>
-        <div className="note__content">
-          <div className={noteContainerClasses}>
-            <NoteTitle
-              value={this.state.note.title}
+        <div className={noteContainerClasses}>
+          <NoteTitle
+            value={this.state.note.title}
+            onSave={this.saveHandler}
+            onChange={this.changeHandler}
+          />
+          <MarkdownPreviewer
+            value={this.state.note.content}
+            {...this.props}
+          />
+        </div>
+        <NoteError {...this.props} />
+        <OptionsNav
+          onSet={this.tabsHandler}
+          showSet={this.state.options}
+        />
+        <div className="note-options">
+          <div className="note-options__content">
+            {this.state.options.showMarkdownEditor &&
+            <MarkdownEditor
+              value={this.state.note.content}
+              onChange={this.changeHandler}
+              onSave={this.saveHandler}
+            />
+            }
+            {this.state.options.showShareOptions &&
+            <ShareOptions
+              value={this.state.note.share}
+              url={this.props.note._id ?
+                `${this.props.URLRoot}/share/${this.props.note._id}` :
+                'Create note first to get sharable link.'}
+              onChange={this.changeHandler}
+              onSave={this.saveHandler}
+            />
+            }
+            {this.state.options.showTagsOptions &&
+            <TagsOptions
+              value={this.state.note.meta}
               onSave={this.saveHandler}
               onChange={this.changeHandler}
             />
-            <MarkdownPreviewer
-              value={this.state.note.content}
-              {...this.props}
-            />
-          </div>
-          <NoteError {...this.props} />
-          <OptionsNav
-            onSet={this.tabsHandler}
-            showSet={this.state.options}
-          />
-          <div className="note-options">
-            <div className="note-options__content">
-              {this.state.options.showMarkdownEditor &&
-                <MarkdownEditor
-                  value={this.state.note.content}
-                  onChange={this.changeHandler}
-                  onSave={this.saveHandler}
-                />
-              }
-              {this.state.options.showShareOptions &&
-                <ShareOptions
-                  value={this.state.note.share}
-                  url={this.props.note._id ?
-                    `${this.props.URLRoot}/share/${this.props.note._id}` :
-                    'Create note first to get sharable link.'}
-                  onChange={this.changeHandler}
-                  onSave={this.saveHandler}
-                />
-              }
-              {this.state.options.showTagsOptions &&
-                <TagsOptions
-                  value={this.state.note.meta}
-                  onSave={this.saveHandler}
-                  onChange={this.changeHandler}
-                />
-              }
-              {this.state.options.showDeleteOptions &&
-                <DeleteOptions onDelete={this.deleteHandler} />
-              }
-            </div>
+            }
+            {this.state.options.showDeleteOptions &&
+            <DeleteOptions onDelete={this.deleteHandler} />
+            }
           </div>
         </div>
       </section>

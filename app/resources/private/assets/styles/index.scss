@@ -10,12 +10,15 @@
 @import 'base/_mixins.scss';
 @import 'base/_global.scss';
 @import 'base/_shared.scss';
+@import 'base/_transitions.scss';
 
 // modules
 @import 'modules/_menu.scss';
 @import 'modules/_menu-item';
 @import 'modules/_header.scss';
 @import 'modules/_home.scss';
+@import 'modules/_main.scss';
+@import 'modules/_about.scss';
 @import 'modules/_form.scss';
 @import 'modules/_access-page.scss';
 @import 'modules/_notes-list';

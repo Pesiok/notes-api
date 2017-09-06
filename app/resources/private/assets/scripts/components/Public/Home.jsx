@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class Home extends Component {
   componentDidMount() {
-    window.setTimeout(() => this.header.classList.add('home__header--blur'), 300);
+    window.setTimeout(() => {
+      // if (this.header) this.header.classList.add('home__header--blur');
+    }, 300);
   }
 
   getElement(element) {

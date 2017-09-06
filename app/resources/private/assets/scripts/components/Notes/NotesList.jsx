@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import queryString from 'query-string';
 
 // components
@@ -14,13 +15,23 @@ const NotesList = (props) => {
   const renderListContents = () => {
     if (props.notesToRender && props.notesToRender.length > 0) {
       return (
-        <ul className="notes-list__list">
+        <TransitionGroup component="ul" className="notes-list__list">
           {
-            props.notesToRender.map(note => (
-              <NotePreview key={note._id} note={note} />
+            props.notesToRender.map((note, index) => (
+              <CSSTransition
+                key={note._id}
+                timeout={400 * index}
+                classNames="fade"
+                exit={false}
+                appear
+                mountOnEnter
+                unmountOnExit
+              >
+                <NotePreview note={note} />
+              </CSSTransition>
             ))
           }
-        </ul>
+        </TransitionGroup>
       );
     }
     if (props.error && props.error !== 'Not Found' && !props.isFetching) {

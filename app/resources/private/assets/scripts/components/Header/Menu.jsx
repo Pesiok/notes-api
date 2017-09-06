@@ -21,7 +21,7 @@ class Menu extends Component {
         elements={[
           { name: 'All', link: '/filter' },
           { name: 'Edited', link: '/filter?by=edited' },
-          { name: 'Shared', link: '/filter?by=shared' },
+          { name: 'Shared by me', link: '/filter?by=shared' },
         ]}
       />,
       { name: 'New note', icon: 'note_add', link: '/notes/new' },
