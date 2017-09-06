@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const NotesListError = ({ error, resetGetNotesError }) => {
-  if (error) {
+  if (error && error !== 'Not Found') {
     return (
       <div className="notes-list__error">
         <div>

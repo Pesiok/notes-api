@@ -11,8 +11,29 @@
   list-style: none;
 
   background-color: $backgroundActive;
+
+  // managed by &:hover
   @include mdShadow(2);
-  transition: box-shadow 0.15s ease-in;
+
+  // managed by &--active and &--show
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.5s ease-in,
+    transform 0.5s ease-in,
+    box-shadow 0.15s ease-in;
+
+  &--active {
+    position: static;
+  }
+
+  &--show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 
   &:focus,
   &:hover {

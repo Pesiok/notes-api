@@ -1,53 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link, NavLink } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import queryString from 'query-string';
 
 // components
-import NotePreview from './NotePreview';
 import NotesListError from './NotesListError';
+import ListContents from './ListContents';
 
 const NotesList = (props) => {
   const query = queryString.parse(props.location.search);
   const path = props.location.pathname;
-
-  const renderListContents = () => {
-    if (props.notesToRender && props.notesToRender.length > 0) {
-      return (
-        <TransitionGroup component="ul" className="notes-list__list">
-          {
-            props.notesToRender.map((note, index) => (
-              <CSSTransition
-                key={note._id}
-                timeout={400 * index}
-                classNames="fade"
-                exit={false}
-                appear
-                mountOnEnter
-                unmountOnExit
-              >
-                <NotePreview note={note} />
-              </CSSTransition>
-            ))
-          }
-        </TransitionGroup>
-      );
-    }
-    if (props.error && props.error !== 'Not Found' && !props.isFetching) {
-      return (
-        <p className="notes-list__placeholder">
-          <strong className="notes-list__placeholder-title">{props.error}</strong>
-          We were unable to obtain your notes. Please try again later.
-        </p>
-      );
-    }
-    return (
-      <p className="notes-list__placeholder">
-        {props.placeHolder}
-      </p>
-    );
-  };
 
   return (
     <section className={`content notes-list ${props.className}`}>
@@ -77,7 +39,7 @@ const NotesList = (props) => {
             </NavLink>
           </span>
         </header>
-        {renderListContents()}
+        <ListContents {...props} />
       </div>
       <Link
         title="Add a new note"
@@ -95,14 +57,11 @@ NotesList.defaultProps = {
   error: null,
   className: '',
 };
-/* eslint-disable */
+
 NotesList.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
-  error: PropTypes.string, 
-  isFetching: PropTypes.bool,
-  placeHolder: PropTypes.string.isRequired,
-  notesToRender: PropTypes.arrayOf(PropTypes.object),
+/* eslint-disable */
   location: PropTypes.object.isRequired,
   children: PropTypes.element,
 };

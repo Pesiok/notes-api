@@ -7,11 +7,10 @@ const Fade = (props) => {
   return (
     <CSSTransition
       {...props}
-      timeout={400}
+      timeout={{ enter: 400, exit: 0 }}
       classNames="fade"
       exit={false}
       appear
-      mountOnEnter
       unmountOnExit
     >
       {children}

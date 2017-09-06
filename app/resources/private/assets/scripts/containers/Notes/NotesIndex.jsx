@@ -10,11 +10,9 @@ import { getNotesRequest } from '../../actions/notes/getNotesActions';
 // components
 import NotesList from '../../components/Notes/NotesList';
 
-
 class NotesIndex extends Component {
   componentDidMount() {
     this.props.getNotesRequest();
-    // .then loading animation or sth...
   }
 
   render() {
