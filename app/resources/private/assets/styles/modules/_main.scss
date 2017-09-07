@@ -1,5 +1,6 @@
 .main {
-  height: calc(100% - #{$headerHeight});
+  padding-top: $headerHeight;
+  height: 100%;
 
   &__content {
     height: 100%;

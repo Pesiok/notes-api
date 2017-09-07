@@ -1,4 +1,8 @@
 .header {
+  position: fixed;
+  z-index: 5;
+  width: 100%;
+
   background-color: $backgroundActive;
 
   &__content {

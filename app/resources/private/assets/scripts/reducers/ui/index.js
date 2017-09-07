@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+
 import {
   getNotesReducer,
   getNoteReducer,
@@ -10,6 +11,7 @@ import {
   signInReducer,
   getSharedNoteReducer,
 } from './composeReducers';
+import menuReducer from './menuReducer';
 
 const uiReducer = combineReducers({
   getNotes: getNotesReducer,
@@ -21,6 +23,7 @@ const uiReducer = combineReducers({
   logIn: logInReducer,
   logOut: logOutReducer,
   signIn: signInReducer,
+  menu: menuReducer,
 });
 
 export default uiReducer;

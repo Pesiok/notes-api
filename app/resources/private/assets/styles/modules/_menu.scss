@@ -3,13 +3,14 @@
   display: none;
   z-index: 1;
 
+  // top: 0;
+  // left: -$menuWidth;
+
   width: $menuWidth;
-  min-height: calc(100% - #{$headerHeight});
-  height: 100%;
-  // overflow-y: auto;
+  min-height: calc(100vh - #{$headerHeight});
+  height: 100vh;
+  // overflow-y: hidden;
   
-	top: 0;
-  left: 0;
   transform: translateX(#{-2 * $menuWidth});
 
   background-color: $backgroundActive;
@@ -25,6 +26,7 @@
 
   &--open {
     transform: translateX(#{-$menuWidth});
+    // left: $menuWidth;
   }
 
   &__heading {

@@ -1,11 +1,10 @@
 html {
   box-sizing: border-box;
+  overflow-x: hidden;
 
   font-size: 62.5%;
-
   font-family: 'Roboto', sans-serif;
   line-height: normal;
-
 }
 
 *, *::after, *::before {
@@ -14,45 +13,46 @@ html {
 }
 
 body {
-  overflow-x: hidden;
-	position: relative;
+  position: relative;
+
   left: 0;
-  
-  transition: 
-    transform 0.3s,
-    background-color 0.4s;
-  transition-timing-function: ease-in-out;
+  // transition: transform 0.3s;
+  // transition-timing-function: ease-in-out;
+
+  transition: left 0.3s ease-in-out;
+  will-change: left;
+
 }
 
 html,
 body {
-  background-color: $backgroundDark;
   height: 100%;
+  background-color: $backgroundDark;
 }
 
 #root,
 [data-reactroot] {
-    height: 100%;
+  height: 100%;
 }
 
 .body--push {
   // push whole body
-  transform: translateX(#{$menuWidth});
-  overflow-y: hidden;
+  // transform: translateX(#{$menuWidth});
+  left: $menuWidth;
 
-  &::after {
-    content: '';
-    position: absolute;
-    z-index: 5;
-    top: 0;
-    left: 0;
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   z-index: 1;
+  //   top: 0;
+  //   left: 0;
 
-    width: 100%;
-    height: 100%;
+  //   width: 100%;
+  //   height: 100%;
 
-    // todo
-    background-color: rgba(0, 0, 0, 0.4);
-  }
+  //   // todo
+  //   background-color: rgba(0, 0, 0, 0.4);
+  // }
 }
 
 // .body--shrink {
