@@ -42,6 +42,8 @@
   position: relative;
   z-index: 1;
   pointer-events: none;
+  overflow-x: hidden;
+  overflow-y: hidden;
 
   &::before {
     content:'';
@@ -65,6 +67,12 @@
   &--primary {
     &::after {
       @include spinner(4rem, $primary);
+    }
+  }
+  
+  &--primary-big {
+    &::after {
+      @include spinner(8rem, $primary);
     }
   }
 

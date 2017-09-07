@@ -23,11 +23,14 @@ const About = () => (
       </h3>
       <ol className="about__list">
         <li>
+          Remove all current bugs...
+        </li>
+        <li>
           Keeping notes shared to users in theirs &#39;all notes&#39; tab.
           Adding them to filters.
         </li>
         <li>
-          Log out from all devices option.
+          Option to log out from all devices
         </li>
         <li>
           More formating options: syntax highlighting, emoticons, etc.

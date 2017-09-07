@@ -9,6 +9,7 @@ const checkAvailability = note => {
 }
 
 const shareController = app => {
+
     // get shared note
     app.get('/api/share/:id', async (req, res) => {
         try {

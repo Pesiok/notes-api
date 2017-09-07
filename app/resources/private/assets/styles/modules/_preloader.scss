@@ -1,0 +1,15 @@
+.preloader {
+  transition: background-color 0.3s ease-in;
+
+  &:empty {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  
+    @extend .loading-spinner;
+    @extend .loading-spinner--primary-big;
+  }
+
+}
