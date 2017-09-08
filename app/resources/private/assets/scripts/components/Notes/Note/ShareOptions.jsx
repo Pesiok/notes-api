@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import DateTimePicker from './DateTimePicker';
+
+import ShareDetails from './ShareDetails';
 
 // utilis
-import Fade from '../../Utilis/Fade';
 import FadeAndSlideIn from '../../Utilis/FadeAndSlideIn';
 
 const ShareOptions = (props) => {
@@ -15,12 +15,7 @@ const ShareOptions = (props) => {
 
     props.onChange({ isShared, expiration }, 'share');
   };
-  const datetimeHandler = (dates) => {
-    const expiration = Date.parse(dates[0]) || null;
-    const isShared = props.value.isShared;
 
-    props.onChange({ isShared, expiration }, 'share');
-  };
   const submitHandler = (event) => {
     event.preventDefault();
     props.onSave();
@@ -31,17 +26,7 @@ const ShareOptions = (props) => {
       <form className="note-options-share" onSubmit={submitHandler}>
         {
           props.value.isShared &&
-          <Fade in>
-            <div className="note-options-share__content">
-              <em className="note-options-share__link">Sharable link:
-                <a href={props.url}>{props.url}</a>
-              </em>
-              <DateTimePicker
-                onChange={datetimeHandler}
-                value={props.value.expiration}
-              />
-            </div>
-          </Fade>
+          <ShareDetails {...props} />
         }
         <div className="note-options-share__input-group">
           <div>
@@ -79,7 +64,6 @@ ShareOptions.propTypes = {
       PropTypes.number,
     ]),
   }).isRequired,
-  url: PropTypes.string.isRequired,
   onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
 };

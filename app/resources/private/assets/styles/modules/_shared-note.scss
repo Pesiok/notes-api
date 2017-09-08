@@ -1,6 +1,7 @@
 .shared-note {
   position: relative;
-
+  font-size: 1.6rem;
+  
   &__content {
     max-width: $maxContentWidth;
     margin: 0 auto;

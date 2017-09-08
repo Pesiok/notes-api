@@ -9,6 +9,24 @@
 
     background-color: $secondaryLight;
     @include mdShadow(1);
+
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.97);
+    transition:
+      opacity 0.3s ease-in,
+      transform 0.3s ease-in;
+  
+    &--active {
+      position: static;
+    }
+  
+    &--show {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1);
+    }
   }
 
   &__link {

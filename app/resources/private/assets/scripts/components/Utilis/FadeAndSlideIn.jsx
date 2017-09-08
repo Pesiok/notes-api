@@ -8,9 +8,11 @@ const FadeAndSlideIn = (props) => {
   return (
     <CSSTransition
       {...props}
-      timeout={{ enter: 300, exit: 300 }}
+      timeout={{ enter: 300, exit: 0 }}
       classNames="fadeSlideIn"
+      exit={false}
       appear
+      unmountOnExit
     >
       {children}
     </CSSTransition>
