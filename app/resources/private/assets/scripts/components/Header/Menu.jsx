@@ -11,6 +11,7 @@ class Menu extends Component {
 
     this.initialState = this.props.isOpen;
     this.body = document.querySelector('body');
+    this.menu = null;
 
     this.menuElements = [
       { name: 'All notes', icon: 'list', link: '/notes' },
@@ -29,11 +30,18 @@ class Menu extends Component {
       { name: 'About', icon: 'info', link: '/about' },
       { name: 'Settings', icon: 'settings', link: '/settings', class: 'menu-item--last' },
     ];
+
+    // bindings 
+    this.getMenu = this.getMenu.bind(this);
   }
 
   componentWillReceiveProps({ isOpen }) {
     this.animateBody(isOpen);
     this.animateMenu(isOpen);
+  }
+
+  getMenu(element) {
+    if (element) this.menu = element;
   }
 
   animateBody(state) {
@@ -86,7 +94,7 @@ class Menu extends Component {
     return (
       <nav
         className={`menu ${this.initialState ? 'menu--active menu--open' : ''}`}
-        ref={(menu) => { this.menu = menu; }}
+        ref={this.getMenu}
       >
         <h2 className="menu__heading">Menu</h2>
         <ul role="menu" className="menu__content">

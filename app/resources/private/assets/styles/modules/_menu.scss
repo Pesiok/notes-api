@@ -7,9 +7,9 @@
   // left: -$menuWidth;
 
   width: $menuWidth;
-  min-height: calc(100vh - #{$headerHeight});
-  height: 100vh;
-  // overflow-y: hidden;
+  // min-height: calc(100vh - #{$headerHeight});
+  height: 100%;
+  overflow-y: auto;
   
   transform: translateX(#{-2 * $menuWidth});
 

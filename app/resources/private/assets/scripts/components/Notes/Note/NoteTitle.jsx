@@ -31,11 +31,17 @@ class NoteTitle extends Component {
   }
 
   saveHandler() {
+    const { value, onChange, onSave } = this.props;
     this.toggleEditor();
-    if (this.props.value.length === 0) {
-      this.props.onChange(this.initialValue, 'title');
+
+    if (value === this.initialValue) {
+      // do nothing
+    } else if (value.length === 0) {
+      // bring back initial value
+      onChange(this.initialValue, 'title');
     } else {
-      this.props.onSave();
+      // send update request
+      onSave();
     }
   }
 
