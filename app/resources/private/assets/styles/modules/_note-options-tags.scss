@@ -1,12 +1,12 @@
 .note-options-tags {
-  padding: 1rem;
-
+  padding: 1px;
   &__list {
     display: flex;
     flex-wrap: wrap;
 
-    padding: 0;
-    padding-bottom: 1rem;
+    padding: 1rem;
+    margin: 0;
+    // padding-bottom: 1rem;
 
     list-style: none;
     border-bottom: 0.1rem solid $primary;
@@ -16,9 +16,11 @@
 
   &__tag {
     display: flex;
+    align-items: center;
 
     margin: 0.3rem;
     padding: 0.1rem;
+    height: 3rem;
 
     background-color: $secondaryLight;
 
@@ -34,14 +36,14 @@
   }
 
   &__tag-name {
-    margin: 0 0.2rem;
+    margin: 0 0.5rem;
   }
 
   &__tag-button {
     display: block;
     cursor: pointer;
 
-    padding: 0.1rem;
+    padding: 0.25rem;
 
     border: none;
     background: none;
@@ -59,6 +61,10 @@
   }
 
   // add
+
+  &__add {
+    margin: 1rem;
+  }
 
   &__add-input-group {
     display: flex;
@@ -80,6 +86,8 @@
   &__add-input {
     border: none;
     border: 0.1rem solid $primary;
+
+    padding: 0.5rem;
 
     background-color: $backgroundLight;
     @include mdShadow(2);

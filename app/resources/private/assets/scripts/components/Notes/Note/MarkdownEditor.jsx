@@ -1,21 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FadeAndSlideIn from '../../Utilis/FadeAndSlideIn';
+
 const MarkdownEditor = props => (
-  <div className="note-options-editor">
-    <textarea
-      className="note-options-editor__input"
-      type="text"
-      value={props.value}
-      onChange={event => props.onChange(event.target.value, 'content')}
-    />
-    <button
-      className="note-options-editor__button"
-      onClick={props.onSave}
-    >
+  <FadeAndSlideIn in>
+    <div className="note-options-editor">
+      <textarea
+        className="note-options-editor__input"
+        type="text"
+        value={props.value}
+        onChange={event => props.onChange(event.target.value, 'content')}
+      />
+      <button
+        className="note-options-editor__button"
+        onClick={props.onSave}
+      >
       Save
-    </button>
-  </div>
+      </button>
+    </div>
+  </FadeAndSlideIn>
 );
 
 MarkdownEditor.propTypes = {

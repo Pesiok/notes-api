@@ -2,6 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DateTimePicker from './DateTimePicker';
 
+// utilis
+import Fade from '../../Utilis/Fade';
+import FadeAndSlideIn from '../../Utilis/FadeAndSlideIn';
+
 const ShareOptions = (props) => {
   // event handlers
   const isSharedHandler = (event) => {
@@ -23,43 +27,47 @@ const ShareOptions = (props) => {
   };
 
   return (
-    <form className="note-options-share" onSubmit={submitHandler}>
-      {
-        props.value.isShared &&
-          <div className="note-options-share__content">
-            <em className="note-options-share__link">Sharable link:
-              <a href={props.url}>{props.url}</a>
-            </em>
-            <DateTimePicker
-              onChange={datetimeHandler}
-              value={props.value.expiration}
+    <FadeAndSlideIn in>
+      <form className="note-options-share" onSubmit={submitHandler}>
+        {
+          props.value.isShared &&
+          <Fade in>
+            <div className="note-options-share__content">
+              <em className="note-options-share__link">Sharable link:
+                <a href={props.url}>{props.url}</a>
+              </em>
+              <DateTimePicker
+                onChange={datetimeHandler}
+                value={props.value.expiration}
+              />
+            </div>
+          </Fade>
+        }
+        <div className="note-options-share__input-group">
+          <div>
+            <input
+              className="note-options-share__checkbox-input"
+              id="isShared"
+              type="checkbox"
+              checked={props.value.isShared}
+              onChange={isSharedHandler}
             />
-          </div>
-      }
-      <div className="note-options-share__input-group">
-        <div>
-          <input
-            className="note-options-share__checkbox-input"
-            id="isShared"
-            type="checkbox"
-            checked={props.value.isShared}
-            onChange={isSharedHandler}
-          />
-          <label
-            className="note-options-share__checkbox-label"
-            htmlFor="isShared"
-          >
+            <label
+              className="note-options-share__checkbox-label"
+              htmlFor="isShared"
+            >
             Shared
-          </label>
-        </div>
-        <button
-          className="note-options-share__button"
-          type="submit"
-        >
+            </label>
+          </div>
+          <button
+            className="note-options-share__button"
+            type="submit"
+          >
           Save
-        </button>
-      </div>
-    </form>
+          </button>
+        </div>
+      </form>
+    </FadeAndSlideIn>
   );
 };
 

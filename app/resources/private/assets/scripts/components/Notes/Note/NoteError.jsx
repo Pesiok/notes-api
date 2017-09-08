@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import FadeAndSlideIn from '../../Utilis/FadeAndSlideIn';
+
 const NoteError = ({ errors, resetErrors }) => {
   const errorTypes = Object.keys(errors);
   const areThereErrors = errorTypes.some(type => (!!errors[type]));
@@ -39,20 +41,22 @@ const NoteError = ({ errors, resetErrors }) => {
 
   if (areThereErrors) {
     return (
-      <div className="note__error">
-        <div className="note__error-content">
-          <h3 className="note__error-title">
+      <FadeAndSlideIn in>
+        <div className="note__error">
+          <div className="note__error-content">
+            <h3 className="note__error-title">
             Ups, there is something wrong
-          </h3>
-          {renderErrors()}
-        </div>
-        <button
-          className="note__error-button"
-          onClick={resetErrorsHandler}
-        >
+            </h3>
+            {renderErrors()}
+          </div>
+          <button
+            className="note__error-button"
+            onClick={resetErrorsHandler}
+          >
           Dismiss
-        </button>
-      </div>
+          </button>
+        </div>
+      </FadeAndSlideIn>
     );
   }
 

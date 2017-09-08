@@ -1,30 +1,31 @@
 .note-options-delete {
-  padding: 1rem;
+  padding: 1px;
 
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   text-align: center;
 
   @include atSmall() {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
 
-  &__content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  &__info {
+    width: 100%;
+    margin-bottom: 1rem;
 
-    max-width: 40rem;
-    min-height: 5rem;
-    margin: 0 auto;
+    border-bottom: 0.1rem solid $danger;
+    background-color: $backgroundLight;
   }
 
   &__button {
+    display: block;
     cursor: pointer;
     border: none;
     background: none;
 
     height: 3rem;
     width: 5rem;
+    margin: 1rem;
+    margin-left: auto;
 
     font-size: 1.5rem;
 

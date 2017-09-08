@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import AddTag from './AddTag';
-// import Transition from '../../Utilis/Transition';
+
+import FadeAndSlideIn from '../../Utilis/FadeAndSlideIn';
 
 class TagsOptions extends Component {
   constructor(props) {
@@ -48,17 +49,19 @@ class TagsOptions extends Component {
 
   render() {
     return (
-      <div className="note-options-tags">
-        {this.props.value.tags.length > 0 &&
-        <ul className="note-options-tags__list">
-          {this.renderTags()}
-        </ul>
-        }
-        <AddTag
-          tags={this.props.value.tags}
-          onSave={this.addTag}
-        />
-      </div>
+      <FadeAndSlideIn in>
+        <div className="note-options-tags">
+          {this.props.value.tags.length > 0 &&
+          <ul className="note-options-tags__list">
+            {this.renderTags()}
+          </ul>
+          }
+          <AddTag
+            tags={this.props.value.tags}
+            onSave={this.addTag}
+          />
+        </div>
+      </FadeAndSlideIn>
     );
   }
 }

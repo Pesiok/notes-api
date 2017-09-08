@@ -1,4 +1,6 @@
 .note {
+  font-size: 1.6rem;
+
   &__container {
     max-width: $maxContentWidth;
     margin: 0 auto;
@@ -13,8 +15,6 @@
     overflow-wrap: break-word;
 
     @include mdShadow(2);
-
-    font-size: 1.4rem;
   }
 
   &__error {

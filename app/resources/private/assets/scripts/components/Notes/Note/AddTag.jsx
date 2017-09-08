@@ -51,7 +51,10 @@ class AddTag extends Component {
 
   render() {
     return (
-      <form onSubmit={this.submitHandler}>
+      <form
+        className="note-options-tags__add"
+        onSubmit={this.submitHandler}
+      >
         <div className="note-options-tags__add-input-group">
           <label htmlFor="addTag" className="visually-hidden">Add tag</label>
           <input
