@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import queryString from 'query-string';
 
 // components
@@ -41,13 +41,6 @@ const NotesList = (props) => {
         </header>
         <ListContents {...props} />
       </div>
-      <Link
-        title="Add a new note"
-        to={'/notes/new'}
-        className="notes-list__new material-icons"
-      >
-        add
-      </Link>
     </section>
   );
 };

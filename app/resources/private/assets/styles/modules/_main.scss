@@ -1,8 +1,27 @@
 .main {
   padding-top: $headerHeight;
+  transition: transform 0.3s ease-in;
   height: 100%;
 
   &__content {
-    height: 100%;
+    min-height: 100%;
+    background-color: $background;
+  }
+  
+  &--push {
+    transform: translateX(#{$menuWidth});
+    
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 0;
+
+      width: 100%;
+      min-height: 100%;
+
+    }
+    
   }
 }

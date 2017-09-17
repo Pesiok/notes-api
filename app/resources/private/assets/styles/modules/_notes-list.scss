@@ -4,6 +4,7 @@
    display: flex;
    align-items: center;
    justify-content: space-between;
+
   }
 
   &__heading-title {
@@ -66,31 +67,7 @@
     padding: 0;
     margin: 0;
   }
-
-  &__new {
-    position: fixed;
-    bottom: 3.2rem;
-    right: 3.2rem;
-
-    height: 4.5rem;
-    width: 4.5rem;
-
-    @include mdShadow(3);
-    transition: box-shadow 0.15s ease-in;
-    &:focus,
-    &:hover {
-      @include mdShadow(4);
-    }
-
-    background-color: $primaryDark;
-    border-radius: 100%;
-
-    text-decoration: none;
-    text-align: center;
-    line-height: 4.5rem;
-    color: $textSecondary;
-  }
-
+  
   &__error {
     display: flex;
     justify-content: space-between;

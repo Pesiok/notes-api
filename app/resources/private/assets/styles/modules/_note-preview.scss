@@ -35,6 +35,10 @@
     transform: translateY(0);
   }
 
+  &--shared {
+    background-color: $primary;
+  }
+
   &:focus,
   &:hover {
     @include mdShadow(3);
@@ -54,14 +58,15 @@
   }
 
   &__status {
-   color: $primaryDark;
-   font-size: 1.2rem;
+   color: $textSecondary;
+   font-size: 1.3rem;
   }
 
   &__time {
     position: absolute;
-
     bottom: 0;
     left: 0;
+
+    font-size: 1.2rem;
   }
 }

@@ -11,16 +11,19 @@ const formatTitle = (title) => {
   return title;
 };
 
-const NotePreview = props => (
-  <Link to={`/notes/${props.note._id}`} className="note-preview" >
+const NotePreview = ({ note }) => (
+  <Link
+    to={`/notes/${note._id}`}
+    className={`note-preview ${note.share.isShared ? 'note-preview--shared' : ''}`}
+  >
     <li className="note-preview__content">
-      <h3 className="note-preview__heading">{formatTitle(props.note.title)}</h3>
-      {props.note.share.isShared &&
+      <h3 className="note-preview__heading">{formatTitle(note.title)}</h3>
+      {note.share.isShared &&
         <strong className="note-preview__status">Shared</strong>
       }
-      {props.note.meta.edited ?
-        <time className="note-preview__time">Last edited: {formatDateTime(props.note.meta.edited)}</time> :
-        <time className="note-preview__time">Created: {formatDateTime(props.note.meta.created)}</time>
+      {note.meta.edited ?
+        <time className="note-preview__time">Last edited: {formatDateTime(note.meta.edited)}</time> :
+        <time className="note-preview__time">Created: {formatDateTime(note.meta.created)}</time>
       }
     </li>
   </Link>

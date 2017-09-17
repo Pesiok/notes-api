@@ -10,8 +10,7 @@ class Menu extends Component {
     super(props);
 
     this.initialState = this.props.isOpen;
-    this.body = document.querySelector('body');
-    this.menu = null;
+    this.animationTimeout = 150;
 
     this.menuElements = [
       { name: 'All notes', icon: 'list', link: '/notes' },
@@ -35,6 +34,10 @@ class Menu extends Component {
     this.getMenu = this.getMenu.bind(this);
   }
 
+  componentDidMount() {
+    this.main = document.querySelector('.main');
+  }
+
   componentWillReceiveProps({ isOpen }) {
     this.animateBody(isOpen);
     this.animateMenu(isOpen);
@@ -45,11 +48,11 @@ class Menu extends Component {
   }
 
   animateBody(state) {
-    const body = this.body;
+    const main = this.main;
     if (state) {
-      body.classList.add('body--push');
-    } else if (body.classList.contains('body--push')) {
-      window.setTimeout(() => body.classList.remove('body--push'), 150);
+      main.classList.add('main--push');
+    } else if (main.classList.contains('main--push')) {
+      window.setTimeout(() => main.classList.remove('main--push'), this.animationTimeout);
     }
   }
 
@@ -57,10 +60,10 @@ class Menu extends Component {
     const menu = this.menu;
     if (state) {
       menu.classList.add('menu--active');
-      window.setTimeout(() => menu.classList.add('menu--open'), 150);
+      window.setTimeout(() => menu.classList.add('menu--open'), this.animationTimeout);
     } else if (menu.classList.contains('menu--active')) {
       menu.classList.remove('menu--open');
-      window.setTimeout(() => menu.classList.remove('menu--active'), 150);
+      window.setTimeout(() => menu.classList.remove('menu--active'), this.animationTimeout);
     }
   }
 
@@ -89,7 +92,7 @@ class Menu extends Component {
 
   render() {
     // show menu when initial state is true, ignore rule when props are changed
-    if (this.initialState && this.props.isOpen) this.body.classList.add('body--push');
+    if (this.initialState && this.props.isOpen) this.main.classList.add('main--push');
 
     return (
       <nav

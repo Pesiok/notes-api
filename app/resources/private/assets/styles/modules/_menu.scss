@@ -1,32 +1,26 @@
 .menu {
   position: fixed;
   display: none;
-  z-index: 1;
-
-  // top: 0;
-  // left: -$menuWidth;
+  z-index: 10;
 
   width: $menuWidth;
-  // min-height: calc(100vh - #{$headerHeight});
-  height: 100%;
+  height: 100vh;
+
   overflow-y: auto;
   
-  transform: translateX(#{-2 * $menuWidth});
-
   background-color: $backgroundActive;
-  @include mdShadow(1);
-
-  transition: transform 0.25s ease;
-
   color: $textSecondary;
+  @include mdShadow(4);
+
+  transform: translateX(#{-$menuWidth});
+  transition: transform 0.25s ease;
 
   &--active {
     display: block;
   }
 
   &--open {
-    transform: translateX(#{-$menuWidth});
-    // left: $menuWidth;
+    transform: translateX(0);
   }
 
   &__heading {
@@ -48,7 +42,6 @@
     margin: 0;
 
     height: calc(100% - #{$headerHeight});
-    // height: calc(100% + #{$headerHeight});
 
     list-style: none;
   }

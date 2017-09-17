@@ -3,7 +3,16 @@
   margin: 4rem auto;
   margin: 0 auto;
 
-  background-color: $backgroundActive;
-  @include mdShadow(2);
+  padding-top: 1rem;
+  padding-bottom: 4.5rem;
+
+  @include atSmall() {
+    padding: 0;
+  }
+
+  &__content {
+    background-color: $backgroundActive;
+    @include mdShadow(2);
+  }
 
 }

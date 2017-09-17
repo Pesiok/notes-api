@@ -1,9 +1,16 @@
 .note-nav {
-
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
   width: 100%;
   margin: 0 auto;
   margin-top: 1rem;
   max-width: 110rem;
+
+  @include atSmall() {
+    position: static;
+  }
 
   background-color: $primary;
   @include mdShadow(3);

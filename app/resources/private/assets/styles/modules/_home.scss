@@ -80,11 +80,7 @@
   &__links {
     @include atMedium() {
       display: flex;
-      // justify-content: space-around;
     }
-
-    height: calc(60vh - #{$headerHeight});
-    // height: 100%;
   }
 
   &__links-container {
@@ -92,8 +88,7 @@
     flex-direction: column;
     justify-content: center;
 
-    height: 100%;
-    // min-height: 18rem;
+    height: calc(60vh - #{$headerHeight});
     width: 100%;
   }
 

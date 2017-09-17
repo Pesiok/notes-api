@@ -16,6 +16,7 @@ import Settings from './../containers/Settings/Settings';
 import SignInPage from './../containers/Access/SignInPage';
 import LogInPage from './../containers/Access/LogInPage';
 import SharedNote from './../containers/Shared/SharedNote';
+import NotFound from './../components/Access/NotFound';
 
 // utilis
 import Fade from './Utilis/Fade';
@@ -38,6 +39,7 @@ const App = ({ location }) => {
               <Route path="/login" component={LogInPage} />
               <Route path="/about" component={About} />
               <Route path="/" exact component={Home} />
+              <Route component={NotFound} />
             </Switch>
           </div>
         </Fade>

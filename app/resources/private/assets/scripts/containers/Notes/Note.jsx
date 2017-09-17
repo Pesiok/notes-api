@@ -106,6 +106,7 @@ class Note extends Component {
 
     return (
       <section className={noteClasses}>
+        <NoteError {...this.props} />
         <div className={noteContainerClasses}>
           <NoteTitle
             value={this.state.note.title}
@@ -117,7 +118,6 @@ class Note extends Component {
             {...this.props}
           />
         </div>
-        <NoteError {...this.props} />
         <OptionsNav
           onSet={this.tabsHandler}
           showSet={this.state.options}
