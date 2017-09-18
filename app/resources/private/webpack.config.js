@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
 const cssDev = ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'];
@@ -62,7 +63,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Notes app',
+      title: 'NotesMD',
       minify: {
         collapseWhitespace: true,
       },
@@ -76,5 +77,11 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new OfflinePlugin({
+      publicPath: '/',
+      ServiceWorker: {
+        navigateFallbackURL: '/',
+      },
+    }),
   ],
 };

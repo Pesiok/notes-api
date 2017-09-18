@@ -15,7 +15,7 @@ const Header = props => (
       >
         menu
       </button>
-      <h1 className="header__heading">Notes App</h1>
+      <h1 className="header__heading">NotesMD</h1>
     </div>
   </header>
 );

@@ -42,12 +42,12 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
-    "classlist.js": "^1.1.20150312",
     "flatpickr": "^3.0.7",
     "highlight.js": "^9.12.0",
     "lodash": "^4.17.4",
     "marked": "^0.3.6",
     "normalize-scss": "^7.0.0",
+    "offline-plugin": "^4.8.3",
     "prop-types": "^15.5.10",
     "query-string": "^5.0.0",
     "react": "^15.6.1",
