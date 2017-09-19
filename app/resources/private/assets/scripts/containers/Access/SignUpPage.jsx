@@ -26,7 +26,7 @@ SignUpPage.propTypes = {
 
 function mapDispatchToProps(dispatch) {
   return {
-    signInRequest: data => dispatch(signUpRequest(data)),
+    signUpRequest: data => dispatch(signUpRequest(data)),
     resetErrorMsg: () => dispatch({ type: RESET_SIGN_UP_ERROR }),
   };
 }
