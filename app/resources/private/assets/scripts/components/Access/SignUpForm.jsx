@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Input from './Input';
 
-class SignInForm extends Component {
+class SignUpForm extends Component {
   constructor(props) {
     super(props);
 
@@ -82,7 +82,7 @@ class SignInForm extends Component {
       const password = this.state.password.value;
 
       // send sign in request and change route on success
-      this.props.signInRequest({ name, password })
+      this.props.signUpRequest({ name, password })
         .then(() => {
           if (!this.props.error) {
             this.props.history.push('/notes');
@@ -122,11 +122,11 @@ class SignInForm extends Component {
         {this.props.error &&
           <div className="form__error">
             <h3 className="form__error-title">{`Error: ${this.props.error}`}</h3>
-            <p className="form__error-info">Couldn&#39;t sign in.</p>
+            <p className="form__error-info">Couldn&#39;t sign up.</p>
           </div>
         }
         <div className="form__content">
-          <h3 className="form__heading form__heading--secondary">Sign in</h3>
+          <h3 className="form__heading form__heading--secondary">Sign up</h3>
           <Input
             name="name"
             type="text"
@@ -194,20 +194,20 @@ class SignInForm extends Component {
   }
 }
 
-SignInForm.defaultProps = {
+SignUpForm.defaultProps = {
   error: null,
 };
 
-SignInForm.defaultProps = {
+SignUpForm.defaultProps = {
   className: '',
 };
 
-SignInForm.propTypes = {
+SignUpForm.propTypes = {
   error: PropTypes.string,
   resetErrorMsg: PropTypes.func.isRequired,
   className: PropTypes.string,
-  signInRequest: PropTypes.func.isRequired,
+  signUpRequest: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 
-export default SignInForm;
+export default SignUpForm;

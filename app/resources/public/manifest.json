@@ -1,7 +1,7 @@
 {
     "lang": "en-US",
     "short_name": "NotesMD",
-    "name": "NotesMD - Write & Share Markdown notes",
+    "name": "NotesMD",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",

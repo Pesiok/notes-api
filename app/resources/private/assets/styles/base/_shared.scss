@@ -20,11 +20,11 @@
 }
 
 .anim-bg-primary {
-  @include bgAnim($primary, $primaryDark, $primaryLight);
+  @include bgAnimEasy($primaryDark, $primary);
 }
 
 .anim-bg-secondary {
-  @include bgAnim($secondary, $secondaryDark, $secondaryLight);
+  @include bgAnimEasy($secondaryDark, $secondary);
 }
 
 .anim-bg-primary--error {

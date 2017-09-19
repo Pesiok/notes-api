@@ -13,7 +13,7 @@ import NotesIndex from './../containers/Notes/NotesIndex';
 import Note from './../containers/Notes/Note';
 import NewNote from './../components/Notes/NewNote';
 import Settings from './../containers/Settings/Settings';
-import SignInPage from './../containers/Access/SignInPage';
+import SignUpPage from './../containers/Access/SignUpPage';
 import LogInPage from './../containers/Access/LogInPage';
 import SharedNote from './../containers/Shared/SharedNote';
 import NotFound from './../components/Access/NotFound';
@@ -35,7 +35,7 @@ const App = ({ location }) => {
               <PrivateRoute path="/notes/:id" shouldRender={Note} />
               <PrivateRoute path="/notes" shouldRender={NotesIndex} />
               <Route path="/share/:id" component={SharedNote} />
-              <Route path="/signin" component={SignInPage} />
+              <Route path="/signin" component={SignUpPage} />
               <Route path="/login" component={LogInPage} />
               <Route path="/about" component={About} />
               <Route path="/" exact component={Home} />

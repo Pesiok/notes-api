@@ -1,6 +1,6 @@
 import {
-  SIGN_IN_SUCCESS,
-} from '../../actions/user/signInActions';
+  SIGN_UP_SUCCESS,
+} from '../../actions/user/signUpActions';
 
 import {
   LOG_IN_FAILURE,
@@ -13,7 +13,7 @@ import {
 
 const userReducer = (state = {}, action) => {
   switch (action.type) {
-    case SIGN_IN_SUCCESS:
+    case SIGN_UP_SUCCESS:
     case LOG_IN_SUCCESS: {
       const { user, token } = action.payload;
       const { isAuthenticated } = action;

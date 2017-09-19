@@ -10,7 +10,7 @@
 
 // animations
 
-@mixin bgAnim($colorOne, $colorTwo, $colorThree, $time: 43s, $degree: 109deg) {
+@mixin bgAnim($colorOne, $colorTwo, $colorThree: null, $time: 43s, $degree: 109deg) {
     background: linear-gradient($degree, $colorOne, $colorTwo, $colorThree);
     background-size: 600% 600%;
     animation: bgGradient $time ease infinite;
@@ -20,6 +20,18 @@
     0% { background-position: 0% 19% }
     50% { background-position: 100% 82% }
     100% { background-position: 0% 19% }
+}
+
+@mixin bgAnimEasy($colorOne, $colorTwo, $time: 9s, $degree: 135deg) {
+    background: linear-gradient($degree, $colorOne, $colorTwo);
+    background-size: 400% 400%;
+    animation: bgGradientEasy $time ease infinite;
+}
+
+@keyframes bgGradientEasy { 
+    0% { background-position: 13% 0% }
+    50% { background-position: 88% 100% }
+    100% { background-position: 13% 0% }
 }
 
 //media queries

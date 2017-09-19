@@ -1,11 +1,11 @@
 
 // Sign in
 
-export const SIGN_IN_FAILURE = 'sign_in_failure';
-export const SIGN_IN_SUCCESS = 'sign_in_success';
-export const SIGN_IN_REQUEST = 'sign_in_request';
+export const SIGN_UP_FAILURE = 'sign_up_failure';
+export const SIGN_UP_SUCCESS = 'sign_up_success';
+export const SIGN_UP_REQUEST = 'sign_up_request';
 
-export const signInRequest = credentials => (dispatch) => {
+export const signUpRequest = credentials => (dispatch) => {
   const options = {
     method: 'POST',
     body: JSON.stringify(credentials),
@@ -14,7 +14,7 @@ export const signInRequest = credentials => (dispatch) => {
     },
   };
 
-  dispatch({ type: SIGN_IN_REQUEST });
+  dispatch({ type: SIGN_UP_REQUEST });
 
   return fetch('/api/users/signin', options)
     .then((response) => {
@@ -25,7 +25,7 @@ export const signInRequest = credentials => (dispatch) => {
       ));
     })
     .then(
-      data => dispatch({ type: SIGN_IN_SUCCESS, payload: data, isAuthenticated: true }),
-      error => dispatch({ type: SIGN_IN_FAILURE, error }),
+      data => dispatch({ type: SIGN_UP_SUCCESS, payload: data, isAuthenticated: true }),
+      error => dispatch({ type: SIGN_UP_FAILURE, error }),
     );
 };

@@ -19,7 +19,7 @@ const Home = () => (
                 Don&#39;t have an account yet?
           </h3>
           <Link to="/signin" className="home__links-button home__links-button--secondary">
-                Sign in
+                Sign up
           </Link>
         </div>
         <div className="home__links-container home__links-container--primary">

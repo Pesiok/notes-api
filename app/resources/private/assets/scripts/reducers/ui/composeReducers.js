@@ -41,10 +41,10 @@ import {
 } from '../../actions/user/logOutActions';
 
 import {
-  SIGN_IN_REQUEST,
-  SIGN_IN_FAILURE,
-  SIGN_IN_SUCCESS,
-} from '../../actions/user/signInActions';
+  SIGN_UP_REQUEST,
+  SIGN_UP_FAILURE,
+  SIGN_UP_SUCCESS,
+} from '../../actions/user/signUpActions';
 
 import {
   GET_SHARED_NOTE_REQUEST,
@@ -55,7 +55,7 @@ import {
 import {
   RESET_LOG_IN_ERROR,
   RESET_LOG_OUT_ERROR,
-  RESET_SIGN_IN_ERROR,
+  RESET_SIGN_UP_ERROR,
   RESET_GET_NOTES_ERROR,
   RESET_GET_NOTE_ERROR,
   RESET_NEW_NOTE_ERROR,
@@ -144,9 +144,9 @@ export const logOutReducer = composeUIReducer({
   resetError: RESET_LOG_OUT_ERROR,
 });
 
-export const signInReducer = composeUIReducer({
-  request: SIGN_IN_REQUEST,
-  failure: SIGN_IN_FAILURE,
-  success: SIGN_IN_SUCCESS,
-  resetError: RESET_SIGN_IN_ERROR,
+export const signUpReducer = composeUIReducer({
+  request: SIGN_UP_REQUEST,
+  failure: SIGN_UP_FAILURE,
+  success: SIGN_UP_SUCCESS,
+  resetError: RESET_SIGN_UP_ERROR,
 });

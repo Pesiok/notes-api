@@ -5,7 +5,7 @@ import { DELETE_NOTE_SUCCESS } from '../../actions/notes/deleteNoteActions';
 import { NEW_NOTE_SUCCESS } from '../../actions/notes/newNoteActions';
 import { LOG_OUT_SUCCESS } from '../../actions/user/logOutActions';
 import { LOG_IN_SUCCESS } from '../../actions/user/logInActions';
-import { SIGN_IN_SUCCESS } from '../../actions/user/signInActions';
+import { SIGN_UP_SUCCESS } from '../../actions/user/signUpActions';
 
 const arrToObj = (arr, key) => Object.assign({}, ...arr.map(item => ({ [item[key]]: item })));
 
@@ -29,7 +29,7 @@ const notesReducer = (state = {}, action) => {
     }
     case LOG_OUT_SUCCESS:
     case LOG_IN_SUCCESS:
-    case SIGN_IN_SUCCESS: {
+    case SIGN_UP_SUCCESS: {
       return {};
     }
     default: {

@@ -8,7 +8,7 @@ import {
   updateNoteReducer,
   logInReducer,
   logOutReducer,
-  signInReducer,
+  signUpReducer,
   getSharedNoteReducer,
 } from './composeReducers';
 import menuReducer from './menuReducer';
@@ -22,7 +22,7 @@ const uiReducer = combineReducers({
   deleteNote: deleteNoteReducer,
   logIn: logInReducer,
   logOut: logOutReducer,
-  signIn: signInReducer,
+  signUp: signUpReducer,
   menu: menuReducer,
 });
 
